@@ -1,43 +1,1257 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin / Team Material</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin / Team - Material Monitoring</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#222}header{background:#1565c0;color:#fff;padding:18px 24px}header h1{margin:0}.wrap{max-width:1200px;margin:20px auto;padding:0 15px}.tabs{display:flex;gap:8px;margin-bottom:15px}.tab,button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:bold}.tab{background:#ddd}.active,.primary{background:#1565c0;color:white}.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px #0001}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}label{font-size:13px;font-weight:bold;display:block;margin-bottom:5px}input{width:100%;padding:10px;border:1px solid #ccc;border-radius:7px}.search{font-size:16px}.table{overflow:auto}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px}th{background:#eef4fb}.num{text-align:right}.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.box{background:#f7f9fc;padding:14px;border-radius:9px}.box b{display:block;font-size:20px;margin-top:5px}.hidden{display:none}.danger{background:#d32f2f;color:#fff}.secondary{background:#e8eef7;color:#1565c0}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.badge{background:#e3f2fd;color:#1565c0;padding:5px 9px;border-radius:20px;font-weight:bold}.empty{text-align:center;padding:25px;color:#777}.status{font-size:13px;margin-top:8px}.ok{color:#16803c}.err{color:#c62828}.muted{color:#666}
-</style></head>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    color:#222;
+}
+
+header{
+    background:#1565c0;
+    color:white;
+    padding:18px 24px;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.container{
+    max-width:1200px;
+    margin:20px auto;
+    padding:0 15px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.tab{
+    border:0;
+    padding:11px 20px;
+    border-radius:8px;
+    background:#ddd;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.tab.active{
+    background:#1565c0;
+    color:white;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:0 2px 8px #0001;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:12px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:7px;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary{
+    background:#1565c0;
+    color:white;
+}
+
+.secondary{
+    background:#e8eef7;
+    color:#1565c0;
+}
+
+.danger{
+    background:#d32f2f;
+    color:white;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.search{
+    font-size:16px;
+}
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #eee;
+    font-size:13px;
+}
+
+th{
+    background:#eef4fb;
+    text-align:left;
+}
+
+.num{
+    text-align:right;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#e3f2fd;
+    color:#1565c0;
+    font-weight:bold;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+}
+
+.summary .box{
+    background:#f7f9fc;
+    padding:14px;
+    border-radius:9px;
+}
+
+.summary b{
+    display:block;
+    font-size:20px;
+    margin-top:5px;
+}
+
+.hidden{
+    display:none;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+
+#status{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+
 <body>
-<header><h1>📦 Admin / Team - Material</h1></header>
-<div class="wrap">
-<div class="tabs"><button class="tab active" onclick="tab('team',this)">👥 TEAM</button><button class="tab" onclick="tab('admin',this)">⚙️ ADMIN</button></div>
+
+<header>
+<h1>📦 Admin / Team - Material Monitoring</h1>
+</header>
+
+<div class="container">
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('team',this)">
+👥 TEAM
+</button>
+
+<button class="tab" onclick="showTab('admin',this)">
+⚙️ ADMIN
+</button>
+</div>
+
+
+<!-- ================= TEAM ================= -->
+
 <section id="teamTab">
-<div class="card"><h2>🔎 Cari Team</h2><input id="search" class="search" placeholder="H007, H008, H009, H010, H012, H026..." oninput="renderTeam()"><div class="actions"><button class="secondary" onclick="pick('H007')">H007</button><button class="secondary" onclick="pick('H008')">H008</button><button class="secondary" onclick="pick('H009')">H009</button><button class="secondary" onclick="pick('H010')">H010</button><button class="secondary" onclick="pick('H012')">H012</button><button class="secondary" onclick="pick('H026')">H026</button><button class="secondary" onclick="loadData()">🔄 Refresh</button></div><div id="status" class="status muted">Menghubungkan ke Supabase...</div></div>
-<div class="card"><div class="summary"><div class="box">Team<b id="st">-</b></div><div class="box">Jenis Material<b id="sj">0</b></div><div class="box">Stok Awal<b id="sa">0</b></div><div class="box">Total Ambil<b id="sb">0</b></div><div class="box">Sisa Gudang<b id="ss">0</b></div></div></div>
-<div class="card"><h2>Data Pemakaian Material</h2><div class="table"><table><thead><tr><th>Team</th><th>Part</th><th>Description</th><th>Harga</th><th>Stok Awal</th><th>Total Ambil</th><th>Sisa Gudang</th><th>Harga Sisa</th></tr></thead><tbody id="teamBody"></tbody></table></div></div>
+
+<div class="card">
+
+<h2>🔎 Cari Team</h2>
+
+<input
+id="teamSearch"
+class="search"
+placeholder="Contoh H007, H008, H009, H010..."
+oninput="renderTeam()"
+>
+
+<div class="actions">
+
+<button class="secondary" onclick="setTeam('H007')">H007</button>
+<button class="secondary" onclick="setTeam('H008')">H008</button>
+<button class="secondary" onclick="setTeam('H009')">H009</button>
+<button class="secondary" onclick="setTeam('H010')">H010</button>
+<button class="secondary" onclick="setTeam('H012')">H012</button>
+<button class="secondary" onclick="setTeam('H026')">H026</button>
+
+<button class="secondary" onclick="loadData()">
+🔄 Refresh
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="summary">
+
+<div class="box">
+Team
+<b id="sumTeam">SEMUA</b>
+</div>
+
+<div class="box">
+Jenis Material
+<b id="sumJenis">0</b>
+</div>
+
+<div class="box">
+Stok Awal
+<b id="sumAwal">0</b>
+</div>
+
+<div class="box">
+Total Ambil
+<b id="sumAmbil">0</b>
+</div>
+
+<div class="box">
+Sisa Gudang
+<b id="sumSisa">0</b>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Data Pemakaian Material</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Team</th>
+<th>Part</th>
+<th>Description</th>
+<th>Unit</th>
+<th class="num">Harga</th>
+<th class="num">Stok Awal</th>
+<th class="num">Total Ambil</th>
+<th class="num">Sisa Gudang</th>
+<th class="num">Harg Sisa</th>
+</tr>
+
+</thead>
+
+<tbody id="teamBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- ================= ADMIN ================= -->
+
 <section id="adminTab" class="hidden">
-<div class="card"><h2>➕ Tambah / Edit Data</h2><input type="hidden" id="id"><div class="grid"><div><label>Team</label><input id="team" placeholder="H007"></div><div><label>Part</label><input id="part" placeholder="RMT"></div><div><label>Description</label><input id="desc" placeholder="Nama material"></div><div><label>Harga</label><input id="harga" type="number" min="0"></div><div><label>Stok Awal</label><input id="awal" type="number" min="0"></div><div><label>Total Ambil</label><input id="ambil" type="number" min="0"></div></div><div class="actions"><button class="primary" onclick="save()">💾 Simpan ke Supabase</button><button class="secondary" onclick="resetForm()">↩ Reset</button></div><small class="muted">Sisa Gudang = Stok Awal − Total Ambil. Harga Sisa = Sisa × Harga.</small></div>
-<div class="card"><h2>📋 Data Admin</h2><input id="adminSearch" class="search" placeholder="Cari team / part / description..." oninput="renderAdmin()"><div class="actions"><button class="secondary" onclick="loadData()">🔄 Refresh Data</button></div><div class="table"><table><thead><tr><th>Team</th><th>Part</th><th>Description</th><th>Harga</th><th>Stok Awal</th><th>Total Ambil</th><th>Sisa</th><th>Harga Sisa</th><th>Aksi</th></tr></thead><tbody id="adminBody"></tbody></table></div></div>
-</section></div>
+
+<div class="card">
+
+<h2>➕ Tambah / Edit Material</h2>
+
+<input type="hidden" id="editId">
+
+<div class="grid">
+
+<div>
+<label>Team</label>
+<input id="team" placeholder="H007">
+</div>
+
+<div>
+<label>Part</label>
+<input id="part" placeholder="RMT">
+</div>
+
+<div>
+<label>Description</label>
+<input id="description" placeholder="Remote">
+</div>
+
+<div>
+<label>Unit</label>
+<input id="unit" placeholder="PCS">
+</div>
+
+<div>
+<label>Harga</label>
+<input id="harga" type="number" min="0">
+</div>
+
+<div>
+<label>Stok Awal</label>
+<input id="stokAwal" type="number" min="0">
+</div>
+
+<div>
+<label>Total Ambil</label>
+<input id="totalAmbil" type="number" min="0">
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button class="primary" onclick="saveData()">
+💾 Simpan ke Supabase
+</button>
+
+<button class="secondary" onclick="resetForm()">
+↩ Reset
+</button>
+
+</div>
+
+<div id="status"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Data Admin</h2>
+
+<input
+id="adminSearch"
+class="search"
+placeholder="Cari Team / Part / Description..."
+oninput="renderAdmin()"
+>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Team</th>
+<th>Part</th>
+<th>Description</th>
+<th>Unit</th>
+<th class="num">Harga</th>
+<th class="num">Stok Awal</th>
+<th class="num">Total Ambil</th>
+<th class="num">Sisa Gudang</th>
+<th class="num">Harg Sisa</th>
+<th>Aksi</th>
+</tr>
+
+</thead>
+
+<tbody id="adminBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
 <script>
-const SUPABASE_URL='https://umfpogjgiqhtiuvazqdm.supabase.co';
-const SUPABASE_KEY='sb_publishable_ijo6swvjf5X83TrDe4Xfpg_7rJz7dRs';
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-let data=[];
-const money=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(n)||0),fmt=n=>new Intl.NumberFormat('id-ID').format(Number(n)||0);
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-function setStatus(t,ok=false){status.textContent=t;status.className='status '+(ok?'ok':'err')}
-function calc(x){let s=(+x.stok_awal||0)- (+x.total_ambil||0);return{s,h:+x.harga||0,hs:s*(+x.harga||0)}}
-function normalize(x){return{id:x.id,team:String(x.team||'').toUpperCase(),part:x.part||'',desc:x.description||'',harga:x.harga||0,awal:x.stok_awal||0,ambil:x.total_ambil||0,sisa:x.sisa_gudang,hs:x.harga_sisa}}
-async function loadData(){setStatus('Mengambil data dari Supabase...',true);const {data:rows,error}=await db.from('material').select('*').order('team',{ascending:true}).order('part',{ascending:true});if(error){console.error(error);setStatus('Gagal mengambil data: '+error.message);teamBody.innerHTML='<tr><td colspan="8" class="empty">Periksa nama kolom/tabel dan RLS Supabase.</td></tr>';adminBody.innerHTML='<tr><td colspan="9" class="empty">Gagal mengambil data.</td></tr>';return}data=(rows||[]).map(normalize);setStatus('Terhubung ke Supabase • '+data.length+' data',true);renderTeam();renderAdmin()}
-function tab(t,b){teamTab.classList.toggle('hidden',t!='team');adminTab.classList.toggle('hidden',t!='admin');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderTeam();renderAdmin()}
-function pick(t){search.value=t;renderTeam()}
-function renderTeam(){let q=search.value.trim().toUpperCase(),r=q?data.filter(x=>x.team.includes(q)):data;st.textContent=q||'SEMUA';sj.textContent=fmt(r.length);sa.textContent=fmt(r.reduce((a,x)=>a+(+x.awal||0),0));sb.textContent=fmt(r.reduce((a,x)=>a+(+x.ambil||0),0));ss.textContent=fmt(r.reduce((a,x)=>a+calc(x).s,0));teamBody.innerHTML=r.length?r.map(x=>{let c=calc(x);return `<tr><td><span class="badge">${esc(x.team)}</span></td><td>${esc(x.part)}</td><td>${esc(x.desc)}</td><td class="num">${money(c.h)}</td><td class="num">${fmt(x.awal)}</td><td class="num">${fmt(x.ambil)}</td><td class="num"><b>${fmt(c.s)}</b></td><td class="num">${money(c.hs)}</td></tr>`}).join(''):'<tr><td colspan="8" class="empty">Data tidak ditemukan.</td></tr>'}
-function renderAdmin(){let q=adminSearch.value.trim().toUpperCase(),r=q?data.filter(x=>(x.team+' '+x.part+' '+x.desc).toUpperCase().includes(q)):data;adminBody.innerHTML=r.length?r.map(x=>{let c=calc(x);return `<tr><td>${esc(x.team)}</td><td>${esc(x.part)}</td><td>${esc(x.desc)}</td><td>${money(c.h)}</td><td>${fmt(x.awal)}</td><td>${fmt(x.ambil)}</td><td>${fmt(c.s)}</td><td>${money(c.hs)}</td><td><button class="secondary" onclick="edit('${x.id}')">Edit</button> <button class="danger" onclick="del('${x.id}')">Hapus</button></td></tr>`}).join(''):'<tr><td colspan="9" class="empty">Belum ada data.</td></tr>'}
-async function save(){let idv=id.value;let o={team:team.value.trim().toUpperCase(),part:part.value.trim(),description:desc.value.trim(),harga:+harga.value||0,stok_awal:+awal.value||0,total_ambil:+ambil.value||0};if(!o.team||!o.part)return alert('Team dan Part wajib diisi.');if(o.total_ambil>o.stok_awal&&!confirm('Total Ambil lebih besar dari Stok Awal. Tetap simpan?'))return;let res=idv?await db.from('material').update(o).eq('id',idv):await db.from('material').insert(o);if(res.error){alert('Gagal menyimpan: '+res.error.message);return}resetForm();await loadData();alert('Data berhasil disimpan ke Supabase.')}
-function edit(i){let x=data.find(x=>String(x.id)==String(i));if(!x)return;id.value=x.id;team.value=x.team;part.value=x.part;desc.value=x.desc;harga.value=x.harga;awal.value=x.awal;ambil.value=x.ambil;document.getElementById('adminTab').scrollIntoView({behavior:'smooth'})}
-async function del(i){if(!confirm('Hapus data ini dari Supabase?'))return;let {error}=await db.from('material').delete().eq('id',i);if(error){alert('Gagal menghapus: '+error.message);return}await loadData()}
-function resetForm(){id.value='';team.value='';part.value='';desc.value='';harga.value=0;awal.value=0;ambil.value=0}
+
+/* ================= SUPABASE ================= */
+
+const SUPABASE_URL =
+"https://umfpogjgiqhtiuvazqdm.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_ijo6swvjf5X83TrDe4Xfpg_7rJz7dRs";
+
+const API =
+SUPABASE_URL + "/rest/v1/material";
+
+const headers = {
+
+"apikey": SUPABASE_KEY,
+
+"Authorization":
+"Bearer " + SUPABASE_KEY,
+
+"Content-Type":
+"application/json",
+
+"Prefer":
+"return=representation"
+
+};
+
+let data = [];
+
+
+/* ================= HELPER ================= */
+
+function getValue(row,column){
+
+return row[column] ?? "";
+
+}
+
+
+function number(value){
+
+return Number(value) || 0;
+
+}
+
+
+function formatNumber(value){
+
+return new Intl.NumberFormat("id-ID")
+.format(number(value));
+
+}
+
+
+function rupiah(value){
+
+return new Intl.NumberFormat(
+"id-ID",
+{
+style:"currency",
+currency:"IDR",
+maximumFractionDigits:0
+}
+).format(number(value));
+
+}
+
+
+function escapeHtml(value){
+
+return String(value ?? "")
+.replace(/[&<>"']/g,function(m){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m];
+
+});
+
+}
+
+
+/* ================= CALCULATION ================= */
+
+function calculate(row){
+
+const harga =
+number(getValue(row,"Harga"));
+
+const stok =
+number(getValue(row,"Stok Awal"));
+
+const ambil =
+number(getValue(row,"Total Ambil"));
+
+const sisa =
+stok - ambil;
+
+const hargaSisa =
+sisa * harga;
+
+return {
+
+harga,
+stok,
+ambil,
+sisa,
+hargaSisa
+
+};
+
+}
+
+
+/* ================= STATUS ================= */
+
+function status(message,success=true){
+
+const el =
+document.getElementById("status");
+
+el.textContent = message;
+
+el.style.color =
+success ? "#16803c" : "#c62828";
+
+}
+
+
+/* ================= TAB ================= */
+
+function showTab(tab,button){
+
+document
+.getElementById("teamTab")
+.classList
+.toggle("hidden",tab !== "team");
+
+document
+.getElementById("adminTab")
+.classList
+.toggle("hidden",tab !== "admin");
+
+document
+.querySelectorAll(".tab")
+.forEach(function(x){
+
+x.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+if(tab === "team"){
+
+renderTeam();
+
+}else{
+
+renderAdmin();
+
+}
+
+}
+
+
+/* ================= TEAM SEARCH ================= */
+
+function setTeam(team){
+
+document
+.getElementById("teamSearch")
+.value = team;
+
+renderTeam();
+
+}
+
+
+/* ================= LOAD DATA ================= */
+
+async function loadData(){
+
+try{
+
+const response =
+await fetch(
+API + "?select=*",
+{
+headers:headers
+}
+);
+
+if(!response.ok){
+
+throw new Error(
+await response.text()
+);
+
+}
+
+data =
+await response.json();
+
+renderTeam();
+
+renderAdmin();
+
+status(
+"Data berhasil dimuat dari Supabase."
+);
+
+}catch(error){
+
+console.error(error);
+
+status(
+"Gagal memuat data: " +
+error.message,
+false
+);
+
+}
+
+}
+
+
+/* ================= TEAM DISPLAY ================= */
+
+function renderTeam(){
+
+const search =
+document
+.getElementById("teamSearch")
+.value
+.trim()
+.toUpperCase();
+
+let rows = data;
+
+if(search){
+
+rows =
+data.filter(function(row){
+
+return String(
+getValue(row,"Team")
+)
+.toUpperCase()
+.includes(search);
+
+});
+
+}
+
+
+document.getElementById("sumTeam")
+.textContent =
+search || "SEMUA";
+
+
+document.getElementById("sumJenis")
+.textContent =
+formatNumber(rows.length);
+
+
+document.getElementById("sumAwal")
+.textContent =
+formatNumber(
+rows.reduce(
+function(total,row){
+
+return total +
+calculate(row).stok;
+
+},
+0
+)
+);
+
+
+document.getElementById("sumAmbil")
+.textContent =
+formatNumber(
+rows.reduce(
+function(total,row){
+
+return total +
+calculate(row).ambil;
+
+},
+0
+)
+);
+
+
+document.getElementById("sumSisa")
+.textContent =
+formatNumber(
+rows.reduce(
+function(total,row){
+
+return total +
+calculate(row).sisa;
+
+},
+0
+)
+);
+
+
+const body =
+document.getElementById("teamBody");
+
+
+if(!rows.length){
+
+body.innerHTML =
+'<tr><td colspan="9" class="empty">Data tidak ditemukan.</td></tr>';
+
+return;
+
+}
+
+
+body.innerHTML =
+rows.map(function(row){
+
+const c =
+calculate(row);
+
+return `
+
+<tr>
+
+<td>
+<span class="badge">
+${escapeHtml(getValue(row,"Team"))}
+</span>
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Part"))}
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Description"))}
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Unit"))}
+</td>
+
+<td class="num">
+${rupiah(c.harga)}
+</td>
+
+<td class="num">
+${formatNumber(c.stok)}
+</td>
+
+<td class="num">
+${formatNumber(c.ambil)}
+</td>
+
+<td class="num">
+<b>${formatNumber(c.sisa)}</b>
+</td>
+
+<td class="num">
+${rupiah(c.hargaSisa)}
+</td>
+
+</tr>
+
+`;
+
+}).join("");
+
+}
+
+
+/* ================= ADMIN DISPLAY ================= */
+
+function renderAdmin(){
+
+const search =
+document
+.getElementById("adminSearch")
+.value
+.trim()
+.toUpperCase();
+
+
+const rows =
+data
+.map(function(row,index){
+
+return {
+
+row,
+index
+
+};
+
+})
+.filter(function(item){
+
+if(!search){
+
+return true;
+
+}
+
+const text =
+[
+getValue(item.row,"Team"),
+getValue(item.row,"Part"),
+getValue(item.row,"Description")
+]
+.join(" ")
+.toUpperCase();
+
+return text.includes(search);
+
+});
+
+
+const body =
+document.getElementById("adminBody");
+
+
+if(!rows.length){
+
+body.innerHTML =
+'<tr><td colspan="10" class="empty">Belum ada data.</td></tr>';
+
+return;
+
+}
+
+
+body.innerHTML =
+rows.map(function(item){
+
+const row =
+item.row;
+
+const c =
+calculate(row);
+
+return `
+
+<tr>
+
+<td>
+${escapeHtml(getValue(row,"Team"))}
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Part"))}
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Description"))}
+</td>
+
+<td>
+${escapeHtml(getValue(row,"Unit"))}
+</td>
+
+<td class="num">
+${rupiah(c.harga)}
+</td>
+
+<td class="num">
+${formatNumber(c.stok)}
+</td>
+
+<td class="num">
+${formatNumber(c.ambil)}
+</td>
+
+<td class="num">
+${formatNumber(c.sisa)}
+</td>
+
+<td class="num">
+${rupiah(c.hargaSisa)}
+</td>
+
+<td>
+
+<button
+class="secondary"
+onclick="editData(${item.index})">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}).join("");
+
+}
+
+
+/* ================= SAVE ================= */
+
+async function saveData(){
+
+const team =
+document.getElementById("team")
+.value
+.trim()
+.toUpperCase();
+
+
+const part =
+document.getElementById("part")
+.value
+.trim();
+
+
+const description =
+document.getElementById("description")
+.value
+.trim();
+
+
+const unit =
+document.getElementById("unit")
+.value
+.trim();
+
+
+const harga =
+number(
+document.getElementById("harga")
+.value
+);
+
+
+const stok =
+number(
+document.getElementById("stokAwal")
+.value
+);
+
+
+const ambil =
+number(
+document.getElementById("totalAmbil")
+.value
+);
+
+
+if(!team){
+
+status(
+"Team wajib diisi.",
+false
+);
+
+return;
+
+}
+
+
+if(!part){
+
+status(
+"Part wajib diisi.",
+false
+);
+
+return;
+
+}
+
+
+const sisa =
+stok - ambil;
+
+
+const hargaSisa =
+sisa * harga;
+
+
+/*
+Nama kolom HARUS sama
+dengan Supabase:
+Team
+Part
+Description
+Unit
+Harg Sisa
+Harga
+Stok Awal
+Total Ambil
+Sisa Gudang
+*/
+
+const record = {
+
+"Team": team,
+
+"Part": part,
+
+"Description": description,
+
+"Unit": unit,
+
+"Harg Sisa": hargaSisa,
+
+"Harga": harga,
+
+"Stok Awal": stok,
+
+"Total Ambil": ambil,
+
+"Sisa Gudang": sisa
+
+};
+
+
+try{
+
+const editId =
+document.getElementById("editId")
+.value;
+
+
+let response;
+
+
+if(editId){
+
+response =
+await fetch(
+API +
+"?id=eq." +
+encodeURIComponent(editId),
+{
+
+method:"PATCH",
+
+headers:headers,
+
+body:JSON.stringify(record)
+
+}
+);
+
+}else{
+
+response =
+await fetch(
+API,
+{
+
+method:"POST",
+
+headers:headers,
+
+body:JSON.stringify(record)
+
+}
+);
+
+}
+
+
+if(!response.ok){
+
+throw new Error(
+await response.text()
+);
+
+}
+
+
+status(
+"Data berhasil disimpan ke Supabase."
+);
+
+
+resetForm();
+
+await loadData();
+
+
+}catch(error){
+
+console.error(error);
+
+status(
+"Gagal menyimpan: " +
+error.message,
+false
+);
+
+}
+
+}
+
+
+/* ================= EDIT ================= */
+
+function editData(index){
+
+const row =
+data[index];
+
+const id =
+row.id ??
+row.ID ??
+row.Id;
+
+
+if(id === undefined){
+
+status(
+"Kolom ID tidak ditemukan.",
+false
+);
+
+return;
+
+}
+
+
+document.getElementById("editId")
+.value = id;
+
+
+document.getElementById("team")
+.value =
+getValue(row,"Team");
+
+
+document.getElementById("part")
+.value =
+getValue(row,"Part");
+
+
+document.getElementById("description")
+.value =
+getValue(row,"Description");
+
+
+document.getElementById("unit")
+.value =
+getValue(row,"Unit");
+
+
+document.getElementById("harga")
+.value =
+getValue(row,"Harga");
+
+
+document.getElementById("stokAwal")
+.value =
+getValue(row,"Stok Awal");
+
+
+document.getElementById("totalAmbil")
+.value =
+getValue(row,"Total Ambil");
+
+
+status(
+"Mode edit data."
+);
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* ================= RESET ================= */
+
+function resetForm(){
+
+document.getElementById("editId")
+.value = "";
+
+document.getElementById("team")
+.value = "";
+
+document.getElementById("part")
+.value = "";
+
+document.getElementById("description")
+.value = "";
+
+document.getElementById("unit")
+.value = "";
+
+document.getElementById("harga")
+.value = 0;
+
+document.getElementById("stokAwal")
+.value = 0;
+
+document.getElementById("totalAmbil")
+.value = 0;
+
+document.getElementById("status")
+.textContent = "";
+
+}
+
+
+/* ================= START ================= */
+
 loadData();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
+```
