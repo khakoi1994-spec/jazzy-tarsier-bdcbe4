@@ -24,7 +24,6 @@ header {
   color: white;
   padding: 16px;
   text-align: center;
-  position: relative;
 }
 
 header h1 {
@@ -63,10 +62,10 @@ input {
 button {
   border: 0;
   border-radius: 7px;
-  padding: 12px 16px;
+  padding: 10px 14px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 button:active {
@@ -125,7 +124,7 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 750px;
+  min-width: 800px;
 }
 
 th,
@@ -181,14 +180,15 @@ th {
   min-width: 700px;
 }
 
-.logout-button {
-  position: absolute;
-  right: 15px;
-  top: 13px;
+.delete-button {
+  background: #d32f2f;
+  color: white;
+  padding: 7px 10px;
+  font-size: 12px;
 }
 
-.reset-button {
-  margin-top: 8px;
+.logout-button {
+  margin-top: 10px;
 }
 
 @media (max-width: 600px) {
@@ -203,15 +203,6 @@ th {
 
   .summary {
     grid-template-columns: 1fr;
-  }
-
-  .logout-button {
-    position: static;
-    margin-top: 10px;
-  }
-
-  header {
-    padding: 14px 10px;
   }
 
   header h1 {
@@ -390,27 +381,18 @@ TEAM DATA
 <div class="summary">
 
 <div class="summary-box">
-
 <span>Total Ambil</span>
-
 <b id="teamTotalAmbil">0</b>
-
 </div>
 
 <div class="summary-box">
-
 <span>Total Pakai</span>
-
 <b id="teamTotalPakai">0</b>
-
 </div>
 
 <div class="summary-box">
-
 <span>Total Sisa</span>
-
 <b id="teamTotalSisa">0</b>
-
 </div>
 
 </div>
@@ -427,7 +409,6 @@ TEAM DATA
 <table class="team-table">
 
 <thead>
-
 <tr>
 <th>Team</th>
 <th>Tanggal</th>
@@ -437,7 +418,6 @@ TEAM DATA
 <th>Sisa</th>
 <th>Nominal</th>
 </tr>
-
 </thead>
 
 <tbody id="teamTable">
@@ -578,10 +558,10 @@ id="saveButton">
 
 <button
 type="button"
-class="secondary reset-button"
+class="secondary"
 id="resetAdminButton">
 
-🔄 RESET
+🔄 RESET FORM
 
 </button>
 
@@ -591,7 +571,9 @@ id="resetAdminButton">
 </div>
 
 
-<!-- DATA ADMIN -->
+<!-- =====================================================
+DATA ADMIN
+===================================================== -->
 
 <div class="card">
 
@@ -619,6 +601,7 @@ placeholder="Cari Team / Material / Description">
 <th>Pakai</th>
 <th>Sisa</th>
 <th>Nominal</th>
+<th>Aksi</th>
 </tr>
 
 </thead>
@@ -656,17 +639,99 @@ const HEADERS = {
   "Content-Type": "application/json"
 };
 
+
 let materials = [];
 
 let currentTeam = "";
 
 
 /* =====================================================
-HELPER ELEMENT
+HELPER
 ===================================================== */
 
 function get(id) {
   return document.getElementById(id);
+}
+
+
+function num(value) {
+  return Number(value) || 0;
+}
+
+
+function formatNumber(value) {
+
+  return new Intl.NumberFormat(
+    "id-ID"
+  ).format(
+    num(value)
+  );
+
+}
+
+
+function rupiah(value) {
+
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }
+  ).format(
+    num(value)
+  );
+
+}
+
+
+function formatDate(value) {
+
+  if (!value) {
+    return "-";
+  }
+
+  const parts =
+    String(value).split("-");
+
+  if (parts.length !== 3) {
+    return value;
+  }
+
+  return (
+    parts[2] +
+    "-" +
+    parts[1] +
+    "-" +
+    parts[0]
+  );
+
+}
+
+
+function esc(value) {
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /[&<>"']/g,
+    function(char) {
+
+      return {
+
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+
+      }[char];
+
+    }
+  );
+
 }
 
 
@@ -676,11 +741,20 @@ NAVIGASI
 
 function hideAll() {
 
-  get("startPage").classList.add("hidden");
-  get("adminLoginPage").classList.add("hidden");
-  get("teamSearchPage").classList.add("hidden");
-  get("teamPage").classList.add("hidden");
-  get("adminPage").classList.add("hidden");
+  get("startPage")
+    .classList.add("hidden");
+
+  get("adminLoginPage")
+    .classList.add("hidden");
+
+  get("teamSearchPage")
+    .classList.add("hidden");
+
+  get("teamPage")
+    .classList.add("hidden");
+
+  get("adminPage")
+    .classList.add("hidden");
 
 }
 
@@ -689,7 +763,8 @@ function backStart() {
 
   hideAll();
 
-  get("startPage").classList.remove("hidden");
+  get("startPage")
+    .classList.remove("hidden");
 
 }
 
@@ -698,7 +773,8 @@ function showAdminLogin() {
 
   hideAll();
 
-  get("adminLoginPage").classList.remove("hidden");
+  get("adminLoginPage")
+    .classList.remove("hidden");
 
   get("adminEmail").focus();
 
@@ -709,7 +785,8 @@ function showTeamSearch() {
 
   hideAll();
 
-  get("teamSearchPage").classList.remove("hidden");
+  get("teamSearchPage")
+    .classList.remove("hidden");
 
   get("teamInput").focus();
 
@@ -717,16 +794,19 @@ function showTeamSearch() {
 
 
 /* =====================================================
-ADMIN LOGIN
+LOGIN ADMIN
 ===================================================== */
 
 async function loginAdmin() {
 
   const email =
-    get("adminEmail").value.trim();
+    get("adminEmail")
+    .value
+    .trim();
 
   const password =
-    get("adminPassword").value;
+    get("adminPassword")
+    .value;
 
   const status =
     get("loginStatus");
@@ -752,27 +832,31 @@ async function loginAdmin() {
 
   try {
 
-    const response = await fetch(
+    const response =
+      await fetch(
 
-      SUPABASE_URL +
-      "/auth/v1/token?grant_type=password",
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
 
-      {
-        method: "POST",
+        {
+          method: "POST",
 
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Content-Type":
-            "application/json"
-        },
+          headers: {
+            "apikey":
+              SUPABASE_KEY,
 
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      }
+            "Content-Type":
+              "application/json"
+          },
 
-    );
+          body:
+            JSON.stringify({
+              email: email,
+              password: password
+            })
+        }
+
+      );
 
 
     const result =
@@ -802,7 +886,9 @@ async function loginAdmin() {
 
         API +
         "/profiles?id=eq." +
-        encodeURIComponent(result.user.id) +
+        encodeURIComponent(
+          result.user.id
+        ) +
         "&select=*",
 
         {
@@ -851,12 +937,12 @@ async function loginAdmin() {
 
     await loadAdminData();
 
-
   }
 
   catch (error) {
 
-    status.className = "error";
+    status.className =
+      "error";
 
     status.textContent =
       "Gagal login: " +
@@ -868,7 +954,7 @@ async function loginAdmin() {
 
 
 /* =====================================================
-LOAD DATA ADMIN
+LOAD ADMIN DATA
 ===================================================== */
 
 async function loadAdminData() {
@@ -896,7 +982,8 @@ async function loadAdminData() {
           ...HEADERS,
 
           "Authorization":
-            "Bearer " + token
+            "Bearer " +
+            token
 
         }
       }
@@ -923,7 +1010,7 @@ async function loadAdminData() {
 
 
 /* =====================================================
-ADMIN TABLE
+RENDER ADMIN
 ===================================================== */
 
 function renderAdmin() {
@@ -937,7 +1024,8 @@ function renderAdmin() {
     .toUpperCase();
 
 
-  let rows = materials;
+  let rows =
+    materials;
 
 
   if (search) {
@@ -984,7 +1072,7 @@ function renderAdmin() {
 
     body.innerHTML = `
       <tr>
-        <td colspan="10" class="center">
+        <td colspan="11" class="center">
           Data tidak ditemukan.
         </td>
       </tr>
@@ -1016,6 +1104,15 @@ function renderAdmin() {
 
       const nominal =
         sisa * harga;
+
+
+      /*
+      Ambil ID database.
+      Biasanya Supabase membuat kolom id.
+      */
+
+      const rowId =
+        row["id"];
 
 
       return `
@@ -1057,11 +1154,26 @@ function renderAdmin() {
           </td>
 
           <td class="number">
-            <b>${formatNumber(sisa)}</b>
+            <b>
+              ${formatNumber(sisa)}
+            </b>
           </td>
 
           <td class="number">
             ${rupiah(nominal)}
+          </td>
+
+          <td>
+
+            <button
+              type="button"
+              class="delete-button"
+              data-id="${esc(rowId)}">
+
+              🗑️ HAPUS
+
+            </button>
+
           </td>
 
         </tr>
@@ -1069,6 +1181,196 @@ function renderAdmin() {
       `;
 
     }).join("");
+
+
+  /*
+  Pasang fungsi HAPUS
+  ke semua tombol.
+  */
+
+  document
+    .querySelectorAll(".delete-button")
+    .forEach(function(button) {
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          const id =
+            this.getAttribute(
+              "data-id"
+            );
+
+          deleteMaterial(id);
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =====================================================
+HAPUS DATA
+===================================================== */
+
+async function deleteMaterial(id) {
+
+  const token =
+    localStorage.getItem(
+      "access_token"
+    );
+
+
+  if (!token) {
+
+    alert(
+      "Sesi Admin sudah berakhir. Silakan login kembali."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !id ||
+    id === "undefined" ||
+    id === "null"
+  ) {
+
+    alert(
+      "ID data tidak ditemukan."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Cari data yang akan dihapus
+  */
+
+  const row =
+    materials.find(function(item) {
+
+      return String(item["id"]) ===
+        String(id);
+
+    });
+
+
+  const namaTeam =
+    row
+      ? row["Team"]
+      : "";
+
+
+  const namaMaterial =
+    row
+      ? row["Part"]
+      : "";
+
+
+  const yakin =
+    confirm(
+
+      "Yakin ingin menghapus data ini?\n\n" +
+
+      "Team: " +
+      namaTeam +
+      "\n" +
+
+      "Material: " +
+      namaMaterial +
+      "\n\n" +
+
+      "Data yang dihapus tidak dapat dikembalikan."
+
+    );
+
+
+  if (!yakin) {
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+
+        API +
+        "/material?id=eq." +
+        encodeURIComponent(id),
+
+        {
+          method: "DELETE",
+
+          headers: {
+
+            ...HEADERS,
+
+            "Authorization":
+              "Bearer " +
+              token,
+
+            "Prefer":
+              "return=minimal"
+
+          }
+
+        }
+
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    /*
+    Hapus dari tampilan lokal
+    */
+
+    materials =
+      materials.filter(function(item) {
+
+        return String(item["id"]) !==
+          String(id);
+
+      });
+
+
+    renderAdmin();
+
+
+    showAdminStatus(
+      "✅ Data berhasil dihapus.",
+      true
+    );
+
+  }
+
+  catch (error) {
+
+    showAdminStatus(
+
+      "❌ Gagal menghapus data: " +
+      error.message,
+
+      false
+
+    );
+
+  }
 
 }
 
@@ -1246,7 +1548,8 @@ async function saveMaterial() {
             ...HEADERS,
 
             "Authorization":
-              "Bearer " + token,
+              "Bearer " +
+              token,
 
             "Prefer":
               "return=representation"
@@ -1276,15 +1579,10 @@ async function saveMaterial() {
     );
 
 
-    /*
-    RESET SETELAH DATA BERHASIL DISIMPAN
-    */
-
     resetAdminForm(false);
 
 
     await loadAdminData();
-
 
   }
 
@@ -1305,7 +1603,7 @@ async function saveMaterial() {
 
 
 /* =====================================================
-RESET ADMIN
+RESET FORM ADMIN
 ===================================================== */
 
 function resetAdminForm(showMessage = true) {
@@ -1330,74 +1628,23 @@ function resetAdminForm(showMessage = true) {
       get(id);
 
     if (field) {
-
       field.value = "";
-
     }
 
   });
 
 
-  /*
-  Hapus pencarian Admin juga
-  */
+  if (showMessage) {
 
-  const search =
-    get("adminSearch");
-
-  if (search) {
-    search.value = "";
-  }
-
-
-  const status =
-    get("adminStatus");
-
-
-  if (status) {
-
-    if (showMessage) {
-
-      status.textContent =
-        "✅ Form berhasil direset.";
-
-      status.className =
-        "success";
-
-    }
-
-    else {
-
-      /*
-      Setelah SIMPAN,
-      pesan berhasil tetap ditampilkan.
-      */
-
-      status.textContent =
-        "✅ Data berhasil disimpan.";
-
-      status.className =
-        "success";
-
-    }
+    showAdminStatus(
+      "✅ Form berhasil direset.",
+      true
+    );
 
   }
 
 
-  /*
-  Fokus kembali ke Team
-  */
-
-  const team =
-    get("adminTeam");
-
-  if (team) {
-
-    setTimeout(function() {
-      team.focus();
-    }, 50);
-
-  }
+  get("adminTeam").focus();
 
 }
 
@@ -1421,7 +1668,8 @@ async function searchTeam() {
 
   if (!team) {
 
-    status.className = "error";
+    status.className =
+      "error";
 
     status.textContent =
       "Masukkan kode Team.";
@@ -1450,14 +1698,10 @@ async function searchTeam() {
         "&select=*",
 
         {
-
           headers: {
-
             "apikey":
               SUPABASE_KEY
-
           }
-
         }
 
       );
@@ -1478,7 +1722,8 @@ async function searchTeam() {
 
     if (!rows.length) {
 
-      status.className = "error";
+      status.className =
+        "error";
 
       status.textContent =
         "Data Team " +
@@ -1508,7 +1753,8 @@ async function searchTeam() {
 
   catch (error) {
 
-    status.className = "error";
+    status.className =
+      "error";
 
     status.textContent =
       "Gagal mengambil data: " +
@@ -1657,6 +1903,7 @@ function backTeamSearch() {
 
   hideAll();
 
+
   get("teamSearchPage")
     .classList
     .remove("hidden");
@@ -1674,11 +1921,7 @@ function backTeamSearch() {
     .className = "";
 
 
-  setTimeout(function() {
-
-    get("teamInput").focus();
-
-  }, 100);
+  get("teamInput").focus();
 
 }
 
@@ -1712,109 +1955,8 @@ function logoutAdmin() {
 
 
 /* =====================================================
-HELPER FORMAT
+STATUS ADMIN
 ===================================================== */
-
-function num(value) {
-
-  return Number(value) || 0;
-
-}
-
-
-function formatNumber(value) {
-
-  return new Intl.NumberFormat(
-    "id-ID"
-  ).format(
-    num(value)
-  );
-
-}
-
-
-function rupiah(value) {
-
-  return new Intl.NumberFormat(
-
-    "id-ID",
-
-    {
-
-      style: "currency",
-
-      currency: "IDR",
-
-      maximumFractionDigits: 0
-
-    }
-
-  ).format(
-    num(value)
-  );
-
-}
-
-
-function formatDate(value) {
-
-  if (!value) {
-
-    return "-";
-
-  }
-
-
-  const parts =
-    String(value).split("-");
-
-
-  if (parts.length !== 3) {
-
-    return value;
-
-  }
-
-
-  return (
-    parts[2] +
-    "-" +
-    parts[1] +
-    "-" +
-    parts[0]
-  );
-
-}
-
-
-function esc(value) {
-
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /[&<>"']/g,
-    function(char) {
-
-      return {
-
-        "&": "&amp;",
-
-        "<": "&lt;",
-
-        ">": "&gt;",
-
-        '"': "&quot;",
-
-        "'": "&#039;"
-
-      }[char];
-
-    }
-  );
-
-}
-
 
 function showAdminStatus(
   text,
@@ -1839,7 +1981,6 @@ function showAdminStatus(
 
 /* =====================================================
 EVENT LISTENER
-SEMUA TOMBOL DIATUR DI SINI
 ===================================================== */
 
 document.addEventListener(
@@ -1866,7 +2007,7 @@ document.addEventListener(
 
 
     /*
-    ADMIN LOGIN
+    LOGIN ADMIN
     */
 
     get("adminLoginSubmit")
@@ -1884,7 +2025,7 @@ document.addEventListener(
 
 
     /*
-    TEAM SEARCH
+    TEAM
     */
 
     get("teamSearchButton")
@@ -1908,10 +2049,6 @@ document.addEventListener(
       );
 
 
-    /*
-    ENTER UNTUK TEAM
-    */
-
     get("teamInput")
       .addEventListener(
         "keydown",
@@ -1932,7 +2069,7 @@ document.addEventListener(
 
 
     /*
-    ADMIN SIMPAN
+    ADMIN
     */
 
     get("saveButton")
@@ -1942,11 +2079,6 @@ document.addEventListener(
       );
 
 
-    /*
-    RESET — VERSI BARU
-    TIDAK MENGANDALKAN ONCLICK HTML
-    */
-
     get("resetAdminButton")
       .addEventListener(
         "click",
@@ -1954,17 +2086,11 @@ document.addEventListener(
 
           event.preventDefault();
 
-          event.stopPropagation();
-
           resetAdminForm(true);
 
         }
       );
 
-
-    /*
-    PENCARIAN ADMIN
-    */
 
     get("adminSearch")
       .addEventListener(
@@ -1972,10 +2098,6 @@ document.addEventListener(
         renderAdmin
       );
 
-
-    /*
-    LOGOUT
-    */
 
     get("logoutButton")
       .addEventListener(
