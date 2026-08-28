@@ -8,6 +8,7 @@
 <title>Material Monitoring</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -68,6 +69,10 @@ button {
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
+}
+
+button:active {
+  transform: scale(.98);
 }
 
 .primary {
@@ -174,12 +179,6 @@ th {
   margin-top: 5px;
 }
 
-.delete-button {
-  background: #d32f2f;
-  color: white;
-  white-space: nowrap;
-}
-
 .material-add-box {
   background: #f5f7fa;
   padding: 15px;
@@ -200,15 +199,33 @@ th {
   border: 1px solid #ddd;
   border-radius: 7px;
   margin-bottom: 7px;
+  gap: 10px;
 }
 
 .material-name {
   font-weight: bold;
+  word-break: break-word;
+}
+
+.delete-button {
+  background: #d32f2f;
+  color: white;
+  white-space: nowrap;
 }
 
 .small-button {
   padding: 7px 10px;
   font-size: 12px;
+}
+
+.logout-button {
+  margin-top: 10px;
+}
+
+.empty {
+  color: #666;
+  text-align: center;
+  padding: 15px;
 }
 
 @media (max-width: 600px) {
@@ -234,10 +251,8 @@ th {
     padding: 8px;
   }
 
-  .material-list-item {
-    gap: 10px;
-  }
 }
+
 </style>
 </head>
 
@@ -264,19 +279,24 @@ HALAMAN AWAL
 type="button"
 class="primary full"
 onclick="showAdminLogin()">
+
 🔐 LOGIN ADMIN
+
 </button>
 
 <button
 type="button"
 class="secondary full"
 onclick="showTeamSearch()">
+
 👥 TEAM
+
 </button>
 
 </div>
 
 </div>
+
 </div>
 
 
@@ -312,14 +332,18 @@ placeholder="Masukkan password">
 type="button"
 class="primary full"
 onclick="loginAdmin()">
+
 MASUK ADMIN
+
 </button>
 
 <button
 type="button"
 class="secondary full"
 onclick="backStart()">
+
 KEMBALI
+
 </button>
 
 <p id="loginStatus"></p>
@@ -327,6 +351,7 @@ KEMBALI
 </div>
 
 </div>
+
 </div>
 
 
@@ -344,7 +369,9 @@ TEAM SEARCH
 
 <div class="card login-card">
 
-<h2 class="center">Cari Team</h2>
+<h2 class="center">
+Cari Team
+</h2>
 
 <p class="center">
 Masukkan kode Team
@@ -361,14 +388,18 @@ onkeydown="if(event.key==='Enter') searchTeam()">
 type="button"
 class="primary full"
 onclick="searchTeam()">
+
 🔎 LIHAT DATA
+
 </button>
 
 <button
 type="button"
 class="secondary full"
 onclick="backStart()">
+
 KEMBALI
+
 </button>
 
 <p id="teamStatus"></p>
@@ -376,6 +407,7 @@ KEMBALI
 </div>
 
 </div>
+
 </div>
 
 
@@ -403,7 +435,9 @@ TEAM DATA
 
 <span>Total Ambil</span>
 
-<b id="teamTotalAmbil">0</b>
+<b id="teamTotalAmbil">
+0
+</b>
 
 </div>
 
@@ -411,7 +445,9 @@ TEAM DATA
 
 <span>Total Pakai</span>
 
-<b id="teamTotalPakai">0</b>
+<b id="teamTotalPakai">
+0
+</b>
 
 </div>
 
@@ -419,7 +455,9 @@ TEAM DATA
 
 <span>Total Sisa</span>
 
-<b id="teamTotalSisa">0</b>
+<b id="teamTotalSisa">
+0
+</b>
 
 </div>
 
@@ -439,6 +477,7 @@ TEAM DATA
 <thead>
 
 <tr>
+
 <th>Team</th>
 <th>Tanggal</th>
 <th>Material</th>
@@ -446,16 +485,19 @@ TEAM DATA
 <th>Pakai</th>
 <th>Sisa</th>
 <th>Nominal</th>
+
 </tr>
 
 </thead>
 
 <tbody id="teamTable">
+
 </tbody>
 
 </table>
 
 </div>
+
 
 <button
 type="button"
@@ -469,6 +511,7 @@ onclick="backTeamSearch()">
 </div>
 
 </div>
+
 </div>
 
 
@@ -484,7 +527,7 @@ ADMIN
 
 <button
 type="button"
-class="danger"
+class="danger logout-button"
 onclick="logoutAdmin()">
 
 LOGOUT
@@ -514,7 +557,9 @@ Tambah Nama Material Baru
 
 <input
 id="newMaterialName"
-placeholder="Contoh RMT">
+placeholder="Contoh RMT"
+autocomplete="off"
+onkeydown="if(event.key==='Enter') addMaterialName()">
 
 <button
 type="button"
@@ -546,7 +591,7 @@ Memuat nama material...
 
 
 <!-- =====================================================
-FORM TAMBAH MATERIAL
+FORM TAMBAH DATA
 ===================================================== -->
 
 <div class="card">
@@ -562,7 +607,8 @@ FORM TAMBAH MATERIAL
 
 <input
 id="adminTeam"
-placeholder="H007">
+placeholder="H007"
+style="text-transform:uppercase">
 
 </div>
 
@@ -696,6 +742,7 @@ oninput="renderAdmin()">
 </thead>
 
 <tbody id="adminTable">
+
 </tbody>
 
 </table>
@@ -705,6 +752,7 @@ oninput="renderAdmin()">
 </div>
 
 </div>
+
 </div>
 
 
@@ -726,7 +774,8 @@ SUPABASE_URL + "/rest/v1";
 
 const HEADERS = {
 
-"apikey": SUPABASE_KEY,
+"apikey":
+SUPABASE_KEY,
 
 "Content-Type":
 "application/json"
@@ -747,19 +796,24 @@ NAVIGASI
 
 function hideAll() {
 
-document.getElementById("startPage")
+document
+.getElementById("startPage")
 .classList.add("hidden");
 
-document.getElementById("adminLoginPage")
+document
+.getElementById("adminLoginPage")
 .classList.add("hidden");
 
-document.getElementById("teamSearchPage")
+document
+.getElementById("teamSearchPage")
 .classList.add("hidden");
 
-document.getElementById("teamPage")
+document
+.getElementById("teamPage")
 .classList.add("hidden");
 
-document.getElementById("adminPage")
+document
+.getElementById("adminPage")
 .classList.add("hidden");
 
 }
@@ -769,7 +823,8 @@ function backStart() {
 
 hideAll();
 
-document.getElementById("startPage")
+document
+.getElementById("startPage")
 .classList.remove("hidden");
 
 }
@@ -779,7 +834,8 @@ function showAdminLogin() {
 
 hideAll();
 
-document.getElementById("adminLoginPage")
+document
+.getElementById("adminLoginPage")
 .classList.remove("hidden");
 
 }
@@ -789,12 +845,15 @@ function showTeamSearch() {
 
 hideAll();
 
-document.getElementById("teamSearchPage")
+document
+.getElementById("teamSearchPage")
 .classList.remove("hidden");
 
 setTimeout(function() {
 
-document.getElementById("teamInput").focus();
+document
+.getElementById("teamInput")
+.focus();
 
 },100);
 
@@ -808,15 +867,19 @@ LOGIN ADMIN
 async function loginAdmin() {
 
 const email =
-document.getElementById("adminEmail")
-.value.trim();
+document
+.getElementById("adminEmail")
+.value
+.trim();
 
 const password =
-document.getElementById("adminPassword")
+document
+.getElementById("adminPassword")
 .value;
 
 const status =
-document.getElementById("loginStatus");
+document
+.getElementById("loginStatus");
 
 
 if (!email || !password) {
@@ -848,7 +911,8 @@ SUPABASE_URL +
 
 {
 
-method: "POST",
+method:
+"POST",
 
 headers: {
 
@@ -860,11 +924,14 @@ SUPABASE_KEY,
 
 },
 
-body: JSON.stringify({
+body:
+JSON.stringify({
 
-email: email,
+email:
+email,
 
-password: password
+password:
+password
 
 })
 
@@ -942,8 +1009,11 @@ result.access_token
 
 hideAll();
 
-document.getElementById("adminPage")
-.classList.remove("hidden");
+
+document
+.getElementById("adminPage")
+.classList
+.remove("hidden");
 
 
 await loadAdminData();
@@ -967,7 +1037,7 @@ error.message;
 
 
 /* =====================================================
-LOAD DATA MATERIAL
+LOAD DATA ADMIN
 ===================================================== */
 
 async function loadAdminData() {
@@ -978,7 +1048,11 @@ localStorage.getItem(
 );
 
 
-if (!token) return;
+if (!token) {
+
+return;
+
+}
 
 
 const response =
@@ -1034,7 +1108,11 @@ localStorage.getItem(
 );
 
 
-if (!token) return;
+if (!token) {
+
+return;
+
+}
 
 
 const response =
@@ -1081,7 +1159,7 @@ renderMaterialSelect();
 
 
 /* =====================================================
-TAMPILKAN DAFTAR MATERIAL ADMIN
+TAMPIL DAFTAR NAMA MATERIAL
 ===================================================== */
 
 function renderMaterialNames() {
@@ -1096,12 +1174,11 @@ if (!materialNames.length) {
 
 container.innerHTML = `
 
-<p>
+<div class="empty">
 
 Belum ada nama material.
-Silakan tambahkan nama material.
 
-</p>
+</div>
 
 `;
 
@@ -1120,11 +1197,18 @@ return `
 
 <span class="material-name">
 
-${esc(
-item["nama_material"]
-)}
+${esc(item["nama_material"])}
 
 </span>
+
+<button
+type="button"
+class="delete-button small-button"
+onclick="deleteMaterialName(${Number(item.id)})">
+
+🗑️ HAPUS
+
+</button>
 
 </div>
 
@@ -1136,7 +1220,7 @@ item["nama_material"]
 
 
 /* =====================================================
-DROPDOWN NAMA MATERIAL
+DROPDOWN MATERIAL
 ===================================================== */
 
 function renderMaterialSelect() {
@@ -1147,7 +1231,11 @@ document.getElementById(
 );
 
 
-if (!select) return;
+if (!select) {
+
+return;
+
+}
 
 
 select.innerHTML = `
@@ -1253,7 +1341,8 @@ API +
 
 {
 
-method: "POST",
+method:
+"POST",
 
 headers: {
 
@@ -1287,9 +1376,7 @@ await response.text();
 
 if (!response.ok) {
 
-if (
-response.status === 409
-) {
+if (response.status === 409) {
 
 throw new Error(
 "Nama material sudah ada."
@@ -1334,6 +1421,158 @@ error.message;
 
 
 /* =====================================================
+HAPUS NAMA MATERIAL
+===================================================== */
+
+async function deleteMaterialName(id) {
+
+const token =
+localStorage.getItem(
+"access_token"
+);
+
+
+if (!token) {
+
+alert(
+"Silakan login sebagai Admin."
+);
+
+return;
+
+}
+
+
+const item =
+materialNames.find(function(row) {
+
+return String(row.id) === String(id);
+
+});
+
+
+if (!item) {
+
+alert(
+"Nama material tidak ditemukan."
+);
+
+return;
+
+}
+
+
+const nama =
+item["nama_material"];
+
+
+const yakin =
+confirm(
+
+"⚠️ HAPUS NAMA MATERIAL\n\n" +
+
+nama +
+
+"\n\n" +
+
+"Nama material akan dihapus dari daftar pilihan Admin.\n\n" +
+
+"Data pemakaian yang sudah tersimpan TIDAK akan dihapus.\n\n" +
+
+"Lanjutkan?"
+
+);
+
+
+if (!yakin) {
+
+return;
+
+}
+
+
+try {
+
+const response =
+await fetch(
+
+API +
+"/material_names?id=eq." +
+encodeURIComponent(id),
+
+{
+
+method:
+"DELETE",
+
+headers: {
+
+...HEADERS,
+
+"Authorization":
+"Bearer " +
+token,
+
+"Prefer":
+"return=representation"
+
+}
+
+}
+
+);
+
+
+const result =
+await response.text();
+
+
+if (!response.ok) {
+
+throw new Error(
+
+result ||
+"Gagal menghapus nama material."
+
+);
+
+}
+
+
+materialNames =
+materialNames.filter(function(row) {
+
+return String(row.id) !== String(id);
+
+});
+
+
+renderMaterialNames();
+
+renderMaterialSelect();
+
+
+alert(
+"✅ Nama material berhasil dihapus."
+);
+
+}
+
+catch (error) {
+
+alert(
+
+"❌ Gagal menghapus nama material:\n\n" +
+error.message
+
+);
+
+}
+
+}
+
+
+/* =====================================================
 RENDER ADMIN
 ===================================================== */
 
@@ -1341,9 +1580,10 @@ function renderAdmin() {
 
 const search =
 (
-document.getElementById(
-"adminSearch"
-).value || ""
+document
+.getElementById("adminSearch")
+.value ||
+""
 )
 .trim()
 .toUpperCase();
@@ -1378,9 +1618,8 @@ String(row["Part"] || "")
 
 
 const body =
-document.getElementById(
-"adminTable"
-);
+document
+.getElementById("adminTable");
 
 
 if (!rows.length) {
@@ -1428,9 +1667,6 @@ num(row["Harga"]);
 const nominal =
 sisa * harga;
 
-const id =
-row["id"];
-
 
 return `
 
@@ -1440,9 +1676,7 @@ return `
 
 <span class="badge">
 
-${esc(
-row["Team"]
-)}
+${esc(row["Team"])}
 
 </span>
 
@@ -1451,9 +1685,7 @@ row["Team"]
 
 <td>
 
-${formatDate(
-row["Tanggal"]
-)}
+${formatDate(row["Tanggal"])}
 
 </td>
 
@@ -1462,9 +1694,7 @@ row["Tanggal"]
 
 <b>
 
-${esc(
-row["Part"]
-)}
+${esc(row["Part"])}
 
 </b>
 
@@ -1514,8 +1744,8 @@ ${rupiah(nominal)}
 
 <button
 type="button"
-class="delete-button"
-onclick="deleteMaterial('${esc(id)}')">
+class="delete-button small-button"
+onclick="deleteMaterial(${Number(row.id)})">
 
 🗑️ HAPUS
 
@@ -1533,7 +1763,7 @@ onclick="deleteMaterial('${esc(id)}')">
 
 
 /* =====================================================
-HAPUS DATA
+HAPUS DATA MATERIAL
 ===================================================== */
 
 async function deleteMaterial(id) {
@@ -1574,11 +1804,20 @@ return;
 const row =
 materials.find(function(item) {
 
-return String(item["id"])
-===
-String(id);
+return String(item.id) === String(id);
 
 });
+
+
+if (!row) {
+
+alert(
+"Data tidak ditemukan."
+);
+
+return;
+
+}
 
 
 const yakin =
@@ -1587,17 +1826,14 @@ confirm(
 "⚠️ KONFIRMASI HAPUS DATA\n\n" +
 
 "Team: " +
-(row ? row["Team"] : "") +
-"\n" +
+(row["Team"] || "") +
 
-"Material: " +
-(row ? row["Part"] : "") +
-"\n" +
+"\nMaterial: " +
+(row["Part"] || "") +
 
-"Tanggal: " +
-(row
-? formatDate(row["Tanggal"])
-: "") +
+"\nTanggal: " +
+formatDate(row["Tanggal"]) +
+
 "\n\n" +
 
 "Data akan dihapus permanen.\n\n" +
@@ -1607,7 +1843,11 @@ confirm(
 );
 
 
-if (!yakin) return;
+if (!yakin) {
+
+return;
+
+}
 
 
 try {
@@ -1621,19 +1861,16 @@ encodeURIComponent(id),
 
 {
 
-method: "DELETE",
+method:
+"DELETE",
 
 headers: {
 
-"apikey":
-SUPABASE_KEY,
+...HEADERS,
 
 "Authorization":
 "Bearer " +
 token,
-
-"Content-Type":
-"application/json",
 
 "Prefer":
 "return=representation"
@@ -1652,8 +1889,10 @@ await response.text();
 if (!response.ok) {
 
 throw new Error(
+
 result ||
 "Gagal menghapus data."
+
 );
 
 }
@@ -1662,9 +1901,7 @@ result ||
 materials =
 materials.filter(function(item) {
 
-return String(item["id"])
-!==
-String(id);
+return String(item.id) !== String(id);
 
 });
 
@@ -1672,21 +1909,18 @@ String(id);
 renderAdmin();
 
 
-showAdminStatus(
-"✅ Data berhasil dihapus dari database.",
-true
+alert(
+"✅ Data berhasil dihapus."
 );
 
 }
 
 catch (error) {
 
-showAdminStatus(
+alert(
 
-"❌ Gagal menghapus data: " +
-error.message,
-
-false
+"❌ Gagal menghapus data:\n\n" +
+error.message
 
 );
 
@@ -1696,7 +1930,7 @@ false
 
 
 /* =====================================================
-SIMPAN DATA MATERIAL
+SIMPAN MATERIAL
 ===================================================== */
 
 async function saveMaterial() {
@@ -1719,47 +1953,47 @@ return;
 
 
 const team =
-document.getElementById(
-"adminTeam"
-).value
+document
+.getElementById("adminTeam")
+.value
 .trim()
 .toUpperCase();
 
 
 const tanggal =
-document.getElementById(
-"adminTanggal"
-).value;
+document
+.getElementById("adminTanggal")
+.value;
 
 
 const part =
-document.getElementById(
-"adminPart"
-).value
+document
+.getElementById("adminPart")
+.value
 .trim();
 
 
 const harga =
 Number(
-document.getElementById(
-"adminHarga"
-).value
+document
+.getElementById("adminHarga")
+.value
 ) || 0;
 
 
 const ambil =
 Number(
-document.getElementById(
-"adminTotalAmbil"
-).value
+document
+.getElementById("adminTotalAmbil")
+.value
 ) || 0;
 
 
 const pakai =
 Number(
-document.getElementById(
-"adminPakai"
-).value
+document
+.getElementById("adminPakai")
+.value
 ) || 0;
 
 
@@ -1810,11 +2044,38 @@ return;
 }
 
 
+if (harga < 0) {
+
+showAdminStatus(
+"Harga tidak boleh negatif.",
+false
+);
+
+return;
+
+}
+
+
+if (ambil < 0 || pakai < 0) {
+
+showAdminStatus(
+"Jumlah tidak boleh negatif.",
+false
+);
+
+return;
+
+}
+
+
 if (pakai > ambil) {
 
 showAdminStatus(
+
 "Jumlah Pakai tidak boleh lebih besar dari Jumlah Ambil.",
+
 false
+
 );
 
 return;
@@ -1864,7 +2125,8 @@ API +
 
 {
 
-method: "POST",
+method:
+"POST",
 
 headers: {
 
@@ -1887,10 +2149,15 @@ JSON.stringify(record)
 );
 
 
+const result =
+await response.text();
+
+
 if (!response.ok) {
 
 throw new Error(
-await response.text()
+result ||
+"Gagal menyimpan data."
 );
 
 }
@@ -1926,7 +2193,7 @@ false
 
 
 /* =====================================================
-RESET FORM
+RESET FORM ADMIN
 ===================================================== */
 
 function resetAdminForm() {
@@ -1947,6 +2214,7 @@ ids.forEach(function(id) {
 const element =
 document.getElementById(id);
 
+
 if (element) {
 
 element.value = "";
@@ -1960,6 +2228,7 @@ const select =
 document.getElementById(
 "adminPart"
 );
+
 
 if (select) {
 
@@ -1992,17 +2261,16 @@ TEAM SEARCH
 async function searchTeam() {
 
 const team =
-document.getElementById(
-"teamInput"
-).value
+document
+.getElementById("teamInput")
+.value
 .trim()
 .toUpperCase();
 
 
 const status =
-document.getElementById(
-"teamStatus"
-);
+document
+.getElementById("teamStatus");
 
 
 if (!team) {
@@ -2091,9 +2359,8 @@ renderTeam(rows);
 hideAll();
 
 
-document.getElementById(
-"teamPage"
-)
+document
+.getElementById("teamPage")
 .classList
 .remove("hidden");
 
@@ -2119,9 +2386,9 @@ TEAM DISPLAY
 
 function renderTeam(rows) {
 
-document.getElementById(
-"teamHeader"
-).textContent =
+document
+.getElementById("teamHeader")
+.textContent =
 "📦 TEAM " +
 currentTeam;
 
@@ -2157,28 +2424,27 @@ totalSisa += sisa;
 });
 
 
-document.getElementById(
-"teamTotalAmbil"
-).textContent =
+document
+.getElementById("teamTotalAmbil")
+.textContent =
 formatNumber(totalAmbil);
 
 
-document.getElementById(
-"teamTotalPakai"
-).textContent =
+document
+.getElementById("teamTotalPakai")
+.textContent =
 formatNumber(totalPakai);
 
 
-document.getElementById(
-"teamTotalSisa"
-).textContent =
+document
+.getElementById("teamTotalSisa")
+.textContent =
 formatNumber(totalSisa);
 
 
 const table =
-document.getElementById(
-"teamTable"
-);
+document
+.getElementById("teamTable");
 
 
 table.innerHTML =
@@ -2212,9 +2478,7 @@ return `
 
 <b>
 
-${esc(
-row["Team"]
-)}
+${esc(row["Team"])}
 
 </b>
 
@@ -2223,9 +2487,7 @@ row["Team"]
 
 <td>
 
-${formatDate(
-row["Tanggal"]
-)}
+${formatDate(row["Tanggal"])}
 
 </td>
 
@@ -2234,9 +2496,7 @@ row["Tanggal"]
 
 <b>
 
-${esc(
-row["Part"]
-)}
+${esc(row["Part"])}
 
 </b>
 
@@ -2295,33 +2555,33 @@ function backTeamSearch() {
 
 hideAll();
 
-document.getElementById(
-"teamSearchPage"
-)
+
+document
+.getElementById("teamSearchPage")
 .classList
 .remove("hidden");
 
 
-document.getElementById(
-"teamInput"
-).value = "";
+document
+.getElementById("teamInput")
+.value = "";
 
 
-document.getElementById(
-"teamStatus"
-).textContent = "";
+document
+.getElementById("teamStatus")
+.textContent = "";
 
 
-document.getElementById(
-"teamStatus"
-).className = "";
+document
+.getElementById("teamStatus")
+.className = "";
 
 
 setTimeout(function() {
 
-document.getElementById(
-"teamInput"
-).focus();
+document
+.getElementById("teamInput")
+.focus();
 
 },100);
 
@@ -2344,9 +2604,9 @@ materialNames = [];
 
 hideAll();
 
-document.getElementById(
-"startPage"
-)
+
+document
+.getElementById("startPage")
 .classList
 .remove("hidden");
 
@@ -2403,7 +2663,11 @@ num(value)
 
 function formatDate(value) {
 
-if (!value) return "-";
+if (!value) {
+
+return "-";
+
+}
 
 
 const parts =
@@ -2476,6 +2740,13 @@ const el =
 document.getElementById(
 "adminStatus"
 );
+
+
+if (!el) {
+
+return;
+
+}
 
 
 el.textContent =
