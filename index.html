@@ -4,29 +4,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Material Monitoring</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#f3f5f7;
-color:#222
+color:#222;
 }
 
 header{
 background:#1565c0;
 color:white;
 padding:16px;
-text-align:center
+text-align:center;
 }
 
 .container{
 max-width:1100px;
 margin:auto;
-padding:15px
+padding:15px;
 }
 
 .card{
@@ -34,12 +38,21 @@ background:white;
 padding:20px;
 margin:15px 0;
 border-radius:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.12)
+box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
 .login-card{
-max-width:420px;
-margin:40px auto
+max-width:430px;
+margin:40px auto;
+}
+
+h1{
+margin:0;
+font-size:22px;
+}
+
+h2{
+margin-top:0;
 }
 
 input{
@@ -48,7 +61,7 @@ padding:12px;
 margin:6px 0 14px;
 border:1px solid #ccc;
 border-radius:7px;
-font-size:16px
+font-size:16px;
 }
 
 button{
@@ -57,135 +70,208 @@ border-radius:7px;
 padding:12px 16px;
 font-weight:bold;
 cursor:pointer;
-font-size:15px
+font-size:15px;
 }
 
 .primary{
 background:#1565c0;
-color:white
+color:white;
 }
 
 .secondary{
 background:#e5eaf0;
-color:#222
+color:#222;
 }
 
 .danger{
 background:#d32f2f;
-color:white
+color:white;
 }
 
 .full{
 width:100%;
-margin-top:8px
+margin-top:8px;
 }
 
 .hidden{
-display:none!important
+display:none!important;
 }
 
 .center{
-text-align:center
+text-align:center;
 }
 
 .error{
 color:#d32f2f;
-font-weight:bold
+font-weight:bold;
 }
 
 .success{
 color:#16803c;
-font-weight:bold
+font-weight:bold;
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:10px
+gap:10px;
 }
 
 .table-wrap{
-overflow-x:auto
+overflow-x:auto;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-min-width:850px
+min-width:850px;
 }
 
 th,td{
 padding:10px;
 border-bottom:1px solid #ddd;
+font-size:14px;
 text-align:left;
-font-size:14px
 }
 
 th{
-background:#edf3f9
+background:#edf3f9;
 }
 
 .number{
-text-align:right
+text-align:right;
 }
 
 .badge{
 background:#e3f2fd;
 color:#1565c0;
-padding:5px 8px;
-border-radius:12px;
-font-weight:bold
+padding:5px 9px;
+border-radius:15px;
+font-weight:bold;
 }
 
 .summary{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px
+grid-template-columns:repeat(3,1fr);
+gap:10px;
 }
 
 .summary-box{
 background:#f5f7fa;
-padding:12px;
+padding:15px;
 border-radius:8px;
-text-align:center
+text-align:center;
+}
+
+.summary-box span{
+display:block;
+font-size:13px;
+color:#666;
 }
 
 .summary-box b{
 display:block;
 font-size:20px;
-margin-top:5px
+margin-top:5px;
+}
+
+.material-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:10px;
+}
+
+.material-button{
+background:white;
+border:2px solid #1565c0;
+color:#1565c0;
+padding:15px;
+border-radius:10px;
+font-weight:bold;
+font-size:16px;
+}
+
+.material-button:hover{
+background:#eaf3ff;
+}
+
+.detail-box{
+background:#f5f7fa;
+padding:18px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.detail-row{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #ddd;
+}
+
+.detail-row:last-child{
+border-bottom:0;
+}
+
+.detail-label{
+color:#666;
+}
+
+.detail-value{
+font-weight:bold;
+}
+
+.big-number{
+font-size:26px;
+font-weight:bold;
+}
+
+.total-sisa{
+font-size:22px;
+font-weight:bold;
+margin-top:12px;
 }
 
 @media(max-width:600px){
 
-.summary{
-grid-template-columns:repeat(2,1fr)
+.container{
+padding:10px;
 }
 
 .card{
-padding:15px
+padding:15px;
+margin:10px 0;
 }
 
-h1{
-font-size:21px
+.summary{
+grid-template-columns:1fr;
 }
 
-h2{
-font-size:19px
+.material-list{
+grid-template-columns:1fr 1fr;
+}
+
+.material-button{
+padding:13px 8px;
+font-size:14px;
 }
 
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- HALAMAN AWAL -->
+
+<!-- =====================================================
+HALAMAN AWAL
+===================================================== -->
 
 <div id="startPage">
 
 <header>
-<h1>📦 Material Monitoring</h1>
+<h1>📦 MATERIAL MONITORING</h1>
 </header>
 
 <div class="container">
@@ -209,15 +295,18 @@ onclick="showTeamSearch()">
 </div>
 
 </div>
+
 </div>
 
 
-<!-- LOGIN ADMIN -->
+<!-- =====================================================
+LOGIN ADMIN
+===================================================== -->
 
 <div id="adminLoginPage" class="hidden">
 
 <header>
-<h1>🔐 Login Admin</h1>
+<h1>🔐 LOGIN ADMIN</h1>
 </header>
 
 <div class="container">
@@ -229,7 +318,7 @@ onclick="showTeamSearch()">
 <input
 id="adminEmail"
 type="email"
-placeholder="Masukkan email Admin">
+placeholder="Masukkan email admin">
 
 <label>Password</label>
 
@@ -255,22 +344,27 @@ KEMBALI
 </div>
 
 </div>
+
 </div>
 
 
-<!-- TEAM -->
+<!-- =====================================================
+TEAM SEARCH
+===================================================== -->
 
 <div id="teamSearchPage" class="hidden">
 
 <header>
-<h1>👥 Cek Material Team</h1>
+<h1>👥 TEAM</h1>
 </header>
 
 <div class="container">
 
 <div class="card login-card">
 
-<h2 class="center">Cari Team</h2>
+<h2 class="center">
+Cari Team
+</h2>
 
 <p class="center">
 Masukkan kode Team
@@ -278,7 +372,7 @@ Masukkan kode Team
 
 <input
 id="teamInput"
-placeholder="Contoh: H007"
+placeholder="Contoh H007"
 autocomplete="off"
 style="text-transform:uppercase"
 onkeydown="if(event.key==='Enter')searchTeam()">
@@ -300,77 +394,150 @@ KEMBALI
 </div>
 
 </div>
+
 </div>
 
 
-<!-- HASIL TEAM -->
+<!-- =====================================================
+TEAM MATERIAL
+===================================================== -->
 
-<div id="teamResultPage" class="hidden">
+<div id="teamPage" class="hidden">
 
 <header>
 
-<h1 id="teamTitle">
-📦 MATERIAL TEAM
+<h1 id="teamHeader">
+📦 TEAM
 </h1>
 
 </header>
 
 <div class="container">
 
+
+<!-- RINGKASAN TEAM -->
+
 <div class="card">
 
 <div class="summary">
 
 <div class="summary-box">
-Part
-<b id="totalPart">0</b>
+
+<span>Barang Dipakai</span>
+
+<b id="teamTotalUsed">
+0
+</b>
+
 </div>
+
 
 <div class="summary-box">
-Stok Awal
-<b id="totalAwal">0</b>
+
+<span>Barang Sisa</span>
+
+<b id="teamTotalSisa">
+0
+</b>
+
 </div>
+
 
 <div class="summary-box">
-Total Ambil
-<b id="totalAmbil">0</b>
-</div>
 
-<div class="summary-box">
-Sisa
-<b id="totalSisa">0</b>
-</div>
+<span>Nominal Barang Sisa</span>
+
+<b id="teamNominalSisa">
+Rp0
+</b>
 
 </div>
 
 </div>
+
+</div>
+
+
+<!-- DAFTAR MATERIAL -->
 
 <div class="card">
 
-<div class="table-wrap">
+<h2>📋 Pilih Material</h2>
 
-<table>
+<p>
+Klik nama material untuk melihat jumlah yang dipakai dan sisanya.
+</p>
 
-<thead>
-
-<tr>
-<th>Part</th>
-<th>Description</th>
-<th>Unit</th>
-<th>Harga</th>
-<th>Stok Awal</th>
-<th>Total Ambil</th>
-<th>Sisa Gudang</th>
-<th>Harg Sisa</th>
-</tr>
-
-</thead>
-
-<tbody id="teamTable"></tbody>
-
-</table>
+<div
+id="materialList"
+class="material-list">
+</div>
 
 </div>
+
+
+<!-- DETAIL MATERIAL -->
+
+<div
+id="materialDetail"
+class="card hidden">
+
+<h2 id="detailPart">
+Material
+</h2>
+
+<p id="detailDescription"></p>
+
+<div class="detail-box">
+
+<div class="detail-row">
+
+<span class="detail-label">
+Barang Dipakai
+</span>
+
+<span
+id="detailUsed"
+class="detail-value big-number">
+0
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+Barang Sisa
+</span>
+
+<span
+id="detailSisa"
+class="detail-value big-number">
+0
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+Nominal Barang Sisa
+</span>
+
+<span
+id="detailNominal"
+class="detail-value">
+Rp0
+</span>
+
+</div>
+
+</div>
+
+</div>
+
 
 <button
 class="secondary full"
@@ -381,10 +548,11 @@ onclick="backTeamSearch()">
 </div>
 
 </div>
-</div>
 
 
-<!-- ADMIN -->
+<!-- =====================================================
+ADMIN
+===================================================== -->
 
 <div id="adminPage" class="hidden">
 
@@ -400,50 +568,97 @@ LOGOUT
 
 </header>
 
+
 <div class="container">
+
+
+<!-- FORM ADMIN -->
 
 <div class="card">
 
-<h2>Tambah Material</h2>
+<h2>➕ Tambah Material</h2>
 
 <div class="grid">
 
+
 <div>
+
 <label>Team</label>
-<input id="adminTeam" placeholder="H007">
+
+<input
+id="adminTeam"
+placeholder="H007">
+
 </div>
 
-<div>
-<label>Part</label>
-<input id="adminPart">
-</div>
 
 <div>
+
+<label>Part / Nama Material</label>
+
+<input
+id="adminPart"
+placeholder="Contoh RMT">
+
+</div>
+
+
+<div>
+
 <label>Description</label>
-<input id="adminDescription">
+
+<input
+id="adminDescription">
+
 </div>
 
+
 <div>
+
 <label>Unit</label>
-<input id="adminUnit">
+
+<input
+id="adminUnit"
+placeholder="Pcs">
+
 </div>
 
+
 <div>
+
 <label>Harga</label>
-<input id="adminHarga" type="number">
+
+<input
+id="adminHarga"
+type="number">
+
 </div>
 
+
 <div>
+
 <label>Stok Awal</label>
-<input id="adminStokAwal" type="number">
+
+<input
+id="adminStokAwal"
+type="number">
+
 </div>
+
 
 <div>
-<label>Total Ambil</label>
-<input id="adminTotalAmbil" type="number">
-</div>
+
+<label>Total Ambil / Pakai</label>
+
+<input
+id="adminTotalAmbil"
+type="number">
 
 </div>
+
+
+</div>
+
 
 <button
 class="primary"
@@ -451,16 +666,20 @@ onclick="saveMaterial()">
 💾 SIMPAN
 </button>
 
+
 <button
 class="secondary"
 onclick="resetForm()">
-RESET
+🔄 RESET
 </button>
+
 
 <p id="adminStatus"></p>
 
 </div>
 
+
+<!-- DATA ADMIN -->
 
 <div class="card">
 
@@ -468,7 +687,7 @@ RESET
 
 <input
 id="adminSearch"
-placeholder="Cari Team / Part / Description"
+placeholder="Cari Team / Material / Description"
 oninput="renderAdmin()">
 
 <div class="table-wrap">
@@ -478,20 +697,31 @@ oninput="renderAdmin()">
 <thead>
 
 <tr>
+
 <th>Team</th>
+
 <th>Part</th>
+
 <th>Description</th>
+
 <th>Unit</th>
+
 <th>Harga</th>
+
 <th>Stok Awal</th>
+
 <th>Total Ambil</th>
+
 <th>Sisa Gudang</th>
+
 <th>Harg Sisa</th>
+
 </tr>
 
 </thead>
 
-<tbody id="adminTable"></tbody>
+<tbody id="adminTable">
+</tbody>
 
 </table>
 
@@ -500,40 +730,67 @@ oninput="renderAdmin()">
 </div>
 
 </div>
+
 </div>
 
 
 <script>
 
-const SUPABASE_URL=
+
+/* =====================================================
+SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
 "https://umfpogjgiqhtiuvazqdm.supabase.co";
 
-const SUPABASE_KEY=
+const SUPABASE_KEY =
 "sb_publishable_ijo6swvjf5X83TrDe4Xfpg_7rJz7dRs";
 
-const API=
-SUPABASE_URL+"/rest/v1";
+const API =
+SUPABASE_URL + "/rest/v1";
 
-const HEADERS={
+
+const HEADERS = {
+
 "apikey":SUPABASE_KEY,
-"Content-Type":"application/json"
+
+"Content-Type":
+"application/json"
+
 };
 
-let materials=[];
-let currentTeam="";
 
+let materials = [];
+
+let currentTeam = "";
+
+
+/* =====================================================
+NAVIGASI
+===================================================== */
 
 function hideAll(){
 
-document.getElementById("startPage").classList.add("hidden");
+document
+.getElementById("startPage")
+.classList.add("hidden");
 
-document.getElementById("adminLoginPage").classList.add("hidden");
+document
+.getElementById("adminLoginPage")
+.classList.add("hidden");
 
-document.getElementById("teamSearchPage").classList.add("hidden");
+document
+.getElementById("teamSearchPage")
+.classList.add("hidden");
 
-document.getElementById("teamResultPage").classList.add("hidden");
+document
+.getElementById("teamPage")
+.classList.add("hidden");
 
-document.getElementById("adminPage").classList.add("hidden");
+document
+.getElementById("adminPage")
+.classList.add("hidden");
 
 }
 
@@ -542,7 +799,9 @@ function backStart(){
 
 hideAll();
 
-document.getElementById("startPage").classList.remove("hidden");
+document
+.getElementById("startPage")
+.classList.remove("hidden");
 
 }
 
@@ -551,7 +810,9 @@ function showAdminLogin(){
 
 hideAll();
 
-document.getElementById("adminLoginPage").classList.remove("hidden");
+document
+.getElementById("adminLoginPage")
+.classList.remove("hidden");
 
 }
 
@@ -560,102 +821,154 @@ function showTeamSearch(){
 
 hideAll();
 
-document.getElementById("teamSearchPage").classList.remove("hidden");
+document
+.getElementById("teamSearchPage")
+.classList.remove("hidden");
 
 setTimeout(function(){
 
-document.getElementById("teamInput").focus();
+document
+.getElementById("teamInput")
+.focus();
 
 },100);
 
 }
 
 
-/* ADMIN LOGIN */
+/* =====================================================
+LOGIN ADMIN
+===================================================== */
 
 async function loginAdmin(){
 
-const email=
-document.getElementById("adminEmail").value.trim();
+const email =
+document
+.getElementById("adminEmail")
+.value
+.trim();
 
-const password=
-document.getElementById("adminPassword").value;
+const password =
+document
+.getElementById("adminPassword")
+.value;
 
-const status=
-document.getElementById("loginStatus");
+const status =
+document
+.getElementById("loginStatus");
 
-if(!email||!password){
+
+if(!email || !password){
 
 status.className="error";
 
-status.textContent=
+status.textContent =
 "Email dan password wajib diisi.";
 
 return;
 
 }
 
-status.textContent="Sedang login...";
+
+status.className="";
+
+status.textContent =
+"Sedang login...";
+
 
 try{
 
-const response=
+
+const response =
 await fetch(
-SUPABASE_URL+
+
+SUPABASE_URL +
 "/auth/v1/token?grant_type=password",
+
 {
+
 method:"POST",
 
 headers:{
+
 "apikey":SUPABASE_KEY,
-"Content-Type":"application/json"
+
+"Content-Type":
+"application/json"
+
 },
 
 body:JSON.stringify({
+
 email:email,
+
 password:password
+
 })
+
 }
+
 );
 
-const result=
+
+const result =
 await response.json();
+
 
 if(!response.ok){
 
 throw new Error(
-result.msg||
-result.error_description||
-result.message||
+
+result.msg ||
+
+result.error_description ||
+
+result.message ||
+
 "Login gagal"
+
 );
 
 }
 
 
-/* PROFILE ADMIN */
+/* CEK PROFILE ADMIN */
 
-const profileResponse=
+const profileResponse =
 await fetch(
-API+
-"/profiles?id=eq."+
-result.user.id+
+
+API +
+"/profiles?id=eq." +
+result.user.id +
 "&select=*",
+
 {
+
 headers:{
+
 ...HEADERS,
+
 "Authorization":
-"Bearer "+result.access_token
+"Bearer " +
+result.access_token
+
 }
+
 }
+
 );
 
-const profiles=
+
+const profiles =
 await profileResponse.json();
 
+
 if(
-!profiles.length||
-profiles[0].role!=="admin"
+
+!profiles.length ||
+
+profiles[0].role !== "admin"
+
 ){
 
 throw new Error(
@@ -664,49 +977,75 @@ throw new Error(
 
 }
 
+
 localStorage.setItem(
+
 "access_token",
+
 result.access_token
+
 );
+
 
 hideAll();
 
-document.getElementById("adminPage")
+
+document
+.getElementById("adminPage")
 .classList.remove("hidden");
+
 
 await loadAdminData();
 
+
 }
+
 catch(error){
 
 status.className="error";
 
-status.textContent=
-"Gagal login: "+error.message;
+status.textContent =
+"Gagal login: " +
+error.message;
 
 }
 
 }
 
 
-/* LOAD ADMIN */
+/* =====================================================
+LOAD ADMIN DATA
+===================================================== */
 
 async function loadAdminData(){
 
-const token=
-localStorage.getItem("access_token");
-
-const response=
-await fetch(
-API+"/material?select=*",
-{
-headers:{
-...HEADERS,
-"Authorization":
-"Bearer "+token
-}
-}
+const token =
+localStorage.getItem(
+"access_token"
 );
+
+
+const response =
+await fetch(
+
+API +
+"/material?select=*",
+
+{
+
+headers:{
+
+...HEADERS,
+
+"Authorization":
+"Bearer " + token
+
+}
+
+}
+
+);
+
 
 if(!response.ok){
 
@@ -716,65 +1055,97 @@ await response.text()
 
 }
 
-materials=
+
+materials =
 await response.json();
+
 
 renderAdmin();
 
 }
 
 
-/* ADMIN TABLE */
+/* =====================================================
+ADMIN TABLE
+===================================================== */
 
 function renderAdmin(){
 
-const search=
-(document.getElementById("adminSearch").value||"")
+const search =
+(
+
+document
+.getElementById("adminSearch")
+.value || ""
+
+)
 .trim()
 .toUpperCase();
 
-let rows=materials;
+
+let rows =
+materials;
+
 
 if(search){
 
-rows=
+rows =
 rows.filter(function(row){
 
 return(
-String(row["Team"]||"")
+
+String(row["Team"] || "")
 .toUpperCase()
 .includes(search)
 
 ||
 
-String(row["Part"]||"")
+String(row["Part"] || "")
 .toUpperCase()
 .includes(search)
 
 ||
 
-String(row["Description"]||"")
+String(row["Description"] || "")
 .toUpperCase()
 .includes(search)
+
 );
 
 });
 
 }
 
-const body=
-document.getElementById("adminTable");
+
+const body =
+document
+.getElementById("adminTable");
+
 
 if(!rows.length){
 
-body.innerHTML=
-'<tr><td colspan="9" class="center">Data tidak ditemukan.</td></tr>';
+body.innerHTML =
+`
+<tr>
+
+<td
+colspan="9"
+class="center">
+
+Data tidak ditemukan.
+
+</td>
+
+</tr>
+`;
 
 return;
 
 }
 
-body.innerHTML=
+
+body.innerHTML =
+
 rows.map(function(row){
 
 return`
@@ -782,16 +1153,26 @@ return`
 <tr>
 
 <td>
+
 <span class="badge">
+
 ${esc(row["Team"])}
+
 </span>
+
 </td>
 
-<td>${esc(row["Part"])}</td>
+<td>
+${esc(row["Part"])}
+</td>
 
-<td>${esc(row["Description"])}</td>
+<td>
+${esc(row["Description"])}
+</td>
 
-<td>${esc(row["Unit"])}</td>
+<td>
+${esc(row["Unit"])}
+</td>
 
 <td class="number">
 ${rupiah(row["Harga"])}
@@ -806,7 +1187,9 @@ ${formatNumber(row["Total Ambil"])}
 </td>
 
 <td class="number">
-<b>${formatNumber(row["Sisa Gudang"])}</b>
+<b>
+${formatNumber(row["Sisa Gudang"])}
+</b>
 </td>
 
 <td class="number">
@@ -822,57 +1205,96 @@ ${rupiah(row["Harg Sisa"])}
 }
 
 
-/* SAVE ADMIN */
+/* =====================================================
+SAVE ADMIN
+===================================================== */
 
 async function saveMaterial(){
 
-const token=
-localStorage.getItem("access_token");
+const token =
+localStorage.getItem(
+"access_token"
+);
+
 
 if(!token){
 
-alert("Silakan login sebagai Admin.");
+alert(
+"Silakan login sebagai Admin."
+);
 
 return;
 
 }
 
-const stokAwal=
+
+const team =
+document
+.getElementById("adminTeam")
+.value
+.trim()
+.toUpperCase();
+
+
+const part =
+document
+.getElementById("adminPart")
+.value
+.trim();
+
+
+const description =
+document
+.getElementById("adminDescription")
+.value
+.trim();
+
+
+const unit =
+document
+.getElementById("adminUnit")
+.value
+.trim();
+
+
+const harga =
 Number(
-document.getElementById("adminStokAwal").value
-)||0;
+document
+.getElementById("adminHarga")
+.value
+) || 0;
 
-const totalAmbil=
+
+const stokAwal =
 Number(
-document.getElementById("adminTotalAmbil").value
-)||0;
+document
+.getElementById("adminStokAwal")
+.value
+) || 0;
 
-const harga=
+
+const totalAmbil =
 Number(
-document.getElementById("adminHarga").value
-)||0;
+document
+.getElementById("adminTotalAmbil")
+.value
+) || 0;
 
-const sisa=
-stokAwal-totalAmbil;
 
-const record={
+const sisa =
+stokAwal -
+totalAmbil;
 
-"Team":
-document.getElementById("adminTeam")
-.value.trim()
-.toUpperCase(),
 
-"Part":
-document.getElementById("adminPart")
-.value.trim(),
+const record = {
 
-"Description":
-document.getElementById("adminDescription")
-.value.trim(),
+"Team":team,
 
-"Unit":
-document.getElementById("adminUnit")
-.value.trim(),
+"Part":part,
+
+"Description":description,
+
+"Unit":unit,
 
 "Harga":harga,
 
@@ -882,11 +1304,13 @@ document.getElementById("adminUnit")
 
 "Sisa Gudang":sisa,
 
-"Harg Sisa":sisa*harga
+"Harg Sisa":
+sisa * harga
 
 };
 
-if(!record["Team"]){
+
+if(!team){
 
 showAdminStatus(
 "Team wajib diisi.",
@@ -897,25 +1321,50 @@ return;
 
 }
 
+
+if(!part){
+
+showAdminStatus(
+"Nama material wajib diisi.",
+false
+);
+
+return;
+
+}
+
+
 try{
 
-const response=
+
+const response =
 await fetch(
-API+"/material",
+
+API + "/material",
+
 {
+
 method:"POST",
 
 headers:{
+
 ...HEADERS,
+
 "Authorization":
-"Bearer "+token,
+"Bearer " + token,
+
 "Prefer":
 "return=representation"
+
 },
 
-body:JSON.stringify(record)
+body:
+JSON.stringify(record)
+
 }
+
 );
+
 
 if(!response.ok){
 
@@ -924,23 +1373,31 @@ await response.text()
 );
 
 }
+
 
 showAdminStatus(
 "✅ Data berhasil disimpan.",
 true
 );
 
+
 resetForm();
+
 
 await loadAdminData();
 
+
 }
+
 catch(error){
 
 showAdminStatus(
-"❌ Gagal menyimpan: "+
+
+"❌ Gagal menyimpan: " +
 error.message,
+
 false
+
 );
 
 }
@@ -948,49 +1405,115 @@ false
 }
 
 
-/* TEAM SEARCH */
+/* =====================================================
+RESET ADMIN
+===================================================== */
+
+function resetForm(){
+
+document
+.getElementById("adminTeam")
+.value="";
+
+document
+.getElementById("adminPart")
+.value="";
+
+document
+.getElementById("adminDescription")
+.value="";
+
+document
+.getElementById("adminUnit")
+.value="";
+
+document
+.getElementById("adminHarga")
+.value="";
+
+document
+.getElementById("adminStokAwal")
+.value="";
+
+document
+.getElementById("adminTotalAmbil")
+.value="";
+
+
+document
+.getElementById("adminStatus")
+.textContent="";
+
+document
+.getElementById("adminStatus")
+.className="";
+
+}
+
+
+/* =====================================================
+TEAM SEARCH
+===================================================== */
 
 async function searchTeam(){
 
-const team=
-document.getElementById("teamInput")
+const team =
+document
+.getElementById("teamInput")
 .value
 .trim()
 .toUpperCase();
 
-const status=
-document.getElementById("teamStatus");
+
+const status =
+document
+.getElementById("teamStatus");
+
 
 if(!team){
 
 status.className="error";
 
-status.textContent=
+status.textContent =
 "Masukkan kode Team.";
 
 return;
 
 }
 
+
 status.className="";
 
-status.textContent=
-"Memuat data "+team+"...";
+status.textContent =
+"Memuat data " +
+team +
+"...";
+
 
 try{
 
-const response=
+
+const response =
 await fetch(
-API+
-"/material?Team=eq."+
-encodeURIComponent(team)+
+
+API +
+"/material?Team=eq." +
+encodeURIComponent(team) +
 "&select=*",
+
 {
+
 headers:{
-"apikey":SUPABASE_KEY
+
+"apikey":
+SUPABASE_KEY
+
 }
+
 }
+
 );
+
 
 if(!response.ok){
 
@@ -1000,37 +1523,48 @@ await response.text()
 
 }
 
-const rows=
+
+const rows =
 await response.json();
+
 
 if(!rows.length){
 
 status.className="error";
 
-status.textContent=
-"Data Team "+team+
+status.textContent =
+"Data Team " +
+team +
 " tidak ditemukan.";
 
 return;
 
 }
 
-currentTeam=team;
+
+currentTeam =
+team;
+
 
 renderTeam(rows);
 
+
 hideAll();
 
-document.getElementById("teamResultPage")
+
+document
+.getElementById("teamPage")
 .classList.remove("hidden");
 
+
 }
+
 catch(error){
 
 status.className="error";
 
-status.textContent=
-"Gagal mengambil data: "+
+status.textContent =
+"Gagal mengambil data: " +
 error.message;
 
 }
@@ -1038,181 +1572,353 @@ error.message;
 }
 
 
-/* TEAM TABLE */
+/* =====================================================
+TAMPILAN TEAM
+===================================================== */
 
 function renderTeam(rows){
 
-document.getElementById("teamTitle")
-.textContent=
-"📦 MATERIAL TEAM "+currentTeam;
+document
+.getElementById("teamHeader")
+.textContent =
+"📦 MATERIAL TEAM " +
+currentTeam;
 
-document.getElementById("totalPart")
-.textContent=
-formatNumber(rows.length);
 
-document.getElementById("totalAwal")
-.textContent=
-formatNumber(
+/*
+TEAM HANYA MELIHAT:
+- Total barang dipakai
+- Total barang sisa
+- Nominal barang sisa
+
+STOK AWAL TIDAK DITAMPILKAN
+*/
+
+const totalUsed =
 rows.reduce(
-(t,r)=>t+num(r["Stok Awal"]),0
-)
+
+(total,row)=>
+total +
+num(row["Total Ambil"]),
+
+0
+
 );
 
-document.getElementById("totalAmbil")
-.textContent=
-formatNumber(
+
+const totalSisa =
 rows.reduce(
-(t,r)=>t+num(r["Total Ambil"]),0
-)
+
+(total,row)=>
+total +
+num(row["Sisa Gudang"]),
+
+0
+
 );
 
-document.getElementById("totalSisa")
-.textContent=
-formatNumber(
+
+const totalNominal =
 rows.reduce(
-(t,r)=>t+num(r["Sisa Gudang"]),0
-)
+
+(total,row)=>
+total +
+num(row["Harg Sisa"]),
+
+0
+
 );
 
-document.getElementById("teamTable")
-.innerHTML=
-rows.map(function(row){
+
+document
+.getElementById("teamTotalUsed")
+.textContent =
+formatNumber(totalUsed);
+
+
+document
+.getElementById("teamTotalSisa")
+.textContent =
+formatNumber(totalSisa);
+
+
+document
+.getElementById("teamNominalSisa")
+.textContent =
+rupiah(totalNominal);
+
+
+/*
+DAFTAR MATERIAL OTOMATIS
+*/
+
+const list =
+document
+.getElementById("materialList");
+
+
+list.innerHTML =
+rows.map(function(row,index){
 
 return`
 
-<tr>
+<button
+class="material-button"
+onclick="showMaterialDetail(${index})">
 
-<td>${esc(row["Part"])}</td>
+${esc(row["Part"])}
 
-<td>${esc(row["Description"])}</td>
-
-<td>${esc(row["Unit"])}</td>
-
-<td class="number">
-${rupiah(row["Harga"])}
-</td>
-
-<td class="number">
-${formatNumber(row["Stok Awal"])}
-</td>
-
-<td class="number">
-${formatNumber(row["Total Ambil"])}
-</td>
-
-<td class="number">
-<b>${formatNumber(row["Sisa Gudang"])}</b>
-</td>
-
-<td class="number">
-${rupiah(row["Harg Sisa"])}
-</td>
-
-</tr>
+</button>
 
 `;
 
 }).join("");
 
+
+/*
+SIMPAN DATA TEAM UNTUK DETAIL
+*/
+
+window.teamMaterials =
+rows;
+
+
+/*
+SEMBUNYIKAN DETAIL SAAT PERTAMA MASUK
+*/
+
+document
+.getElementById("materialDetail")
+.classList.add("hidden");
+
 }
 
 
-function backTeamSearch(){
+/* =====================================================
+DETAIL MATERIAL
+===================================================== */
 
-hideAll();
+function showMaterialDetail(index){
 
-document.getElementById("teamSearchPage")
+const row =
+window.teamMaterials[index];
+
+
+if(!row){
+return;
+}
+
+
+document
+.getElementById("materialDetail")
 .classList.remove("hidden");
 
-document.getElementById("teamInput").value="";
 
-document.getElementById("teamStatus").textContent="";
-
-document.getElementById("teamInput").focus();
-
-}
+document
+.getElementById("detailPart")
+.textContent =
+row["Part"] || "Material";
 
 
-/* LOGOUT */
-
-function logoutAdmin(){
-
-localStorage.removeItem("access_token");
-
-hideAll();
-
-document.getElementById("startPage")
-.classList.remove("hidden");
-
-}
+document
+.getElementById("detailDescription")
+.textContent =
+row["Description"] || "";
 
 
-/* HELPERS */
+/*
+TEAM TIDAK MELIHAT STOK AWAL
+*/
 
-function num(value){
+document
+.getElementById("detailUsed")
+.textContent =
+formatNumber(
+row["Total Ambil"]
+);
 
-return Number(value)||0;
 
-}
+document
+.getElementById("detailSisa")
+.textContent =
+formatNumber(
+row["Sisa Gudang"]
+);
 
-function formatNumber(value){
 
-return new Intl.NumberFormat("id-ID")
-.format(num(value));
+document
+.getElementById("detailNominal")
+.textContent =
+rupiah(
+row["Harg Sisa"]
+);
 
-}
 
-function rupiah(value){
+/*
+SCROLL KE DETAIL
+*/
 
-return new Intl.NumberFormat(
-"id-ID",
-{
-style:"currency",
-currency:"IDR",
-maximumFractionDigits:0
-}
-).format(num(value));
+document
+.getElementById("materialDetail")
+.scrollIntoView({
 
-}
+behavior:"smooth",
 
-function esc(value){
-
-return String(value??"")
-.replace(/[&<>"']/g,function(char){
-
-return{
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[char];
+block:"start"
 
 });
 
 }
 
-function resetForm(){
 
-document.getElementById("adminTeam").value="";
-document.getElementById("adminPart").value="";
-document.getElementById("adminDescription").value="";
-document.getElementById("adminUnit").value="";
-document.getElementById("adminHarga").value="";
-document.getElementById("adminStokAwal").value="";
-document.getElementById("adminTotalAmbil").value="";
+/* =====================================================
+CARI TEAM LAIN
+===================================================== */
+
+function backTeamSearch(){
+
+hideAll();
+
+
+document
+.getElementById("teamSearchPage")
+.classList.remove("hidden");
+
+
+document
+.getElementById("teamInput")
+.value="";
+
+
+document
+.getElementById("teamStatus")
+.textContent="";
+
+
+setTimeout(function(){
+
+document
+.getElementById("teamInput")
+.focus();
+
+},100);
 
 }
 
-function showAdminStatus(text,success){
 
-const el=
-document.getElementById("adminStatus");
+/* =====================================================
+LOGOUT
+===================================================== */
 
-el.textContent=text;
+function logoutAdmin(){
 
-el.className=
-success?"success":"error";
+localStorage.removeItem(
+"access_token"
+);
+
+
+hideAll();
+
+
+document
+.getElementById("startPage")
+.classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+HELPER
+===================================================== */
+
+function num(value){
+
+return Number(value) || 0;
+
+}
+
+
+function formatNumber(value){
+
+return new Intl.NumberFormat(
+"id-ID"
+).format(
+num(value)
+);
+
+}
+
+
+function rupiah(value){
+
+return new Intl.NumberFormat(
+
+"id-ID",
+
+{
+
+style:"currency",
+
+currency:"IDR",
+
+maximumFractionDigits:0
+
+}
+
+).format(
+num(value)
+);
+
+}
+
+
+function esc(value){
+
+return String(
+value ?? ""
+)
+.replace(
+/[&<>"']/g,
+function(char){
+
+return{
+
+"&":"&amp;",
+
+"<":"&lt;",
+
+">":"&gt;",
+
+'"':"&quot;",
+
+"'":"&#039;"
+
+}[char];
+
+}
+);
+
+}
+
+
+function showAdminStatus(
+text,
+success
+){
+
+const el =
+document
+.getElementById("adminStatus");
+
+
+el.textContent =
+text;
+
+
+el.className =
+success
+? "success"
+: "error";
 
 }
 
