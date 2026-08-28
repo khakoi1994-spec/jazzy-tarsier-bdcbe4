@@ -8,256 +8,215 @@
 <title>Material Monitoring</title>
 
 <style>
-
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f3f5f7;
-color:#222;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f5f7;
+  color:#222;
 }
 
 header{
-background:#1565c0;
-color:white;
-padding:16px;
-text-align:center;
+  background:#1565c0;
+  color:white;
+  padding:16px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:22px;
 }
 
 .container{
-max-width:1100px;
-margin:auto;
-padding:15px;
+  max-width:1150px;
+  margin:auto;
+  padding:15px;
 }
 
 .card{
-background:white;
-padding:20px;
-margin:15px 0;
-border-radius:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.12);
+  background:white;
+  padding:20px;
+  margin:15px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
 .login-card{
-max-width:430px;
-margin:40px auto;
-}
-
-h1{
-margin:0;
-font-size:22px;
-}
-
-h2{
-margin-top:0;
+  max-width:430px;
+  margin:40px auto;
 }
 
 input{
-width:100%;
-padding:12px;
-margin:6px 0 14px;
-border:1px solid #ccc;
-border-radius:7px;
-font-size:16px;
+  width:100%;
+  padding:12px;
+  margin:6px 0 14px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:16px;
 }
 
 button{
-border:0;
-border-radius:7px;
-padding:12px 16px;
-font-weight:bold;
-cursor:pointer;
-font-size:15px;
+  border:0;
+  border-radius:7px;
+  padding:12px 16px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
 }
 
 .primary{
-background:#1565c0;
-color:white;
+  background:#1565c0;
+  color:white;
 }
 
 .secondary{
-background:#e5eaf0;
-color:#222;
+  background:#e5eaf0;
+  color:#222;
 }
 
 .danger{
-background:#d32f2f;
-color:white;
+  background:#d32f2f;
+  color:white;
 }
 
 .full{
-width:100%;
-margin-top:8px;
+  width:100%;
+  margin-top:8px;
 }
 
 .hidden{
-display:none!important;
+  display:none!important;
 }
 
 .center{
-text-align:center;
+  text-align:center;
 }
 
 .error{
-color:#d32f2f;
-font-weight:bold;
+  color:#d32f2f;
+  font-weight:bold;
 }
 
 .success{
-color:#16803c;
-font-weight:bold;
+  color:#16803c;
+  font-weight:bold;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
 }
 
 .table-wrap{
-overflow-x:auto;
+  overflow-x:auto;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-min-width:850px;
+  width:100%;
+  border-collapse:collapse;
+  min-width:800px;
 }
 
 th,td{
-padding:10px;
-border-bottom:1px solid #ddd;
-font-size:14px;
-text-align:left;
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:left;
+  font-size:14px;
 }
 
 th{
-background:#edf3f9;
+  background:#edf3f9;
 }
 
 .number{
-text-align:right;
+  text-align:right;
 }
 
 .badge{
-background:#e3f2fd;
-color:#1565c0;
-padding:5px 9px;
-border-radius:15px;
-font-weight:bold;
+  background:#e3f2fd;
+  color:#1565c0;
+  padding:5px 9px;
+  border-radius:15px;
+  font-weight:bold;
 }
 
 .summary{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
 .summary-box{
-background:#f5f7fa;
-padding:15px;
-border-radius:8px;
-text-align:center;
+  background:#f5f7fa;
+  padding:15px;
+  border-radius:8px;
+  text-align:center;
 }
 
 .summary-box span{
-display:block;
-font-size:13px;
-color:#666;
+  display:block;
+  font-size:13px;
+  color:#666;
 }
 
 .summary-box b{
-display:block;
-font-size:20px;
-margin-top:5px;
+  display:block;
+  font-size:20px;
+  margin-top:5px;
 }
 
 .material-list{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
 }
 
 .material-button{
-background:white;
-border:2px solid #1565c0;
-color:#1565c0;
-padding:15px;
-border-radius:10px;
-font-weight:bold;
-font-size:16px;
+  background:white;
+  border:2px solid #1565c0;
+  color:#1565c0;
+  padding:15px;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:16px;
 }
 
 .material-button:hover{
-background:#eaf3ff;
+  background:#eaf3ff;
 }
 
-.detail-box{
-background:#f5f7fa;
-padding:18px;
-border-radius:10px;
-margin-top:15px;
-}
-
-.detail-row{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #ddd;
-}
-
-.detail-row:last-child{
-border-bottom:0;
-}
-
-.detail-label{
-color:#666;
-}
-
-.detail-value{
-font-weight:bold;
-}
-
-.big-number{
-font-size:26px;
-font-weight:bold;
-}
-
-.total-sisa{
-font-size:22px;
-font-weight:bold;
-margin-top:12px;
+.team-table th{
+  white-space:nowrap;
 }
 
 @media(max-width:600px){
 
-.container{
-padding:10px;
-}
+  .container{
+    padding:10px;
+  }
 
-.card{
-padding:15px;
-margin:10px 0;
-}
+  .card{
+    padding:15px;
+  }
 
-.summary{
-grid-template-columns:1fr;
-}
+  .summary{
+    grid-template-columns:1fr;
+  }
 
-.material-list{
-grid-template-columns:1fr 1fr;
-}
+  .material-list{
+    grid-template-columns:1fr 1fr;
+  }
 
-.material-button{
-padding:13px 8px;
-font-size:14px;
+  .material-button{
+    padding:13px 8px;
+    font-size:14px;
+  }
 }
-
-}
-
 </style>
 </head>
 
@@ -295,7 +254,6 @@ onclick="showTeamSearch()">
 </div>
 
 </div>
-
 </div>
 
 
@@ -344,7 +302,6 @@ KEMBALI
 </div>
 
 </div>
-
 </div>
 
 
@@ -362,9 +319,7 @@ TEAM SEARCH
 
 <div class="card login-card">
 
-<h2 class="center">
-Cari Team
-</h2>
+<h2 class="center">Cari Team</h2>
 
 <p class="center">
 Masukkan kode Team
@@ -394,150 +349,75 @@ KEMBALI
 </div>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-TEAM MATERIAL
+TEAM DATA
 ===================================================== -->
 
 <div id="teamPage" class="hidden">
 
 <header>
-
 <h1 id="teamHeader">
 📦 TEAM
 </h1>
-
 </header>
 
 <div class="container">
-
-
-<!-- RINGKASAN TEAM -->
 
 <div class="card">
 
 <div class="summary">
 
 <div class="summary-box">
-
-<span>Barang Dipakai</span>
-
-<b id="teamTotalUsed">
-0
-</b>
-
+<span>Total Ambil</span>
+<b id="teamTotalAmbil">0</b>
 </div>
-
 
 <div class="summary-box">
-
-<span>Barang Sisa</span>
-
-<b id="teamTotalSisa">
-0
-</b>
-
+<span>Total Pakai</span>
+<b id="teamTotalPakai">0</b>
 </div>
-
 
 <div class="summary-box">
-
-<span>Nominal Barang Sisa</span>
-
-<b id="teamNominalSisa">
-Rp0
-</b>
-
+<span>Total Sisa</span>
+<b id="teamTotalSisa">0</b>
 </div>
 
 </div>
 
 </div>
 
-
-<!-- DAFTAR MATERIAL -->
 
 <div class="card">
 
-<h2>📋 Pilih Material</h2>
+<h2>📋 Data Material</h2>
 
-<p>
-Klik nama material untuk melihat jumlah yang dipakai dan sisanya.
-</p>
+<div class="table-wrap">
 
-<div
-id="materialList"
-class="material-list">
-</div>
+<table class="team-table">
 
-</div>
+<thead>
 
+<tr>
+<th>Team</th>
+<th>Tanggal</th>
+<th>Material</th>
+<th>Ambil</th>
+<th>Pakai</th>
+<th>Sisa</th>
+<th>Nominal</th>
+</tr>
 
-<!-- DETAIL MATERIAL -->
+</thead>
 
-<div
-id="materialDetail"
-class="card hidden">
+<tbody id="teamTable">
+</tbody>
 
-<h2 id="detailPart">
-Material
-</h2>
-
-<p id="detailDescription"></p>
-
-<div class="detail-box">
-
-<div class="detail-row">
-
-<span class="detail-label">
-Barang Dipakai
-</span>
-
-<span
-id="detailUsed"
-class="detail-value big-number">
-0
-</span>
+</table>
 
 </div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-Barang Sisa
-</span>
-
-<span
-id="detailSisa"
-class="detail-value big-number">
-0
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-Nominal Barang Sisa
-</span>
-
-<span
-id="detailNominal"
-class="detail-value">
-Rp0
-</span>
-
-</div>
-
-</div>
-
-</div>
-
 
 <button
 class="secondary full"
@@ -547,6 +427,7 @@ onclick="backTeamSearch()">
 
 </div>
 
+</div>
 </div>
 
 
@@ -568,18 +449,16 @@ LOGOUT
 
 </header>
 
-
 <div class="container">
 
 
-<!-- FORM ADMIN -->
+<!-- FORM -->
 
 <div class="card">
 
 <h2>➕ Tambah Material</h2>
 
 <div class="grid">
-
 
 <div>
 
@@ -594,7 +473,18 @@ placeholder="H007">
 
 <div>
 
-<label>Part / Nama Material</label>
+<label>Tanggal Pengambilan</label>
+
+<input
+id="adminTanggal"
+type="date">
+
+</div>
+
+
+<div>
+
+<label>Nama Material</label>
 
 <input
 id="adminPart"
@@ -626,36 +516,40 @@ placeholder="Pcs">
 
 <div>
 
-<label>Harga</label>
+<label>Harga / Unit</label>
 
 <input
 id="adminHarga"
-type="number">
+type="number"
+placeholder="50000">
 
 </div>
 
 
 <div>
 
-<label>Stok Awal</label>
-
-<input
-id="adminStokAwal"
-type="number">
-
-</div>
-
-
-<div>
-
-<label>Total Ambil / Pakai</label>
+<label>Jumlah Ambil</label>
 
 <input
 id="adminTotalAmbil"
-type="number">
+type="number"
+min="0"
+placeholder="0">
 
 </div>
 
+
+<div>
+
+<label>Jumlah Pakai</label>
+
+<input
+id="adminPakai"
+type="number"
+min="0"
+placeholder="0">
+
+</div>
 
 </div>
 
@@ -666,13 +560,11 @@ onclick="saveMaterial()">
 💾 SIMPAN
 </button>
 
-
 <button
 class="secondary"
 onclick="resetForm()">
 🔄 RESET
 </button>
-
 
 <p id="adminStatus"></p>
 
@@ -699,22 +591,15 @@ oninput="renderAdmin()">
 <tr>
 
 <th>Team</th>
-
-<th>Part</th>
-
+<th>Tanggal</th>
+<th>Material</th>
 <th>Description</th>
-
 <th>Unit</th>
-
 <th>Harga</th>
-
-<th>Stok Awal</th>
-
-<th>Total Ambil</th>
-
-<th>Sisa Gudang</th>
-
-<th>Harg Sisa</th>
+<th>Ambil</th>
+<th>Pakai</th>
+<th>Sisa</th>
+<th>Nominal</th>
 
 </tr>
 
@@ -730,7 +615,6 @@ oninput="renderAdmin()">
 </div>
 
 </div>
-
 </div>
 
 
@@ -878,7 +762,6 @@ status.textContent =
 
 try{
 
-
 const response =
 await fetch(
 
@@ -979,11 +862,8 @@ throw new Error(
 
 
 localStorage.setItem(
-
 "access_token",
-
 result.access_token
-
 );
 
 
@@ -996,7 +876,6 @@ document
 
 
 await loadAdminData();
-
 
 }
 
@@ -1073,18 +952,15 @@ function renderAdmin(){
 
 const search =
 (
-
 document
 .getElementById("adminSearch")
 .value || ""
-
 )
 .trim()
 .toUpperCase();
 
 
-let rows =
-materials;
+let rows = materials;
 
 
 if(search){
@@ -1124,18 +1000,11 @@ document
 
 if(!rows.length){
 
-body.innerHTML =
-`
+body.innerHTML = `
 <tr>
-
-<td
-colspan="9"
-class="center">
-
+<td colspan="10" class="center">
 Data tidak ditemukan.
-
 </td>
-
 </tr>
 `;
 
@@ -1148,18 +1017,34 @@ body.innerHTML =
 
 rows.map(function(row){
 
+const ambil =
+num(row["Total Ambil"]);
+
+const pakai =
+num(row["Pakai"]);
+
+const sisa =
+ambil - pakai;
+
+const harga =
+num(row["Harga"]);
+
+const nominal =
+sisa * harga;
+
+
 return`
 
 <tr>
 
 <td>
-
 <span class="badge">
-
 ${esc(row["Team"])}
-
 </span>
+</td>
 
+<td>
+${formatDate(row["Tanggal"])}
 </td>
 
 <td>
@@ -1175,25 +1060,23 @@ ${esc(row["Unit"])}
 </td>
 
 <td class="number">
-${rupiah(row["Harga"])}
+${rupiah(harga)}
 </td>
 
 <td class="number">
-${formatNumber(row["Stok Awal"])}
+${formatNumber(ambil)}
 </td>
 
 <td class="number">
-${formatNumber(row["Total Ambil"])}
+${formatNumber(pakai)}
 </td>
 
 <td class="number">
-<b>
-${formatNumber(row["Sisa Gudang"])}
-</b>
+<b>${formatNumber(sisa)}</b>
 </td>
 
 <td class="number">
-${rupiah(row["Harg Sisa"])}
+${rupiah(nominal)}
 </td>
 
 </tr>
@@ -1206,7 +1089,7 @@ ${rupiah(row["Harg Sisa"])}
 
 
 /* =====================================================
-SAVE ADMIN
+SAVE MATERIAL
 ===================================================== */
 
 async function saveMaterial(){
@@ -1234,6 +1117,12 @@ document
 .value
 .trim()
 .toUpperCase();
+
+
+const tanggal =
+document
+.getElementById("adminTanggal")
+.value;
 
 
 const part =
@@ -1265,15 +1154,7 @@ document
 ) || 0;
 
 
-const stokAwal =
-Number(
-document
-.getElementById("adminStokAwal")
-.value
-) || 0;
-
-
-const totalAmbil =
+const ambil =
 Number(
 document
 .getElementById("adminTotalAmbil")
@@ -1281,39 +1162,52 @@ document
 ) || 0;
 
 
+const pakai =
+Number(
+document
+.getElementById("adminPakai")
+.value
+) || 0;
+
+
 const sisa =
-stokAwal -
-totalAmbil;
+ambil - pakai;
 
 
-const record = {
+const nominal =
+sisa * harga;
 
-"Team":team,
 
-"Part":part,
+/* Sisa tidak boleh negatif */
 
-"Description":description,
+if(pakai > ambil){
 
-"Unit":unit,
+showAdminStatus(
+"❌ Jumlah Pakai tidak boleh lebih besar dari Jumlah Ambil.",
+false
+);
 
-"Harga":harga,
+return;
 
-"Stok Awal":stokAwal,
-
-"Total Ambil":totalAmbil,
-
-"Sisa Gudang":sisa,
-
-"Harg Sisa":
-sisa * harga
-
-};
+}
 
 
 if(!team){
 
 showAdminStatus(
 "Team wajib diisi.",
+false
+);
+
+return;
+
+}
+
+
+if(!tanggal){
+
+showAdminStatus(
+"Tanggal pengambilan wajib diisi.",
 false
 );
 
@@ -1334,8 +1228,43 @@ return;
 }
 
 
-try{
+const record = {
 
+/*
+Kolom baru
+*/
+
+"Team":team,
+
+"Tanggal":tanggal,
+
+"Part":part,
+
+"Description":description,
+
+"Unit":unit,
+
+"Harga":harga,
+
+"Total Ambil":ambil,
+
+"Pakai":pakai,
+
+/*
+Kolom lama tetap diisi
+agar data lama tetap kompatibel.
+*/
+
+"Stok Awal":ambil,
+
+"Sisa Gudang":sisa,
+
+"Harg Sisa":nominal
+
+};
+
+
+try{
 
 const response =
 await fetch(
@@ -1386,7 +1315,6 @@ resetForm();
 
 await loadAdminData();
 
-
 }
 
 catch(error){
@@ -1406,13 +1334,17 @@ false
 
 
 /* =====================================================
-RESET ADMIN
+RESET
 ===================================================== */
 
 function resetForm(){
 
 document
 .getElementById("adminTeam")
+.value="";
+
+document
+.getElementById("adminTanggal")
 .value="";
 
 document
@@ -1432,11 +1364,11 @@ document
 .value="";
 
 document
-.getElementById("adminStokAwal")
+.getElementById("adminTotalAmbil")
 .value="";
 
 document
-.getElementById("adminTotalAmbil")
+.getElementById("adminPakai")
 .value="";
 
 
@@ -1491,7 +1423,6 @@ team +
 
 
 try{
-
 
 const response =
 await fetch(
@@ -1556,7 +1487,6 @@ document
 .getElementById("teamPage")
 .classList.remove("hidden");
 
-
 }
 
 catch(error){
@@ -1581,59 +1511,47 @@ function renderTeam(rows){
 document
 .getElementById("teamHeader")
 .textContent =
-"📦 MATERIAL TEAM " +
+"📦 TEAM " +
 currentTeam;
 
 
-/*
-TEAM HANYA MELIHAT:
-- Total barang dipakai
-- Total barang sisa
-- Nominal barang sisa
+let totalAmbil = 0;
 
-STOK AWAL TIDAK DITAMPILKAN
-*/
+let totalPakai = 0;
 
-const totalUsed =
-rows.reduce(
-
-(total,row)=>
-total +
-num(row["Total Ambil"]),
-
-0
-
-);
+let totalSisa = 0;
 
 
-const totalSisa =
-rows.reduce(
+rows.forEach(function(row){
 
-(total,row)=>
-total +
-num(row["Sisa Gudang"]),
+const ambil =
+num(row["Total Ambil"]);
 
-0
+const pakai =
+num(row["Pakai"]);
 
-);
+const sisa =
+ambil - pakai;
 
+totalAmbil += ambil;
 
-const totalNominal =
-rows.reduce(
+totalPakai += pakai;
 
-(total,row)=>
-total +
-num(row["Harg Sisa"]),
+totalSisa += sisa;
 
-0
-
-);
+});
 
 
 document
-.getElementById("teamTotalUsed")
+.getElementById("teamTotalAmbil")
 .textContent =
-formatNumber(totalUsed);
+formatNumber(totalAmbil);
+
+
+document
+.getElementById("teamTotalPakai")
+.textContent =
+formatNumber(totalPakai);
 
 
 document
@@ -1642,131 +1560,76 @@ document
 formatNumber(totalSisa);
 
 
-document
-.getElementById("teamNominalSisa")
-.textContent =
-rupiah(totalNominal);
-
-
 /*
-DAFTAR MATERIAL OTOMATIS
+TEAM HANYA MELIHAT:
+Team
+Tanggal
+Material
+Ambil
+Pakai
+Sisa
+Nominal
 */
 
-const list =
 document
-.getElementById("materialList");
+.getElementById("teamTable")
+.innerHTML =
 
+rows.map(function(row){
 
-list.innerHTML =
-rows.map(function(row,index){
+const ambil =
+num(row["Total Ambil"]);
+
+const pakai =
+num(row["Pakai"]);
+
+const sisa =
+ambil - pakai;
+
+const harga =
+num(row["Harga"]);
+
+const nominal =
+sisa * harga;
+
 
 return`
 
-<button
-class="material-button"
-onclick="showMaterialDetail(${index})">
+<tr>
 
-${esc(row["Part"])}
+<td>
+<b>${esc(row["Team"])}</b>
+</td>
 
-</button>
+<td>
+${formatDate(row["Tanggal"])}
+</td>
+
+<td>
+<b>${esc(row["Part"])}</b>
+</td>
+
+<td class="number">
+${formatNumber(ambil)}
+</td>
+
+<td class="number">
+${formatNumber(pakai)}
+</td>
+
+<td class="number">
+<b>${formatNumber(sisa)}</b>
+</td>
+
+<td class="number">
+<b>${rupiah(nominal)}</b>
+</td>
+
+</tr>
 
 `;
 
 }).join("");
-
-
-/*
-SIMPAN DATA TEAM UNTUK DETAIL
-*/
-
-window.teamMaterials =
-rows;
-
-
-/*
-SEMBUNYIKAN DETAIL SAAT PERTAMA MASUK
-*/
-
-document
-.getElementById("materialDetail")
-.classList.add("hidden");
-
-}
-
-
-/* =====================================================
-DETAIL MATERIAL
-===================================================== */
-
-function showMaterialDetail(index){
-
-const row =
-window.teamMaterials[index];
-
-
-if(!row){
-return;
-}
-
-
-document
-.getElementById("materialDetail")
-.classList.remove("hidden");
-
-
-document
-.getElementById("detailPart")
-.textContent =
-row["Part"] || "Material";
-
-
-document
-.getElementById("detailDescription")
-.textContent =
-row["Description"] || "";
-
-
-/*
-TEAM TIDAK MELIHAT STOK AWAL
-*/
-
-document
-.getElementById("detailUsed")
-.textContent =
-formatNumber(
-row["Total Ambil"]
-);
-
-
-document
-.getElementById("detailSisa")
-.textContent =
-formatNumber(
-row["Sisa Gudang"]
-);
-
-
-document
-.getElementById("detailNominal")
-.textContent =
-rupiah(
-row["Harg Sisa"]
-);
-
-
-/*
-SCROLL KE DETAIL
-*/
-
-document
-.getElementById("materialDetail")
-.scrollIntoView({
-
-behavior:"smooth",
-
-block:"start"
-
-});
 
 }
 
@@ -1779,21 +1642,17 @@ function backTeamSearch(){
 
 hideAll();
 
-
 document
 .getElementById("teamSearchPage")
 .classList.remove("hidden");
-
 
 document
 .getElementById("teamInput")
 .value="";
 
-
 document
 .getElementById("teamStatus")
 .textContent="";
-
 
 setTimeout(function(){
 
@@ -1816,9 +1675,7 @@ localStorage.removeItem(
 "access_token"
 );
 
-
 hideAll();
-
 
 document
 .getElementById("startPage")
@@ -1872,6 +1729,30 @@ num(value)
 }
 
 
+function formatDate(value){
+
+if(!value){
+return "-";
+}
+
+const parts =
+String(value).split("-");
+
+if(parts.length !== 3){
+return value;
+}
+
+return (
+parts[2] +
+"-" +
+parts[1] +
+"-" +
+parts[0]
+);
+
+}
+
+
 function esc(value){
 
 return String(
@@ -1910,10 +1791,8 @@ const el =
 document
 .getElementById("adminStatus");
 
-
 el.textContent =
 text;
-
 
 el.className =
 success
