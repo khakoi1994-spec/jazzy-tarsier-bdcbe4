@@ -62,6 +62,11 @@ select {
   background: white;
 }
 
+input[readonly] {
+  background: #eef2f5;
+  font-weight: bold;
+}
+
 button {
   border: 0;
   border-radius: 7px;
@@ -191,20 +196,25 @@ th {
 }
 
 .material-list-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 180px auto;
   align-items: center;
+  gap: 10px;
   padding: 10px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 7px;
   margin-bottom: 7px;
-  gap: 10px;
 }
 
 .material-name {
   font-weight: bold;
   word-break: break-word;
+}
+
+.material-price {
+  text-align: right;
+  font-weight: bold;
 }
 
 .delete-button {
@@ -228,6 +238,13 @@ th {
   padding: 15px;
 }
 
+.price-info {
+  font-size: 13px;
+  color: #666;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 600px) {
 
   .container {
@@ -249,6 +266,18 @@ th {
   th,
   td {
     padding: 8px;
+  }
+
+  .material-list-item {
+    grid-template-columns: 1fr;
+  }
+
+  .material-price {
+    text-align: left;
+  }
+
+  .delete-button {
+    width: 100%;
   }
 
 }
@@ -541,32 +570,41 @@ LOGOUT
 
 
 <!-- =====================================================
-DAFTAR NAMA MATERIAL
-KHUSUS ADMIN
+DAFTAR MATERIAL DAN HARGA
 ===================================================== -->
 
 <div class="card">
 
-<h2>📦 Daftar Nama Material</h2>
+<h2>📦 Daftar Nama Material & Harga</h2>
 
 <div class="material-add-box">
 
 <label>
-Tambah Nama Material Baru
+Nama Material
 </label>
 
 <input
 id="newMaterialName"
 placeholder="Contoh RMT"
 autocomplete="off"
-onkeydown="if(event.key==='Enter') addMaterialName()">
+style="text-transform:uppercase">
+
+<label>
+Harga / PCS
+</label>
+
+<input
+id="newMaterialPrice"
+type="number"
+min="0"
+placeholder="50000">
 
 <button
 type="button"
 class="primary"
 onclick="addMaterialName()">
 
-➕ TAMBAH NAMA MATERIAL
+➕ TAMBAH MATERIAL
 
 </button>
 
@@ -577,7 +615,7 @@ onclick="addMaterialName()">
 
 <div class="material-list">
 
-<h3>Nama Material Tersimpan</h3>
+<h3>Material Tersimpan</h3>
 
 <div id="materialNamesList">
 
@@ -591,7 +629,7 @@ Memuat nama material...
 
 
 <!-- =====================================================
-FORM TAMBAH DATA
+FORM DATA PEMAKAIAN
 ===================================================== -->
 
 <div class="card">
@@ -615,7 +653,7 @@ style="text-transform:uppercase">
 
 <div>
 
-<label>Tanggal</label>
+<label>Tanggal Pengambilan</label>
 
 <input
 id="adminTanggal"
@@ -628,7 +666,9 @@ type="date">
 
 <label>Nama Material</label>
 
-<select id="adminPart">
+<select
+id="adminPart"
+onchange="autoFillPrice()">
 
 <option value="">
 -- Pilih Nama Material --
@@ -641,13 +681,18 @@ type="date">
 
 <div>
 
-<label>Harga / Unit</label>
+<label>Harga / PCS</label>
 
 <input
 id="adminHarga"
 type="number"
 min="0"
-placeholder="50000">
+readonly
+placeholder="Otomatis">
+
+<p class="price-info">
+Harga otomatis mengikuti harga material.
+</p>
 
 </div>
 
@@ -757,6 +802,7 @@ oninput="renderAdmin()">
 
 
 <script>
+
 
 /* =====================================================
 SUPABASE
@@ -1159,7 +1205,7 @@ renderMaterialSelect();
 
 
 /* =====================================================
-TAMPIL DAFTAR NAMA MATERIAL
+RENDER NAMA MATERIAL
 ===================================================== */
 
 function renderMaterialNames() {
@@ -1191,15 +1237,27 @@ container.innerHTML =
 
 materialNames.map(function(item) {
 
+const harga =
+num(item["harga"]);
+
+
 return `
 
 <div class="material-list-item">
 
-<span class="material-name">
+<div class="material-name">
 
 ${esc(item["nama_material"])}
 
-</span>
+</div>
+
+
+<div class="material-price">
+
+${rupiah(harga)} / PCS
+
+</div>
+
 
 <button
 type="button"
@@ -1262,6 +1320,9 @@ item["nama_material"];
 option.textContent =
 item["nama_material"];
 
+option.dataset.harga =
+num(item["harga"]);
+
 select.appendChild(
 option
 );
@@ -1272,7 +1333,61 @@ option
 
 
 /* =====================================================
-TAMBAH NAMA MATERIAL
+HARGA OTOMATIS
+===================================================== */
+
+function autoFillPrice() {
+
+const select =
+document.getElementById(
+"adminPart"
+);
+
+const hargaInput =
+document.getElementById(
+"adminHarga"
+);
+
+
+if (!select || !hargaInput) {
+
+return;
+
+}
+
+
+const selectedOption =
+select.options[
+select.selectedIndex
+];
+
+
+if (
+!selectedOption ||
+!selectedOption.value
+) {
+
+hargaInput.value = "";
+
+return;
+
+}
+
+
+const harga =
+Number(
+selectedOption.dataset.harga
+) || 0;
+
+
+hargaInput.value =
+harga;
+
+}
+
+
+/* =====================================================
+TAMBAH MATERIAL + HARGA
 ===================================================== */
 
 async function addMaterialName() {
@@ -1294,11 +1409,15 @@ return;
 }
 
 
-const input =
+const nameInput =
 document.getElementById(
 "newMaterialName"
 );
 
+const priceInput =
+document.getElementById(
+"newMaterialPrice"
+);
 
 const status =
 document.getElementById(
@@ -1307,9 +1426,15 @@ document.getElementById(
 
 
 const nama =
-input.value
+nameInput.value
 .trim()
 .toUpperCase();
+
+
+const harga =
+Number(
+priceInput.value
+) || 0;
 
 
 if (!nama) {
@@ -1319,6 +1444,19 @@ status.className =
 
 status.textContent =
 "Nama material wajib diisi.";
+
+return;
+
+}
+
+
+if (harga <= 0) {
+
+status.className =
+"error";
+
+status.textContent =
+"Harga / PCS wajib diisi.";
 
 return;
 
@@ -1361,7 +1499,10 @@ body:
 JSON.stringify({
 
 nama_material:
-nama
+nama,
+
+harga:
+harga
 
 })
 
@@ -1376,7 +1517,9 @@ await response.text();
 
 if (!response.ok) {
 
-if (response.status === 409) {
+if (
+response.status === 409
+) {
 
 throw new Error(
 "Nama material sudah ada."
@@ -1385,21 +1528,25 @@ throw new Error(
 }
 
 throw new Error(
+
 text ||
-"Gagal menambahkan nama material."
+"Gagal menambahkan material."
+
 );
 
 }
 
 
-input.value = "";
+nameInput.value = "";
+
+priceInput.value = "";
 
 
 status.className =
 "success";
 
 status.textContent =
-"✅ Nama material berhasil ditambahkan.";
+"✅ Material dan harga berhasil ditambahkan.";
 
 
 await loadMaterialNames();
@@ -1443,6 +1590,22 @@ return;
 }
 
 
+if (
+id === undefined ||
+id === null ||
+id === "" ||
+id === "undefined"
+) {
+
+alert(
+"ID nama material tidak ditemukan."
+);
+
+return;
+
+}
+
+
 const item =
 materialNames.find(function(row) {
 
@@ -1462,22 +1625,21 @@ return;
 }
 
 
-const nama =
-item["nama_material"];
-
-
 const yakin =
 confirm(
 
 "⚠️ HAPUS NAMA MATERIAL\n\n" +
 
-nama +
+item["nama_material"] +
 
-"\n\n" +
+"\n" +
 
-"Nama material akan dihapus dari daftar pilihan Admin.\n\n" +
+rupiah(item["harga"]) +
+" / PCS\n\n" +
 
-"Data pemakaian yang sudah tersimpan TIDAK akan dihapus.\n\n" +
+"Nama material akan dihapus dari daftar pilihan.\n\n" +
+
+"Data pemakaian yang sudah tersimpan TIDAK ikut dihapus.\n\n" +
 
 "Lanjutkan?"
 
@@ -1573,7 +1735,7 @@ error.message
 
 
 /* =====================================================
-RENDER ADMIN
+RENDER DATA ADMIN
 ===================================================== */
 
 function renderAdmin() {
@@ -1763,7 +1925,7 @@ onclick="deleteMaterial(${Number(row.id)})">
 
 
 /* =====================================================
-HAPUS DATA MATERIAL
+HAPUS DATA PEMAKAIAN
 ===================================================== */
 
 async function deleteMaterial(id) {
@@ -1930,7 +2092,7 @@ error.message
 
 
 /* =====================================================
-SIMPAN MATERIAL
+SIMPAN DATA MATERIAL
 ===================================================== */
 
 async function saveMaterial() {
@@ -2023,7 +2185,7 @@ return;
 if (!tanggal) {
 
 showAdminStatus(
-"Tanggal wajib diisi.",
+"Tanggal pengambilan wajib diisi.",
 false
 );
 
@@ -2044,10 +2206,10 @@ return;
 }
 
 
-if (harga < 0) {
+if (harga <= 0) {
 
 showAdminStatus(
-"Harga tidak boleh negatif.",
+"Harga material tidak ditemukan.",
 false
 );
 
@@ -2156,8 +2318,10 @@ await response.text();
 if (!response.ok) {
 
 throw new Error(
+
 result ||
 "Gagal menyimpan data."
+
 );
 
 }
@@ -2193,7 +2357,7 @@ false
 
 
 /* =====================================================
-RESET FORM ADMIN
+RESET FORM
 ===================================================== */
 
 function resetAdminForm() {
