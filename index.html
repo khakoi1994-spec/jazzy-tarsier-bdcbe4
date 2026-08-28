@@ -4,284 +4,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Material Monitoring</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-  box-sizing: border-box;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f5f7;
+  color:#222
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f5f7;
-  color: #222;
+header{
+  background:#1565c0;
+  color:white;
+  padding:16px;
+  text-align:center
 }
 
-header {
-  background: #1565c0;
-  color: white;
-  padding: 16px;
-  text-align: center;
+header h1{
+  margin:0;
+  font-size:22px
 }
 
-header h1 {
-  margin: 0;
-  font-size: 22px;
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:15px
 }
 
-.container {
-  max-width: 1150px;
-  margin: auto;
-  padding: 15px;
+.card{
+  background:white;
+  padding:20px;
+  margin:15px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+.login-card{
+  max-width:430px;
+  margin:40px auto
 }
 
-.login-card {
-  max-width: 430px;
-  margin: 40px auto;
+input,select{
+  width:100%;
+  padding:12px;
+  margin:6px 0 14px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:16px;
+  background:white
 }
 
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  margin: 6px 0 14px;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  font-size: 16px;
-  background: white;
+input[readonly]{
+  background:#eef2f5;
+  font-weight:bold;
+  color:#222
 }
 
-input[readonly] {
-  background: #eef2f5;
-  font-weight: bold;
+button{
+  border:0;
+  border-radius:7px;
+  padding:11px 15px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:14px
 }
 
-button {
-  border: 0;
-  border-radius: 7px;
-  padding: 11px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
+button:active{
+  transform:scale(.98)
 }
 
-button:active {
-  transform: scale(.98);
+.primary{
+  background:#1565c0;
+  color:white
 }
 
-.primary {
-  background: #1565c0;
-  color: white;
+.secondary{
+  background:#e5eaf0;
+  color:#222
 }
 
-.secondary {
-  background: #e5eaf0;
-  color: #222;
+.danger{
+  background:#d32f2f;
+  color:white
 }
 
-.danger {
-  background: #d32f2f;
-  color: white;
+.full{
+  width:100%;
+  margin-top:8px
 }
 
-.full {
-  width: 100%;
-  margin-top: 8px;
+.hidden{
+  display:none!important
 }
 
-.hidden {
-  display: none !important;
+.center{
+  text-align:center
 }
 
-.center {
-  text-align: center;
+.error{
+  color:#d32f2f;
+  font-weight:bold
 }
 
-.error {
-  color: #d32f2f;
-  font-weight: bold;
+.success{
+  color:#16803c;
+  font-weight:bold
 }
 
-.success {
-  color: #16803c;
-  font-weight: bold;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
+.table-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch
 }
 
-.table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 650px;
+th,td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:left;
+  font-size:14px
 }
 
-th,
-td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  font-size: 14px;
+th{
+  background:#edf3f9
 }
 
-th {
-  background: #edf3f9;
+.number{
+  text-align:right
 }
 
-.number {
-  text-align: right;
+.badge{
+  background:#e3f2fd;
+  color:#1565c0;
+  padding:5px 9px;
+  border-radius:15px;
+  font-weight:bold
 }
 
-.badge {
-  background: #e3f2fd;
-  color: #1565c0;
-  padding: 5px 9px;
-  border-radius: 15px;
-  font-weight: bold;
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px
 }
 
-.summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+.summary-box{
+  background:#f5f7fa;
+  padding:15px;
+  border-radius:8px;
+  text-align:center
 }
 
-.summary-box {
-  background: #f5f7fa;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
+.summary-box span{
+  display:block;
+  font-size:13px;
+  color:#666
 }
 
-.summary-box span {
-  display: block;
-  font-size: 13px;
-  color: #666;
+.summary-box b{
+  display:block;
+  font-size:20px;
+  margin-top:5px
 }
 
-.summary-box b {
-  display: block;
-  font-size: 20px;
-  margin-top: 5px;
+.material-add-box{
+  background:#f5f7fa;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px
 }
 
-.material-add-box {
-  background: #f5f7fa;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+.material-list{
+  margin-top:15px
 }
 
-.material-list {
-  margin-top: 15px;
+.material-list-item{
+  display:grid;
+  grid-template-columns:1fr 200px auto;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  background:white;
+  border:1px solid #ddd;
+  border-radius:7px;
+  margin-bottom:7px
 }
 
-.material-list-item {
-  display: grid;
-  grid-template-columns: 1fr 180px auto;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 7px;
-  margin-bottom: 7px;
+.material-name{
+  font-weight:bold;
+  word-break:break-word
 }
 
-.material-name {
-  font-weight: bold;
-  word-break: break-word;
+.material-price{
+  text-align:right;
+  font-weight:bold;
+  white-space:nowrap
 }
 
-.material-price {
-  text-align: right;
-  font-weight: bold;
+.delete-button{
+  background:#d32f2f;
+  color:white;
+  white-space:nowrap
 }
 
-.delete-button {
-  background: #d32f2f;
-  color: white;
-  white-space: nowrap;
+.small-button{
+  padding:7px 10px;
+  font-size:12px
 }
 
-.small-button {
-  padding: 7px 10px;
-  font-size: 12px;
+.logout-button{
+  margin-top:10px
 }
 
-.logout-button {
-  margin-top: 10px;
+.empty{
+  color:#666;
+  text-align:center;
+  padding:15px
 }
 
-.empty {
-  color: #666;
-  text-align: center;
-  padding: 15px;
+.price-box{
+  font-size:18px;
+  font-weight:bold;
+  color:#1565c0;
+  background:#eef5ff;
+  padding:10px;
+  border-radius:7px;
+  margin-top:4px;
+  margin-bottom:14px
 }
 
-.price-info {
-  font-size: 13px;
-  color: #666;
-  margin-top: -8px;
-  margin-bottom: 10px;
-}
+@media(max-width:600px){
 
-@media (max-width: 600px) {
-
-  .container {
-    padding: 10px;
+  .container{
+    padding:10px
   }
 
-  .card {
-    padding: 15px;
+  .card{
+    padding:15px
   }
 
-  .summary {
-    grid-template-columns: 1fr;
+  .summary{
+    grid-template-columns:1fr
   }
 
-  header h1 {
-    font-size: 19px;
+  header h1{
+    font-size:19px
   }
 
-  th,
-  td {
-    padding: 8px;
+  th,td{
+    padding:8px
   }
 
-  .material-list-item {
-    grid-template-columns: 1fr;
+  .material-list-item{
+    grid-template-columns:1fr
   }
 
-  .material-price {
-    text-align: left;
+  .material-price{
+    text-align:left
   }
 
-  .delete-button {
-    width: 100%;
+  .delete-button{
+    width:100%
   }
-
 }
-
 </style>
 </head>
 
@@ -325,7 +322,6 @@ onclick="showTeamSearch()">
 </div>
 
 </div>
-
 </div>
 
 
@@ -378,9 +374,7 @@ KEMBALI
 <p id="loginStatus"></p>
 
 </div>
-
 </div>
-
 </div>
 
 
@@ -411,7 +405,7 @@ id="teamInput"
 placeholder="Contoh H007"
 autocomplete="off"
 style="text-transform:uppercase"
-onkeydown="if(event.key==='Enter') searchTeam()">
+onkeydown="if(event.key==='Enter')searchTeam()">
 
 <button
 type="button"
@@ -434,9 +428,7 @@ KEMBALI
 <p id="teamStatus"></p>
 
 </div>
-
 </div>
-
 </div>
 
 
@@ -461,37 +453,21 @@ TEAM DATA
 <div class="summary">
 
 <div class="summary-box">
-
 <span>Total Ambil</span>
-
-<b id="teamTotalAmbil">
-0
-</b>
-
+<b id="teamTotalAmbil">0</b>
 </div>
 
 <div class="summary-box">
-
 <span>Total Pakai</span>
-
-<b id="teamTotalPakai">
-0
-</b>
-
+<b id="teamTotalPakai">0</b>
 </div>
 
 <div class="summary-box">
-
 <span>Total Sisa</span>
-
-<b id="teamTotalSisa">
-0
-</b>
-
+<b id="teamTotalSisa">0</b>
 </div>
 
 </div>
-
 </div>
 
 
@@ -506,7 +482,6 @@ TEAM DATA
 <thead>
 
 <tr>
-
 <th>Team</th>
 <th>Tanggal</th>
 <th>Material</th>
@@ -514,19 +489,15 @@ TEAM DATA
 <th>Pakai</th>
 <th>Sisa</th>
 <th>Nominal</th>
-
 </tr>
 
 </thead>
 
-<tbody id="teamTable">
-
-</tbody>
+<tbody id="teamTable"></tbody>
 
 </table>
 
 </div>
-
 
 <button
 type="button"
@@ -538,9 +509,7 @@ onclick="backTeamSearch()">
 </button>
 
 </div>
-
 </div>
-
 </div>
 
 
@@ -570,18 +539,16 @@ LOGOUT
 
 
 <!-- =====================================================
-DAFTAR MATERIAL DAN HARGA
+NAMA MATERIAL + HARGA
 ===================================================== -->
 
 <div class="card">
 
-<h2>📦 Daftar Nama Material & Harga</h2>
+<h2>📦 Nama Material & Harga</h2>
 
 <div class="material-add-box">
 
-<label>
-Nama Material
-</label>
+<label>Nama Material</label>
 
 <input
 id="newMaterialName"
@@ -589,15 +556,14 @@ placeholder="Contoh RMT"
 autocomplete="off"
 style="text-transform:uppercase">
 
-<label>
-Harga / PCS
-</label>
+<label>Harga</label>
 
 <input
 id="newMaterialPrice"
-type="number"
-min="0"
-placeholder="50000">
+type="text"
+inputmode="numeric"
+placeholder="Rp 50.000"
+oninput="formatPriceInput(this)">
 
 <button
 type="button"
@@ -618,9 +584,7 @@ onclick="addMaterialName()">
 <h3>Material Tersimpan</h3>
 
 <div id="materialNamesList">
-
 Memuat nama material...
-
 </div>
 
 </div>
@@ -629,7 +593,7 @@ Memuat nama material...
 
 
 <!-- =====================================================
-FORM DATA PEMAKAIAN
+TAMBAH DATA PEMAKAIAN
 ===================================================== -->
 
 <div class="card">
@@ -681,18 +645,20 @@ onchange="autoFillPrice()">
 
 <div>
 
-<label>Harga / PCS</label>
+<label>Harga</label>
+
+<div
+id="adminHargaDisplay"
+class="price-box">
+
+Rp 0
+
+</div>
 
 <input
 id="adminHarga"
-type="number"
-min="0"
-readonly
-placeholder="Otomatis">
-
-<p class="price-info">
-Harga otomatis mengikuti harga material.
-</p>
+type="hidden"
+value="0">
 
 </div>
 
@@ -786,9 +752,7 @@ oninput="renderAdmin()">
 
 </thead>
 
-<tbody id="adminTable">
-
-</tbody>
+<tbody id="adminTable"></tbody>
 
 </table>
 
@@ -797,12 +761,10 @@ oninput="renderAdmin()">
 </div>
 
 </div>
-
 </div>
 
 
 <script>
-
 
 /* =====================================================
 SUPABASE
@@ -817,228 +779,159 @@ const SUPABASE_KEY =
 const API =
 SUPABASE_URL + "/rest/v1";
 
-
 const HEADERS = {
-
-"apikey":
-SUPABASE_KEY,
-
-"Content-Type":
-"application/json"
-
+"apikey":SUPABASE_KEY,
+"Content-Type":"application/json"
 };
 
-
-let materials = [];
-
-let materialNames = [];
-
-let currentTeam = "";
+let materials=[];
+let materialNames=[];
+let currentTeam="";
 
 
 /* =====================================================
 NAVIGASI
 ===================================================== */
 
-function hideAll() {
+function hideAll(){
 
-document
-.getElementById("startPage")
+document.getElementById("startPage")
 .classList.add("hidden");
 
-document
-.getElementById("adminLoginPage")
+document.getElementById("adminLoginPage")
 .classList.add("hidden");
 
-document
-.getElementById("teamSearchPage")
+document.getElementById("teamSearchPage")
 .classList.add("hidden");
 
-document
-.getElementById("teamPage")
+document.getElementById("teamPage")
 .classList.add("hidden");
 
-document
-.getElementById("adminPage")
+document.getElementById("adminPage")
 .classList.add("hidden");
 
 }
 
 
-function backStart() {
+function backStart(){
 
 hideAll();
 
-document
-.getElementById("startPage")
+document.getElementById("startPage")
 .classList.remove("hidden");
 
 }
 
 
-function showAdminLogin() {
+function showAdminLogin(){
 
 hideAll();
 
-document
-.getElementById("adminLoginPage")
+document.getElementById("adminLoginPage")
 .classList.remove("hidden");
 
 }
 
 
-function showTeamSearch() {
+function showTeamSearch(){
 
 hideAll();
 
-document
-.getElementById("teamSearchPage")
+document.getElementById("teamSearchPage")
 .classList.remove("hidden");
 
-setTimeout(function() {
-
-document
-.getElementById("teamInput")
-.focus();
-
+setTimeout(()=>{
+document.getElementById("teamInput").focus();
 },100);
 
 }
 
 
 /* =====================================================
-LOGIN ADMIN
+LOGIN
 ===================================================== */
 
-async function loginAdmin() {
+async function loginAdmin(){
 
-const email =
-document
-.getElementById("adminEmail")
-.value
-.trim();
+const email=
+document.getElementById("adminEmail")
+.value.trim();
 
-const password =
-document
-.getElementById("adminPassword")
+const password=
+document.getElementById("adminPassword")
 .value;
 
-const status =
-document
-.getElementById("loginStatus");
+const status=
+document.getElementById("loginStatus");
 
+if(!email||!password){
 
-if (!email || !password) {
-
-status.className =
-"error";
-
-status.textContent =
+status.className="error";
+status.textContent=
 "Email dan password wajib diisi.";
 
 return;
 
 }
 
+status.className="";
+status.textContent="Sedang login...";
 
-status.className = "";
+try{
 
-status.textContent =
-"Sedang login...";
-
-
-try {
-
-const response =
+const response=
 await fetch(
-
-SUPABASE_URL +
+SUPABASE_URL+
 "/auth/v1/token?grant_type=password",
-
 {
-
-method:
-"POST",
-
-headers: {
-
-"apikey":
-SUPABASE_KEY,
-
-"Content-Type":
-"application/json"
-
+method:"POST",
+headers:{
+"apikey":SUPABASE_KEY,
+"Content-Type":"application/json"
 },
-
-body:
-JSON.stringify({
-
-email:
-email,
-
-password:
-password
-
+body:JSON.stringify({
+email:email,
+password:password
 })
+});
 
-}
-
-);
-
-
-const result =
+const result=
 await response.json();
 
-
-if (!response.ok) {
+if(!response.ok){
 
 throw new Error(
-
-result.msg ||
-result.error_description ||
-result.message ||
+result.msg||
+result.error_description||
+result.message||
 "Login gagal"
-
 );
 
 }
 
 
-/* CEK PROFILE ADMIN */
-
-const profileResponse =
+const profileResponse=
 await fetch(
-
-API +
-"/profiles?id=eq." +
-encodeURIComponent(result.user.id) +
+API+
+"/profiles?id=eq."+
+encodeURIComponent(result.user.id)+
 "&select=*",
-
 {
-
-headers: {
-
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-result.access_token
-
+"Bearer "+result.access_token
 }
-
-}
-
-);
+});
 
 
-const profiles =
+const profiles=
 await profileResponse.json();
 
-
-if (
-!profiles.length ||
-profiles[0].role !== "admin"
-) {
+if(
+!profiles.length||
+profiles[0].role!=="admin"
+){
 
 throw new Error(
 "Akun ini bukan Admin."
@@ -1046,36 +939,25 @@ throw new Error(
 
 }
 
-
 localStorage.setItem(
 "access_token",
 result.access_token
 );
 
-
 hideAll();
 
-
-document
-.getElementById("adminPage")
-.classList
-.remove("hidden");
-
+document.getElementById("adminPage")
+.classList.remove("hidden");
 
 await loadAdminData();
-
 await loadMaterialNames();
 
 }
+catch(error){
 
-catch (error) {
-
-status.className =
-"error";
-
-status.textContent =
-"Gagal login: " +
-error.message;
+status.className="error";
+status.textContent=
+"Gagal login: "+error.message;
 
 }
 
@@ -1083,48 +965,28 @@ error.message;
 
 
 /* =====================================================
-LOAD DATA ADMIN
+LOAD DATA
 ===================================================== */
 
-async function loadAdminData() {
+async function loadAdminData(){
 
-const token =
-localStorage.getItem(
-"access_token"
-);
+const token=
+localStorage.getItem("access_token");
 
+if(!token)return;
 
-if (!token) {
-
-return;
-
-}
-
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material?select=*",
-
+API+"/material?select=*",
 {
-
-headers: {
-
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token
-
+"Bearer "+token
 }
+});
 
-}
-
-);
-
-
-if (!response.ok) {
+if(!response.ok){
 
 throw new Error(
 await response.text()
@@ -1132,10 +994,8 @@ await response.text()
 
 }
 
-
-materials =
+materials=
 await response.json();
-
 
 renderAdmin();
 
@@ -1143,48 +1003,29 @@ renderAdmin();
 
 
 /* =====================================================
-LOAD NAMA MATERIAL
+LOAD MATERIAL
 ===================================================== */
 
-async function loadMaterialNames() {
+async function loadMaterialNames(){
 
-const token =
-localStorage.getItem(
-"access_token"
-);
+const token=
+localStorage.getItem("access_token");
 
+if(!token)return;
 
-if (!token) {
-
-return;
-
-}
-
-
-const response =
+const response=
 await fetch(
-
-API +
+API+
 "/material_names?select=*&order=nama_material.asc",
-
 {
-
-headers: {
-
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token
-
+"Bearer "+token
 }
+});
 
-}
-
-);
-
-
-if (!response.ok) {
+if(!response.ok){
 
 throw new Error(
 await response.text()
@@ -1192,72 +1033,49 @@ await response.text()
 
 }
 
-
-materialNames =
+materialNames=
 await response.json();
 
-
 renderMaterialNames();
-
 renderMaterialSelect();
 
 }
 
 
 /* =====================================================
-RENDER NAMA MATERIAL
+RENDER MATERIAL
 ===================================================== */
 
-function renderMaterialNames() {
+function renderMaterialNames(){
 
-const container =
+const container=
 document.getElementById(
 "materialNamesList"
 );
 
+if(!materialNames.length){
 
-if (!materialNames.length) {
-
-container.innerHTML = `
-
-<div class="empty">
-
-Belum ada nama material.
-
-</div>
-
-`;
+container.innerHTML=
+'<div class="empty">Belum ada nama material.</div>';
 
 return;
 
 }
 
-
-container.innerHTML =
-
-materialNames.map(function(item) {
-
-const harga =
-num(item["harga"]);
-
+container.innerHTML=
+materialNames.map(item=>{
 
 return `
 
 <div class="material-list-item">
 
 <div class="material-name">
-
-${esc(item["nama_material"])}
-
+${esc(item.nama_material)}
 </div>
-
 
 <div class="material-price">
-
-${rupiah(harga)} / PCS
-
+${rupiah(item.harga)}
 </div>
-
 
 <button
 type="button"
@@ -1278,56 +1096,83 @@ onclick="deleteMaterialName(${Number(item.id)})">
 
 
 /* =====================================================
-DROPDOWN MATERIAL
+DROPDOWN
 ===================================================== */
 
-function renderMaterialSelect() {
+function renderMaterialSelect(){
 
-const select =
-document.getElementById(
-"adminPart"
-);
+const select=
+document.getElementById("adminPart");
 
-
-if (!select) {
-
-return;
-
-}
-
-
-select.innerHTML = `
+select.innerHTML=`
 
 <option value="">
-
 -- Pilih Nama Material --
-
 </option>
 
 `;
 
+materialNames.forEach(item=>{
 
-materialNames.forEach(function(item) {
+const option=
+document.createElement("option");
 
-const option =
-document.createElement(
-"option"
-);
+option.value=
+item.nama_material;
 
-option.value =
-item["nama_material"];
+option.textContent=
+item.nama_material;
 
-option.textContent =
-item["nama_material"];
+option.dataset.harga=
+num(item.harga);
 
-option.dataset.harga =
-num(item["harga"]);
-
-select.appendChild(
-option
-);
+select.appendChild(option);
 
 });
+
+}
+
+
+/* =====================================================
+FORMAT INPUT HARGA
+===================================================== */
+
+function formatPriceInput(input){
+
+let value=
+input.value.replace(/\D/g,"");
+
+if(!value){
+
+input.value="";
+return;
+
+}
+
+input.value=
+new Intl.NumberFormat("id-ID")
+.format(Number(value));
+
+}
+
+
+/* =====================================================
+AMBIL ANGKA DARI HARGA
+===================================================== */
+
+function parsePrice(value){
+
+if(value===null||
+value===undefined||
+value===""){
+
+return 0;
+
+}
+
+return Number(
+String(value).replace(/\D/g,"")
+)||0;
 
 }
 
@@ -1336,231 +1181,134 @@ option
 HARGA OTOMATIS
 ===================================================== */
 
-function autoFillPrice() {
+function autoFillPrice(){
 
-const select =
-document.getElementById(
-"adminPart"
-);
+const select=
+document.getElementById("adminPart");
 
-const hargaInput =
-document.getElementById(
-"adminHarga"
-);
+const display=
+document.getElementById("adminHargaDisplay");
 
+const hidden=
+document.getElementById("adminHarga");
 
-if (!select || !hargaInput) {
-
-return;
-
-}
-
-
-const selectedOption =
+const option=
 select.options[
 select.selectedIndex
 ];
 
+if(!option||!option.value){
 
-if (
-!selectedOption ||
-!selectedOption.value
-) {
-
-hargaInput.value = "";
+hidden.value=0;
+display.textContent="Rp 0";
 
 return;
 
 }
 
+const harga=
+Number(option.dataset.harga)||0;
 
-const harga =
-Number(
-selectedOption.dataset.harga
-) || 0;
+hidden.value=harga;
 
-
-hargaInput.value =
-harga;
+display.textContent=
+rupiah(harga);
 
 }
 
 
 /* =====================================================
-TAMBAH MATERIAL + HARGA
+TAMBAH MATERIAL
 ===================================================== */
 
-async function addMaterialName() {
+async function addMaterialName(){
 
-const token =
-localStorage.getItem(
-"access_token"
-);
+const token=
+localStorage.getItem("access_token");
 
+const nameInput=
+document.getElementById("newMaterialName");
 
-if (!token) {
+const priceInput=
+document.getElementById("newMaterialPrice");
 
-alert(
-"Silakan login sebagai Admin."
-);
+const status=
+document.getElementById("materialNameStatus");
 
-return;
+const nama=
+nameInput.value.trim().toUpperCase();
 
-}
+const harga=
+parsePrice(priceInput.value);
 
+if(!nama){
 
-const nameInput =
-document.getElementById(
-"newMaterialName"
-);
-
-const priceInput =
-document.getElementById(
-"newMaterialPrice"
-);
-
-const status =
-document.getElementById(
-"materialNameStatus"
-);
-
-
-const nama =
-nameInput.value
-.trim()
-.toUpperCase();
-
-
-const harga =
-Number(
-priceInput.value
-) || 0;
-
-
-if (!nama) {
-
-status.className =
-"error";
-
-status.textContent =
+status.className="error";
+status.textContent=
 "Nama material wajib diisi.";
-
 return;
 
 }
 
+if(harga<=0){
 
-if (harga <= 0) {
-
-status.className =
-"error";
-
-status.textContent =
-"Harga / PCS wajib diisi.";
-
+status.className="error";
+status.textContent=
+"Harga wajib diisi.";
 return;
 
 }
 
+status.className="";
+status.textContent="Menyimpan...";
 
-status.className = "";
+try{
 
-status.textContent =
-"Menyimpan...";
-
-
-try {
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material_names",
-
+API+"/material_names",
 {
-
-method:
-"POST",
-
-headers: {
-
+method:"POST",
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token,
-
+"Bearer "+token,
 "Prefer":
 "return=representation"
-
 },
-
-body:
-JSON.stringify({
-
-nama_material:
-nama,
-
-harga:
-harga
-
+body:JSON.stringify({
+nama_material:nama,
+harga:harga
 })
+});
 
-}
-
-);
-
-
-const text =
+const text=
 await response.text();
 
-
-if (!response.ok) {
-
-if (
-response.status === 409
-) {
+if(!response.ok){
 
 throw new Error(
-"Nama material sudah ada."
-);
-
-}
-
-throw new Error(
-
-text ||
+text||
 "Gagal menambahkan material."
-
 );
 
 }
 
+nameInput.value="";
+priceInput.value="";
 
-nameInput.value = "";
-
-priceInput.value = "";
-
-
-status.className =
-"success";
-
-status.textContent =
-"✅ Material dan harga berhasil ditambahkan.";
-
+status.className="success";
+status.textContent=
+"✅ Material berhasil ditambahkan.";
 
 await loadMaterialNames();
 
 }
+catch(error){
 
-catch (error) {
-
-status.className =
-"error";
-
-status.textContent =
-"❌ " +
-error.message;
+status.className="error";
+status.textContent=
+"❌ "+error.message;
 
 }
 
@@ -1571,50 +1319,17 @@ error.message;
 HAPUS NAMA MATERIAL
 ===================================================== */
 
-async function deleteMaterialName(id) {
+async function deleteMaterialName(id){
 
-const token =
-localStorage.getItem(
-"access_token"
+const token=
+localStorage.getItem("access_token");
+
+const item=
+materialNames.find(
+row=>String(row.id)===String(id)
 );
 
-
-if (!token) {
-
-alert(
-"Silakan login sebagai Admin."
-);
-
-return;
-
-}
-
-
-if (
-id === undefined ||
-id === null ||
-id === "" ||
-id === "undefined"
-) {
-
-alert(
-"ID nama material tidak ditemukan."
-);
-
-return;
-
-}
-
-
-const item =
-materialNames.find(function(row) {
-
-return String(row.id) === String(id);
-
-});
-
-
-if (!item) {
+if(!item){
 
 alert(
 "Nama material tidak ditemukan."
@@ -1624,109 +1339,57 @@ return;
 
 }
 
-
-const yakin =
+const yakin=
 confirm(
-
-"⚠️ HAPUS NAMA MATERIAL\n\n" +
-
-item["nama_material"] +
-
-"\n" +
-
-rupiah(item["harga"]) +
-" / PCS\n\n" +
-
-"Nama material akan dihapus dari daftar pilihan.\n\n" +
-
-"Data pemakaian yang sudah tersimpan TIDAK ikut dihapus.\n\n" +
-
-"Lanjutkan?"
-
+"Hapus nama material \""+
+item.nama_material+
+"\"?"
 );
 
+if(!yakin)return;
 
-if (!yakin) {
+try{
 
-return;
-
-}
-
-
-try {
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material_names?id=eq." +
+API+
+"/material_names?id=eq."+
 encodeURIComponent(id),
-
 {
-
-method:
-"DELETE",
-
-headers: {
-
+method:"DELETE",
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token,
-
+"Bearer "+token,
 "Prefer":
 "return=representation"
-
 }
-
-}
-
-);
-
-
-const result =
-await response.text();
-
-
-if (!response.ok) {
-
-throw new Error(
-
-result ||
-"Gagal menghapus nama material."
-
-);
-
-}
-
-
-materialNames =
-materialNames.filter(function(row) {
-
-return String(row.id) !== String(id);
-
 });
 
+const text=
+await response.text();
 
-renderMaterialNames();
+if(!response.ok){
 
-renderMaterialSelect();
+throw new Error(
+text||
+"Gagal menghapus material."
+);
 
+}
+
+await loadMaterialNames();
 
 alert(
 "✅ Nama material berhasil dihapus."
 );
 
 }
-
-catch (error) {
+catch(error){
 
 alert(
-
-"❌ Gagal menghapus nama material:\n\n" +
+"❌ Gagal menghapus:\n"+
 error.message
-
 );
 
 }
@@ -1735,69 +1398,46 @@ error.message
 
 
 /* =====================================================
-RENDER DATA ADMIN
+RENDER ADMIN
 ===================================================== */
 
-function renderAdmin() {
+function renderAdmin(){
 
-const search =
+const search=
 (
-document
-.getElementById("adminSearch")
-.value ||
-""
+document.getElementById("adminSearch")
+.value||""
 )
 .trim()
 .toUpperCase();
 
+let rows=materials;
 
-let rows =
-materials;
+if(search){
 
-
-if (search) {
-
-rows =
-rows.filter(function(row) {
-
-return (
-
-String(row["Team"] || "")
+rows=
+rows.filter(row=>
+String(row.Team||"")
+.toUpperCase()
+.includes(search)||
+String(row.Part||"")
 .toUpperCase()
 .includes(search)
-
-||
-
-String(row["Part"] || "")
-.toUpperCase()
-.includes(search)
-
 );
-
-});
 
 }
 
+const body=
+document.getElementById("adminTable");
 
-const body =
-document
-.getElementById("adminTable");
+if(!rows.length){
 
-
-if (!rows.length) {
-
-body.innerHTML = `
+body.innerHTML=`
 
 <tr>
-
-<td
-colspan="9"
-class="center">
-
+<td colspan="9" class="center">
 Data tidak ditemukan.
-
 </td>
-
 </tr>
 
 `;
@@ -1806,101 +1446,61 @@ return;
 
 }
 
+body.innerHTML=
+rows.map(row=>{
 
-body.innerHTML =
-
-rows.map(function(row) {
-
-const ambil =
+const ambil=
 num(row["Total Ambil"]);
 
-const pakai =
+const pakai=
 num(row["Pakai"]);
 
-const sisa =
-Math.max(
-0,
-ambil - pakai
-);
+const sisa=
+Math.max(0,ambil-pakai);
 
-const harga =
+const harga=
 num(row["Harga"]);
 
-const nominal =
-sisa * harga;
-
+const nominal=
+sisa*harga;
 
 return `
 
 <tr>
 
 <td>
-
 <span class="badge">
-
-${esc(row["Team"])}
-
+${esc(row.Team)}
 </span>
-
 </td>
-
 
 <td>
-
-${formatDate(row["Tanggal"])}
-
+${formatDate(row.Tanggal)}
 </td>
-
 
 <td>
-
-<b>
-
-${esc(row["Part"])}
-
-</b>
-
+<b>${esc(row.Part)}</b>
 </td>
-
 
 <td class="number">
-
 ${rupiah(harga)}
-
 </td>
 
-
 <td class="number">
-
 ${formatNumber(ambil)}
-
 </td>
 
-
 <td class="number">
-
 ${formatNumber(pakai)}
-
 </td>
 
-
 <td class="number">
-
-<b>
-
-${formatNumber(sisa)}
-
-</b>
-
+<b>${formatNumber(sisa)}</b>
 </td>
 
-
 <td class="number">
-
 ${rupiah(nominal)}
-
 </td>
-
 
 <td>
 
@@ -1928,162 +1528,81 @@ onclick="deleteMaterial(${Number(row.id)})">
 HAPUS DATA PEMAKAIAN
 ===================================================== */
 
-async function deleteMaterial(id) {
+async function deleteMaterial(id){
 
-const token =
-localStorage.getItem(
-"access_token"
+const token=
+localStorage.getItem("access_token");
+
+const row=
+materials.find(
+item=>String(item.id)===String(id)
 );
 
+if(!row){
 
-if (!token) {
-
-alert(
-"Sesi Admin sudah berakhir."
-);
-
+alert("ID data tidak ditemukan.");
 return;
 
 }
 
-
-if (
-id === undefined ||
-id === null ||
-id === "" ||
-id === "undefined"
-) {
-
-alert(
-"ID data tidak ditemukan."
-);
-
-return;
-
-}
-
-
-const row =
-materials.find(function(item) {
-
-return String(item.id) === String(id);
-
-});
-
-
-if (!row) {
-
-alert(
-"Data tidak ditemukan."
-);
-
-return;
-
-}
-
-
-const yakin =
+const yakin=
 confirm(
-
-"⚠️ KONFIRMASI HAPUS DATA\n\n" +
-
-"Team: " +
-(row["Team"] || "") +
-
-"\nMaterial: " +
-(row["Part"] || "") +
-
-"\nTanggal: " +
-formatDate(row["Tanggal"]) +
-
-"\n\n" +
-
-"Data akan dihapus permanen.\n\n" +
-
-"Lanjutkan?"
-
+"⚠️ HAPUS DATA\n\n"+
+"Team: "+(row.Team||"")+
+"\nMaterial: "+(row.Part||"")+
+"\nTanggal: "+formatDate(row.Tanggal)+
+"\n\nData akan dihapus permanen."
 );
 
+if(!yakin)return;
 
-if (!yakin) {
+try{
 
-return;
-
-}
-
-
-try {
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material?id=eq." +
+API+
+"/material?id=eq."+
 encodeURIComponent(id),
-
 {
-
-method:
-"DELETE",
-
-headers: {
-
+method:"DELETE",
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token,
-
+"Bearer "+token,
 "Prefer":
 "return=representation"
-
 }
-
-}
-
-);
-
-
-const result =
-await response.text();
-
-
-if (!response.ok) {
-
-throw new Error(
-
-result ||
-"Gagal menghapus data."
-
-);
-
-}
-
-
-materials =
-materials.filter(function(item) {
-
-return String(item.id) !== String(id);
-
 });
 
+const text=
+await response.text();
+
+if(!response.ok){
+
+throw new Error(
+text||
+"Gagal menghapus data."
+);
+
+}
+
+materials=
+materials.filter(
+item=>String(item.id)!==String(id)
+);
 
 renderAdmin();
-
 
 alert(
 "✅ Data berhasil dihapus."
 );
 
 }
-
-catch (error) {
+catch(error){
 
 alert(
-
-"❌ Gagal menghapus data:\n\n" +
+"❌ Gagal menghapus data:\n"+
 error.message
-
 );
 
 }
@@ -2092,97 +1611,61 @@ error.message
 
 
 /* =====================================================
-SIMPAN DATA MATERIAL
+SIMPAN PEMAKAIAN
 ===================================================== */
 
-async function saveMaterial() {
+async function saveMaterial(){
 
-const token =
-localStorage.getItem(
-"access_token"
-);
+const token=
+localStorage.getItem("access_token");
 
+const team=
+document.getElementById("adminTeam")
+.value.trim().toUpperCase();
 
-if (!token) {
-
-alert(
-"Silakan login sebagai Admin."
-);
-
-return;
-
-}
-
-
-const team =
-document
-.getElementById("adminTeam")
-.value
-.trim()
-.toUpperCase();
-
-
-const tanggal =
-document
-.getElementById("adminTanggal")
+const tanggal=
+document.getElementById("adminTanggal")
 .value;
 
+const part=
+document.getElementById("adminPart")
+.value;
 
-const part =
-document
-.getElementById("adminPart")
-.value
-.trim();
-
-
-const harga =
+const harga=
 Number(
-document
-.getElementById("adminHarga")
+document.getElementById("adminHarga")
 .value
-) || 0;
+)||0;
 
-
-const ambil =
+const ambil=
 Number(
-document
-.getElementById("adminTotalAmbil")
+document.getElementById("adminTotalAmbil")
 .value
-) || 0;
+)||0;
 
-
-const pakai =
+const pakai=
 Number(
-document
-.getElementById("adminPakai")
+document.getElementById("adminPakai")
 .value
-) || 0;
+)||0;
 
+const sisa=
+Math.max(0,ambil-pakai);
 
-const sisa =
-Math.max(
-0,
-ambil - pakai
-);
+const nominal=
+sisa*harga;
 
-
-const nominal =
-sisa * harga;
-
-
-if (!team) {
+if(!team){
 
 showAdminStatus(
-"Team wajib diisi.",
-false
+"Team wajib diisi.",false
 );
 
 return;
 
 }
 
-
-if (!tanggal) {
+if(!tanggal){
 
 showAdminStatus(
 "Tanggal pengambilan wajib diisi.",
@@ -2193,8 +1676,7 @@ return;
 
 }
 
-
-if (!part) {
+if(!part){
 
 showAdminStatus(
 "Silakan pilih nama material.",
@@ -2205,8 +1687,7 @@ return;
 
 }
 
-
-if (harga <= 0) {
+if(harga<=0){
 
 showAdminStatus(
 "Harga material tidak ditemukan.",
@@ -2217,138 +1698,84 @@ return;
 
 }
 
-
-if (ambil < 0 || pakai < 0) {
-
-showAdminStatus(
-"Jumlah tidak boleh negatif.",
-false
-);
-
-return;
-
-}
-
-
-if (pakai > ambil) {
+if(pakai>ambil){
 
 showAdminStatus(
-
 "Jumlah Pakai tidak boleh lebih besar dari Jumlah Ambil.",
-
 false
-
 );
 
 return;
 
 }
 
+const record={
 
-const record = {
+"Team":team,
 
-"Team":
-team,
+"Tanggal":tanggal,
 
-"Tanggal":
-tanggal,
+"Part":part,
 
-"Part":
-part,
+"Harga":harga,
 
-"Harga":
-harga,
+"Stok Awal":ambil,
 
-"Stok Awal":
-ambil,
+"Total Ambil":ambil,
 
-"Total Ambil":
-ambil,
+"Pakai":pakai,
 
-"Pakai":
-pakai,
+"Sisa Gudang":sisa,
 
-"Sisa Gudang":
-sisa,
-
-"Harg Sisa":
-nominal
+"Harg Sisa":nominal
 
 };
 
+try{
 
-try {
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material",
-
+API+"/material",
 {
-
-method:
-"POST",
-
-headers: {
-
+method:"POST",
+headers:{
 ...HEADERS,
-
 "Authorization":
-"Bearer " +
-token,
-
+"Bearer "+token,
 "Prefer":
 "return=representation"
-
 },
+body:JSON.stringify(record)
+});
 
-body:
-JSON.stringify(record)
-
-}
-
-);
-
-
-const result =
+const text=
 await response.text();
 
-
-if (!response.ok) {
+if(!response.ok){
 
 throw new Error(
-
-result ||
+text||
 "Gagal menyimpan data."
-
 );
 
 }
-
 
 showAdminStatus(
 "✅ Data berhasil disimpan.",
 true
 );
 
-
 resetAdminForm();
-
 
 await loadAdminData();
 
 }
-
-catch (error) {
+catch(error){
 
 showAdminStatus(
-
-"❌ Gagal menyimpan: " +
+"❌ Gagal menyimpan: "+
 error.message,
-
 false
-
 );
 
 }
@@ -2360,60 +1787,24 @@ false
 RESET FORM
 ===================================================== */
 
-function resetAdminForm() {
+function resetAdminForm(){
 
-const ids = [
+document.getElementById("adminTeam").value="";
+document.getElementById("adminTanggal").value="";
+document.getElementById("adminPart").value="";
+document.getElementById("adminTotalAmbil").value="";
+document.getElementById("adminPakai").value="";
 
-"adminTeam",
-"adminTanggal",
-"adminHarga",
-"adminTotalAmbil",
-"adminPakai"
+document.getElementById("adminHarga").value="0";
 
-];
+document.getElementById("adminHargaDisplay")
+.textContent="Rp 0";
 
+document.getElementById("adminStatus")
+.textContent="";
 
-ids.forEach(function(id) {
-
-const element =
-document.getElementById(id);
-
-
-if (element) {
-
-element.value = "";
-
-}
-
-});
-
-
-const select =
-document.getElementById(
-"adminPart"
-);
-
-
-if (select) {
-
-select.value = "";
-
-}
-
-
-const status =
-document.getElementById(
-"adminStatus"
-);
-
-
-if (status) {
-
-status.textContent = "";
-
-status.className = "";
-
-}
+document.getElementById("adminStatus")
+.className="";
 
 }
 
@@ -2422,70 +1813,46 @@ status.className = "";
 TEAM SEARCH
 ===================================================== */
 
-async function searchTeam() {
+async function searchTeam(){
 
-const team =
-document
-.getElementById("teamInput")
-.value
-.trim()
-.toUpperCase();
+const team=
+document.getElementById("teamInput")
+.value.trim().toUpperCase();
 
+const status=
+document.getElementById("teamStatus");
 
-const status =
-document
-.getElementById("teamStatus");
+if(!team){
 
-
-if (!team) {
-
-status.className =
-"error";
-
-status.textContent =
+status.className="error";
+status.textContent=
 "Masukkan kode Team.";
 
 return;
 
 }
 
+status.className="";
+status.textContent=
+"Memuat data "+team+"...";
 
-status.className = "";
+try{
 
-status.textContent =
-"Memuat data " +
-team +
-"...";
-
-
-try {
-
-const response =
+const response=
 await fetch(
-
-API +
-"/material?Team=eq." +
-encodeURIComponent(team) +
+API+
+"/material?Team=eq."+
+encodeURIComponent(team)+
 "&select=*",
-
 {
-
-headers: {
-
-"apikey":
-SUPABASE_KEY,
-
+headers:{
+"apikey":SUPABASE_KEY,
 "Content-Type":
 "application/json"
-
 }
+});
 
-}
-
-);
-
-
-if (!response.ok) {
+if(!response.ok){
 
 throw new Error(
 await response.text()
@@ -2493,50 +1860,35 @@ await response.text()
 
 }
 
-
-const rows =
+const rows=
 await response.json();
 
+if(!rows.length){
 
-if (!rows.length) {
-
-status.className =
-"error";
-
-status.textContent =
-"Data Team " +
-team +
+status.className="error";
+status.textContent=
+"Data Team "+team+
 " tidak ditemukan.";
 
 return;
 
 }
 
-
-currentTeam =
-team;
-
+currentTeam=team;
 
 renderTeam(rows);
 
-
 hideAll();
 
-
-document
-.getElementById("teamPage")
-.classList
-.remove("hidden");
+document.getElementById("teamPage")
+.classList.remove("hidden");
 
 }
+catch(error){
 
-catch (error) {
-
-status.className =
-"error";
-
-status.textContent =
-"Gagal mengambil data: " +
+status.className="error";
+status.textContent=
+"Gagal mengambil data: "+
 error.message;
 
 }
@@ -2548,158 +1900,96 @@ error.message;
 TEAM DISPLAY
 ===================================================== */
 
-function renderTeam(rows) {
+function renderTeam(rows){
 
-document
-.getElementById("teamHeader")
-.textContent =
-"📦 TEAM " +
-currentTeam;
+document.getElementById("teamHeader")
+.textContent=
+"📦 TEAM "+currentTeam;
 
+let totalAmbil=0;
+let totalPakai=0;
+let totalSisa=0;
 
-let totalAmbil = 0;
+rows.forEach(row=>{
 
-let totalPakai = 0;
-
-let totalSisa = 0;
-
-
-rows.forEach(function(row) {
-
-const ambil =
+const ambil=
 num(row["Total Ambil"]);
 
-const pakai =
+const pakai=
 num(row["Pakai"]);
 
-const sisa =
-Math.max(
-0,
-ambil - pakai
-);
+const sisa=
+Math.max(0,ambil-pakai);
 
-
-totalAmbil += ambil;
-
-totalPakai += pakai;
-
-totalSisa += sisa;
+totalAmbil+=ambil;
+totalPakai+=pakai;
+totalSisa+=sisa;
 
 });
 
-
-document
-.getElementById("teamTotalAmbil")
-.textContent =
+document.getElementById("teamTotalAmbil")
+.textContent=
 formatNumber(totalAmbil);
 
-
-document
-.getElementById("teamTotalPakai")
-.textContent =
+document.getElementById("teamTotalPakai")
+.textContent=
 formatNumber(totalPakai);
 
-
-document
-.getElementById("teamTotalSisa")
-.textContent =
+document.getElementById("teamTotalSisa")
+.textContent=
 formatNumber(totalSisa);
 
+const table=
+document.getElementById("teamTable");
 
-const table =
-document
-.getElementById("teamTable");
+table.innerHTML=
+rows.map(row=>{
 
-
-table.innerHTML =
-
-rows.map(function(row) {
-
-const ambil =
+const ambil=
 num(row["Total Ambil"]);
 
-const pakai =
+const pakai=
 num(row["Pakai"]);
 
-const sisa =
-Math.max(
-0,
-ambil - pakai
-);
+const sisa=
+Math.max(0,ambil-pakai);
 
-const harga =
+const harga=
 num(row["Harga"]);
 
-const nominal =
-sisa * harga;
-
+const nominal=
+sisa*harga;
 
 return `
 
 <tr>
 
 <td>
-
-<b>
-
-${esc(row["Team"])}
-
-</b>
-
+<b>${esc(row.Team)}</b>
 </td>
-
 
 <td>
-
-${formatDate(row["Tanggal"])}
-
+${formatDate(row.Tanggal)}
 </td>
-
 
 <td>
-
-<b>
-
-${esc(row["Part"])}
-
-</b>
-
+<b>${esc(row.Part)}</b>
 </td>
-
 
 <td class="number">
-
 ${formatNumber(ambil)}
-
 </td>
 
-
 <td class="number">
-
 ${formatNumber(pakai)}
-
 </td>
 
-
 <td class="number">
-
-<b>
-
-${formatNumber(sisa)}
-
-</b>
-
+<b>${formatNumber(sisa)}</b>
 </td>
 
-
 <td class="number">
-
-<b>
-
-${rupiah(nominal)}
-
-</b>
-
+<b>${rupiah(nominal)}</b>
 </td>
 
 </tr>
@@ -2715,38 +2005,24 @@ ${rupiah(nominal)}
 CARI TEAM LAIN
 ===================================================== */
 
-function backTeamSearch() {
+function backTeamSearch(){
 
 hideAll();
 
+document.getElementById("teamSearchPage")
+.classList.remove("hidden");
 
-document
-.getElementById("teamSearchPage")
-.classList
-.remove("hidden");
+document.getElementById("teamInput")
+.value="";
 
+document.getElementById("teamStatus")
+.textContent="";
 
-document
-.getElementById("teamInput")
-.value = "";
+document.getElementById("teamStatus")
+.className="";
 
-
-document
-.getElementById("teamStatus")
-.textContent = "";
-
-
-document
-.getElementById("teamStatus")
-.className = "";
-
-
-setTimeout(function() {
-
-document
-.getElementById("teamInput")
-.focus();
-
+setTimeout(()=>{
+document.getElementById("teamInput").focus();
 },100);
 
 }
@@ -2756,23 +2032,19 @@ document
 LOGOUT
 ===================================================== */
 
-function logoutAdmin() {
+function logoutAdmin(){
 
 localStorage.removeItem(
 "access_token"
 );
 
-materials = [];
-
-materialNames = [];
+materials=[];
+materialNames=[];
 
 hideAll();
 
-
-document
-.getElementById("startPage")
-.classList
-.remove("hidden");
+document.getElementById("startPage")
+.classList.remove("hidden");
 
 }
 
@@ -2781,115 +2053,72 @@ document
 HELPER
 ===================================================== */
 
-function num(value) {
+function num(value){
 
-return Number(value) || 0;
+return Number(value)||0;
 
 }
 
 
-function formatNumber(value) {
+function formatNumber(value){
 
 return new Intl.NumberFormat(
 "id-ID"
-).format(
-num(value)
-);
+).format(num(value));
 
 }
 
 
-function rupiah(value) {
+function rupiah(value){
 
-return new Intl.NumberFormat(
-
+return "Rp "+
+new Intl.NumberFormat(
 "id-ID",
-
 {
-
-style:
-"currency",
-
-currency:
-"IDR",
-
-maximumFractionDigits:
-0
-
+minimumFractionDigits:0,
+maximumFractionDigits:0
 }
-
-).format(
-num(value)
-);
+).format(num(value));
 
 }
 
 
-function formatDate(value) {
+function formatDate(value){
 
-if (!value) {
+if(!value)return "-";
 
-return "-";
-
-}
-
-
-const parts =
+const parts=
 String(value).split("-");
 
-
-if (parts.length !== 3) {
-
-return value;
-
-}
-
+if(parts.length!==3)return value;
 
 return (
-
-parts[2] +
-"-" +
-parts[1] +
-"-" +
+parts[2]+"-"+
+parts[1]+"-"+
 parts[0]
-
 );
 
 }
 
 
-function esc(value) {
+function esc(value){
 
-return String(
-value ?? ""
-)
+return String(value??"")
 .replace(
-
 /[&<>"']/g,
-
-function(char) {
+function(char){
 
 return {
 
-"&":
-"&amp;",
-
-"<":
-"&lt;",
-
-">":
-"&gt;",
-
-'"':
-"&quot;",
-
-"'":
-"&#039;"
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
 
 }[char];
 
 }
-
 );
 
 }
@@ -2898,29 +2127,19 @@ return {
 function showAdminStatus(
 text,
 success
-) {
+){
 
-const el =
+const el=
 document.getElementById(
 "adminStatus"
 );
 
+el.textContent=text;
 
-if (!el) {
-
-return;
-
-}
-
-
-el.textContent =
-text;
-
-
-el.className =
+el.className=
 success
-? "success"
-: "error";
+?"success"
+:"error";
 
 }
 
