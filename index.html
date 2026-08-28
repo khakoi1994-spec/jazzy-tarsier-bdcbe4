@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -62,14 +61,10 @@ input {
 button {
   border: 0;
   border-radius: 7px;
-  padding: 10px 14px;
+  padding: 11px 15px;
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
-}
-
-button:active {
-  transform: scale(.98);
 }
 
 .primary {
@@ -124,7 +119,7 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
+  min-width: 850px;
 }
 
 th,
@@ -176,15 +171,10 @@ th {
   margin-top: 5px;
 }
 
-.team-table {
-  min-width: 700px;
-}
-
 .delete-button {
   background: #d32f2f;
   color: white;
-  padding: 7px 10px;
-  font-size: 12px;
+  white-space: nowrap;
 }
 
 .logout-button {
@@ -207,10 +197,6 @@ th {
 
   header h1 {
     font-size: 19px;
-  }
-
-  table {
-    font-size: 13px;
   }
 
   th,
@@ -243,14 +229,14 @@ HALAMAN AWAL
 <button
 type="button"
 class="primary full"
-id="adminLoginButton">
+onclick="showAdminLogin()">
 🔐 LOGIN ADMIN
 </button>
 
 <button
 type="button"
 class="secondary full"
-id="teamAccessButton">
+onclick="showTeamSearch()">
 👥 TEAM
 </button>
 
@@ -279,28 +265,26 @@ LOGIN ADMIN
 <input
 id="adminEmail"
 type="email"
-placeholder="Masukkan email admin"
-autocomplete="username">
+placeholder="Masukkan email admin">
 
 <label>Password</label>
 
 <input
 id="adminPassword"
 type="password"
-placeholder="Masukkan password"
-autocomplete="current-password">
+placeholder="Masukkan password">
 
 <button
 type="button"
 class="primary full"
-id="adminLoginSubmit">
+onclick="loginAdmin()">
 MASUK ADMIN
 </button>
 
 <button
 type="button"
 class="secondary full"
-id="adminLoginBack">
+onclick="backStart()">
 KEMBALI
 </button>
 
@@ -338,19 +322,20 @@ Masukkan kode Team
 id="teamInput"
 placeholder="Contoh H007"
 autocomplete="off"
-style="text-transform:uppercase">
+style="text-transform:uppercase"
+onkeydown="if(event.key==='Enter') searchTeam()">
 
 <button
 type="button"
 class="primary full"
-id="teamSearchButton">
+onclick="searchTeam()">
 🔎 LIHAT DATA
 </button>
 
 <button
 type="button"
 class="secondary full"
-id="teamSearchBack">
+onclick="backStart()">
 KEMBALI
 </button>
 
@@ -369,9 +354,11 @@ TEAM DATA
 <div id="teamPage" class="hidden">
 
 <header>
+
 <h1 id="teamHeader">
 📦 TEAM
 </h1>
+
 </header>
 
 <div class="container">
@@ -381,18 +368,33 @@ TEAM DATA
 <div class="summary">
 
 <div class="summary-box">
+
 <span>Total Ambil</span>
-<b id="teamTotalAmbil">0</b>
+
+<b id="teamTotalAmbil">
+0
+</b>
+
 </div>
 
 <div class="summary-box">
+
 <span>Total Pakai</span>
-<b id="teamTotalPakai">0</b>
+
+<b id="teamTotalPakai">
+0
+</b>
+
 </div>
 
 <div class="summary-box">
+
 <span>Total Sisa</span>
-<b id="teamTotalSisa">0</b>
+
+<b id="teamTotalSisa">
+0
+</b>
+
 </div>
 
 </div>
@@ -406,10 +408,12 @@ TEAM DATA
 
 <div class="table-wrap">
 
-<table class="team-table">
+<table>
 
 <thead>
+
 <tr>
+
 <th>Team</th>
 <th>Tanggal</th>
 <th>Material</th>
@@ -417,7 +421,9 @@ TEAM DATA
 <th>Pakai</th>
 <th>Sisa</th>
 <th>Nominal</th>
+
 </tr>
+
 </thead>
 
 <tbody id="teamTable">
@@ -427,10 +433,11 @@ TEAM DATA
 
 </div>
 
+
 <button
 type="button"
 class="secondary full"
-id="otherTeamButton">
+onclick="backTeamSearch()">
 
 🔎 CARI TEAM LAIN
 
@@ -454,8 +461,8 @@ ADMIN
 
 <button
 type="button"
-class="danger logout-button"
-id="logoutButton">
+class="danger"
+onclick="logoutAdmin()">
 
 LOGOUT
 
@@ -467,7 +474,9 @@ LOGOUT
 <div class="container">
 
 
-<!-- FORM ADMIN -->
+<!-- =====================================================
+FORM TAMBAH DATA
+===================================================== -->
 
 <div class="card">
 
@@ -475,73 +484,99 @@ LOGOUT
 
 <div class="grid">
 
+
 <div>
+
 <label>Team</label>
+
 <input
 id="adminTeam"
 placeholder="H007">
+
 </div>
 
 
 <div>
+
 <label>Tanggal</label>
+
 <input
 id="adminTanggal"
 type="date">
+
 </div>
 
 
 <div>
+
 <label>Nama Material</label>
+
 <input
 id="adminPart"
 placeholder="Contoh RMT">
+
 </div>
 
 
 <div>
+
 <label>Description</label>
+
 <input
 id="adminDescription">
+
 </div>
 
 
 <div>
+
 <label>Unit</label>
+
 <input
 id="adminUnit"
 placeholder="Pcs">
+
 </div>
 
 
 <div>
+
 <label>Harga / Unit</label>
+
 <input
 id="adminHarga"
 type="number"
 min="0"
 placeholder="50000">
+
 </div>
 
 
 <div>
+
 <label>Jumlah Ambil</label>
+
 <input
 id="adminTotalAmbil"
 type="number"
 min="0"
 placeholder="0">
+
 </div>
 
 
 <div>
+
 <label>Jumlah Pakai</label>
+
 <input
 id="adminPakai"
 type="number"
 min="0"
 placeholder="0">
+
 </div>
+
 
 </div>
 
@@ -549,7 +584,7 @@ placeholder="0">
 <button
 type="button"
 class="primary"
-id="saveButton">
+onclick="saveMaterial()">
 
 💾 SIMPAN
 
@@ -559,7 +594,7 @@ id="saveButton">
 <button
 type="button"
 class="secondary"
-id="resetAdminButton">
+onclick="resetAdminForm()">
 
 🔄 RESET FORM
 
@@ -581,7 +616,8 @@ DATA ADMIN
 
 <input
 id="adminSearch"
-placeholder="Cari Team / Material / Description">
+placeholder="Cari Team / Material / Description"
+oninput="renderAdmin()">
 
 
 <div class="table-wrap">
@@ -591,6 +627,7 @@ placeholder="Cari Team / Material / Description">
 <thead>
 
 <tr>
+
 <th>Team</th>
 <th>Tanggal</th>
 <th>Material</th>
@@ -602,6 +639,7 @@ placeholder="Cari Team / Material / Description">
 <th>Sisa</th>
 <th>Nominal</th>
 <th>Aksi</th>
+
 </tr>
 
 </thead>
@@ -634,9 +672,14 @@ const SUPABASE_KEY =
 const API =
 SUPABASE_URL + "/rest/v1";
 
+
 const HEADERS = {
+
   "apikey": SUPABASE_KEY,
-  "Content-Type": "application/json"
+
+  "Content-Type":
+  "application/json"
+
 };
 
 
@@ -646,115 +689,30 @@ let currentTeam = "";
 
 
 /* =====================================================
-HELPER
-===================================================== */
-
-function get(id) {
-  return document.getElementById(id);
-}
-
-
-function num(value) {
-  return Number(value) || 0;
-}
-
-
-function formatNumber(value) {
-
-  return new Intl.NumberFormat(
-    "id-ID"
-  ).format(
-    num(value)
-  );
-
-}
-
-
-function rupiah(value) {
-
-  return new Intl.NumberFormat(
-    "id-ID",
-    {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0
-    }
-  ).format(
-    num(value)
-  );
-
-}
-
-
-function formatDate(value) {
-
-  if (!value) {
-    return "-";
-  }
-
-  const parts =
-    String(value).split("-");
-
-  if (parts.length !== 3) {
-    return value;
-  }
-
-  return (
-    parts[2] +
-    "-" +
-    parts[1] +
-    "-" +
-    parts[0]
-  );
-
-}
-
-
-function esc(value) {
-
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /[&<>"']/g,
-    function(char) {
-
-      return {
-
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-
-      }[char];
-
-    }
-  );
-
-}
-
-
-/* =====================================================
 NAVIGASI
 ===================================================== */
 
 function hideAll() {
 
-  get("startPage")
-    .classList.add("hidden");
+  document
+  .getElementById("startPage")
+  .classList.add("hidden");
 
-  get("adminLoginPage")
-    .classList.add("hidden");
+  document
+  .getElementById("adminLoginPage")
+  .classList.add("hidden");
 
-  get("teamSearchPage")
-    .classList.add("hidden");
+  document
+  .getElementById("teamSearchPage")
+  .classList.add("hidden");
 
-  get("teamPage")
-    .classList.add("hidden");
+  document
+  .getElementById("teamPage")
+  .classList.add("hidden");
 
-  get("adminPage")
-    .classList.add("hidden");
+  document
+  .getElementById("adminPage")
+  .classList.add("hidden");
 
 }
 
@@ -763,8 +721,9 @@ function backStart() {
 
   hideAll();
 
-  get("startPage")
-    .classList.remove("hidden");
+  document
+  .getElementById("startPage")
+  .classList.remove("hidden");
 
 }
 
@@ -773,10 +732,10 @@ function showAdminLogin() {
 
   hideAll();
 
-  get("adminLoginPage")
-    .classList.remove("hidden");
-
-  get("adminEmail").focus();
+  document
+  .getElementById("adminLoginPage")
+  .classList
+  .remove("hidden");
 
 }
 
@@ -785,10 +744,18 @@ function showTeamSearch() {
 
   hideAll();
 
-  get("teamSearchPage")
-    .classList.remove("hidden");
+  document
+  .getElementById("teamSearchPage")
+  .classList
+  .remove("hidden");
 
-  get("teamInput").focus();
+  setTimeout(function() {
+
+    document
+    .getElementById("teamInput")
+    .focus();
+
+  }, 100);
 
 }
 
@@ -800,24 +767,28 @@ LOGIN ADMIN
 async function loginAdmin() {
 
   const email =
-    get("adminEmail")
-    .value
-    .trim();
+  document
+  .getElementById("adminEmail")
+  .value
+  .trim();
 
   const password =
-    get("adminPassword")
-    .value;
+  document
+  .getElementById("adminPassword")
+  .value;
 
   const status =
-    get("loginStatus");
+  document
+  .getElementById("loginStatus");
 
 
   if (!email || !password) {
 
-    status.className = "error";
+    status.className =
+    "error";
 
     status.textContent =
-      "Email dan password wajib diisi.";
+    "Email dan password wajib diisi.";
 
     return;
 
@@ -827,40 +798,47 @@ async function loginAdmin() {
   status.className = "";
 
   status.textContent =
-    "Sedang login...";
+  "Sedang login...";
 
 
   try {
 
     const response =
-      await fetch(
+    await fetch(
 
-        SUPABASE_URL +
-        "/auth/v1/token?grant_type=password",
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=password",
 
-        {
-          method: "POST",
+      {
 
-          headers: {
-            "apikey":
-              SUPABASE_KEY,
+        method: "POST",
 
-            "Content-Type":
-              "application/json"
-          },
+        headers: {
 
-          body:
-            JSON.stringify({
-              email: email,
-              password: password
-            })
-        }
+          "apikey":
+          SUPABASE_KEY,
 
-      );
+          "Content-Type":
+          "application/json"
+
+        },
+
+        body:
+        JSON.stringify({
+
+          email: email,
+
+          password: password
+
+        })
+
+      }
+
+    );
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if (!response.ok) {
@@ -882,32 +860,34 @@ async function loginAdmin() {
     */
 
     const profileResponse =
-      await fetch(
+    await fetch(
 
-        API +
-        "/profiles?id=eq." +
-        encodeURIComponent(
-          result.user.id
-        ) +
-        "&select=*",
+      API +
+      "/profiles?id=eq." +
+      encodeURIComponent(
+        result.user.id
+      ) +
+      "&select=*",
 
-        {
-          headers: {
+      {
 
-            ...HEADERS,
+        headers: {
 
-            "Authorization":
-              "Bearer " +
-              result.access_token
+          ...HEADERS,
 
-          }
+          "Authorization":
+          "Bearer " +
+          result.access_token
+
         }
 
-      );
+      }
+
+    );
 
 
     const profiles =
-      await profileResponse.json();
+    await profileResponse.json();
 
 
     if (
@@ -930,9 +910,11 @@ async function loginAdmin() {
 
     hideAll();
 
-    get("adminPage")
-      .classList
-      .remove("hidden");
+
+    document
+    .getElementById("adminPage")
+    .classList
+    .remove("hidden");
 
 
     await loadAdminData();
@@ -942,11 +924,11 @@ async function loginAdmin() {
   catch (error) {
 
     status.className =
-      "error";
+    "error";
 
     status.textContent =
-      "Gagal login: " +
-      error.message;
+    "Gagal login: " +
+    error.message;
 
   }
 
@@ -954,15 +936,15 @@ async function loginAdmin() {
 
 
 /* =====================================================
-LOAD ADMIN DATA
+LOAD DATA ADMIN
 ===================================================== */
 
 async function loadAdminData() {
 
   const token =
-    localStorage.getItem(
-      "access_token"
-    );
+  localStorage.getItem(
+    "access_token"
+  );
 
 
   if (!token) {
@@ -971,24 +953,26 @@ async function loadAdminData() {
 
 
   const response =
-    await fetch(
+  await fetch(
 
-      API +
-      "/material?select=*",
+    API +
+    "/material?select=*",
 
-      {
-        headers: {
+    {
 
-          ...HEADERS,
+      headers: {
 
-          "Authorization":
-            "Bearer " +
-            token
+        ...HEADERS,
 
-        }
+        "Authorization":
+        "Bearer " +
+        token
+
       }
 
-    );
+    }
+
+  );
 
 
   if (!response.ok) {
@@ -1001,7 +985,7 @@ async function loadAdminData() {
 
 
   materials =
-    await response.json();
+  await response.json();
 
 
   renderAdmin();
@@ -1010,72 +994,83 @@ async function loadAdminData() {
 
 
 /* =====================================================
-RENDER ADMIN
+ADMIN TABLE
 ===================================================== */
 
 function renderAdmin() {
 
   const search =
-    (
-      get("adminSearch").value ||
-      ""
-    )
-    .trim()
-    .toUpperCase();
+  (
+    document
+    .getElementById("adminSearch")
+    .value ||
+    ""
+  )
+  .trim()
+  .toUpperCase();
 
 
   let rows =
-    materials;
+  materials;
 
 
   if (search) {
 
     rows =
-      rows.filter(function(row) {
+    rows.filter(function(row) {
 
-        return (
+      return (
 
-          String(
-            row["Team"] || ""
-          )
-          .toUpperCase()
-          .includes(search)
+        String(
+          row["Team"] || ""
+        )
+        .toUpperCase()
+        .includes(search)
 
-          ||
+        ||
 
-          String(
-            row["Part"] || ""
-          )
-          .toUpperCase()
-          .includes(search)
+        String(
+          row["Part"] || ""
+        )
+        .toUpperCase()
+        .includes(search)
 
-          ||
+        ||
 
-          String(
-            row["Description"] || ""
-          )
-          .toUpperCase()
-          .includes(search)
+        String(
+          row["Description"] || ""
+        )
+        .toUpperCase()
+        .includes(search)
 
-        );
+      );
 
-      });
+    });
 
   }
 
 
   const body =
-    get("adminTable");
+  document
+  .getElementById("adminTable");
 
 
   if (!rows.length) {
 
     body.innerHTML = `
+
       <tr>
-        <td colspan="11" class="center">
+
+        <td
+          colspan="11"
+          class="center">
+
           Data tidak ditemukan.
+
         </td>
+
       </tr>
+
     `;
 
     return;
@@ -1085,142 +1080,157 @@ function renderAdmin() {
 
   body.innerHTML =
 
-    rows.map(function(row) {
+  rows.map(function(row) {
 
-      const ambil =
-        num(row["Total Ambil"]);
+    const ambil =
+    num(row["Total Ambil"]);
 
-      const pakai =
-        num(row["Pakai"]);
+    const pakai =
+    num(row["Pakai"]);
 
-      const sisa =
-        Math.max(
-          0,
-          ambil - pakai
-        );
+    const sisa =
+    Math.max(
+      0,
+      ambil - pakai
+    );
 
-      const harga =
-        num(row["Harga"]);
+    const harga =
+    num(row["Harga"]);
 
-      const nominal =
-        sisa * harga;
-
-
-      /*
-      Ambil ID database.
-      Biasanya Supabase membuat kolom id.
-      */
-
-      const rowId =
-        row["id"];
+    const nominal =
+    sisa * harga;
 
 
-      return `
+    /*
+    ID DATABASE SUPABASE
+    */
 
-        <tr>
-
-          <td>
-            <span class="badge">
-              ${esc(row["Team"])}
-            </span>
-          </td>
-
-          <td>
-            ${formatDate(row["Tanggal"])}
-          </td>
-
-          <td>
-            ${esc(row["Part"])}
-          </td>
-
-          <td>
-            ${esc(row["Description"])}
-          </td>
-
-          <td>
-            ${esc(row["Unit"])}
-          </td>
-
-          <td class="number">
-            ${rupiah(harga)}
-          </td>
-
-          <td class="number">
-            ${formatNumber(ambil)}
-          </td>
-
-          <td class="number">
-            ${formatNumber(pakai)}
-          </td>
-
-          <td class="number">
-            <b>
-              ${formatNumber(sisa)}
-            </b>
-          </td>
-
-          <td class="number">
-            ${rupiah(nominal)}
-          </td>
-
-          <td>
-
-            <button
-              type="button"
-              class="delete-button"
-              data-id="${esc(rowId)}">
-
-              🗑️ HAPUS
-
-            </button>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
+    const id =
+    row["id"];
 
 
-  /*
-  Pasang fungsi HAPUS
-  ke semua tombol.
-  */
+    return `
 
-  document
-    .querySelectorAll(".delete-button")
-    .forEach(function(button) {
+      <tr>
 
-      button.addEventListener(
-        "click",
-        function() {
+        <td>
 
-          const id =
-            this.getAttribute(
-              "data-id"
-            );
+          <span class="badge">
 
-          deleteMaterial(id);
+            ${esc(row["Team"])}
 
-        }
-      );
+          </span>
 
-    });
+        </td>
+
+
+        <td>
+
+          ${formatDate(
+            row["Tanggal"]
+          )}
+
+        </td>
+
+
+        <td>
+
+          ${esc(
+            row["Part"]
+          )}
+
+        </td>
+
+
+        <td>
+
+          ${esc(
+            row["Description"]
+          )}
+
+        </td>
+
+
+        <td>
+
+          ${esc(
+            row["Unit"]
+          )}
+
+        </td>
+
+
+        <td class="number">
+
+          ${rupiah(harga)}
+
+        </td>
+
+
+        <td class="number">
+
+          ${formatNumber(ambil)}
+
+        </td>
+
+
+        <td class="number">
+
+          ${formatNumber(pakai)}
+
+        </td>
+
+
+        <td class="number">
+
+          <b>
+
+            ${formatNumber(sisa)}
+
+          </b>
+
+        </td>
+
+
+        <td class="number">
+
+          ${rupiah(nominal)}
+
+        </td>
+
+
+        <td>
+
+          <button
+            type="button"
+            class="delete-button"
+            onclick="deleteMaterial('${esc(id)}')">
+
+            🗑️ HAPUS
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
 
 }
 
 
 /* =====================================================
-HAPUS DATA
+HAPUS DATA SUPABASE
 ===================================================== */
 
 async function deleteMaterial(id) {
 
   const token =
-    localStorage.getItem(
-      "access_token"
-    );
+  localStorage.getItem(
+    "access_token"
+  );
 
 
   if (!token) {
@@ -1235,9 +1245,10 @@ async function deleteMaterial(id) {
 
 
   if (
-    !id ||
-    id === "undefined" ||
-    id === "null"
+    id === undefined ||
+    id === null ||
+    id === "" ||
+    id === "undefined"
   ) {
 
     alert(
@@ -1249,47 +1260,56 @@ async function deleteMaterial(id) {
   }
 
 
-  /*
-  Cari data yang akan dihapus
-  */
-
   const row =
-    materials.find(function(item) {
+  materials.find(function(item) {
 
-      return String(item["id"]) ===
-        String(id);
+    return String(
+      item["id"]
+    ) === String(id);
 
-    });
-
-
-  const namaTeam =
-    row
-      ? row["Team"]
-      : "";
+  });
 
 
-  const namaMaterial =
-    row
-      ? row["Part"]
-      : "";
+  const team =
+  row
+  ? row["Team"]
+  : "";
+
+
+  const material =
+  row
+  ? row["Part"]
+  : "";
+
+
+  const tanggal =
+  row
+  ? formatDate(row["Tanggal"])
+  : "";
 
 
   const yakin =
-    confirm(
+  confirm(
 
-      "Yakin ingin menghapus data ini?\n\n" +
+    "⚠️ KONFIRMASI HAPUS DATA\n\n" +
 
-      "Team: " +
-      namaTeam +
-      "\n" +
+    "Team: " +
+    team +
+    "\n" +
 
-      "Material: " +
-      namaMaterial +
-      "\n\n" +
+    "Tanggal: " +
+    tanggal +
+    "\n" +
 
-      "Data yang dihapus tidak dapat dikembalikan."
+    "Material: " +
+    material +
+    "\n\n" +
 
-    );
+    "Data akan dihapus PERMANEN dari database.\n\n" +
+
+    "Lanjutkan?"
+
+  );
 
 
   if (!yakin) {
@@ -1300,62 +1320,78 @@ async function deleteMaterial(id) {
   try {
 
     const response =
-      await fetch(
+    await fetch(
 
-        API +
-        "/material?id=eq." +
-        encodeURIComponent(id),
+      API +
+      "/material?id=eq." +
+      encodeURIComponent(id),
 
-        {
-          method: "DELETE",
+      {
 
-          headers: {
+        method: "DELETE",
 
-            ...HEADERS,
+        headers: {
 
-            "Authorization":
-              "Bearer " +
-              token,
+          "apikey":
+          SUPABASE_KEY,
 
-            "Prefer":
-              "return=minimal"
+          "Authorization":
+          "Bearer " +
+          token,
 
-          }
+          "Content-Type":
+          "application/json",
+
+          "Prefer":
+          "return=representation"
 
         }
 
-      );
+      }
+
+    );
+
+
+    const result =
+    await response.text();
 
 
     if (!response.ok) {
 
       throw new Error(
-        await response.text()
+        result ||
+        "Gagal menghapus data."
       );
 
     }
 
 
     /*
-    Hapus dari tampilan lokal
+    Hapus data dari array lokal
     */
 
     materials =
-      materials.filter(function(item) {
+    materials.filter(function(item) {
 
-        return String(item["id"]) !==
-          String(id);
+      return String(
+        item["id"]
+      ) !== String(id);
 
-      });
+    });
 
+
+    /*
+    Render ulang tabel Admin
+    */
 
     renderAdmin();
 
 
     showAdminStatus(
-      "✅ Data berhasil dihapus.",
+      "✅ Data berhasil dihapus dari database.",
       true
     );
+
 
   }
 
@@ -1382,9 +1418,9 @@ SIMPAN MATERIAL
 async function saveMaterial() {
 
   const token =
-    localStorage.getItem(
-      "access_token"
-    );
+  localStorage.getItem(
+    "access_token"
+  );
 
 
   if (!token) {
@@ -1399,63 +1435,76 @@ async function saveMaterial() {
 
 
   const team =
-    get("adminTeam")
-    .value
-    .trim()
-    .toUpperCase();
+  document
+  .getElementById("adminTeam")
+  .value
+  .trim()
+  .toUpperCase();
 
 
   const tanggal =
-    get("adminTanggal")
-    .value;
+  document
+  .getElementById("adminTanggal")
+  .value;
 
 
   const part =
-    get("adminPart")
-    .value
-    .trim();
+  document
+  .getElementById("adminPart")
+  .value
+  .trim();
 
 
   const description =
-    get("adminDescription")
-    .value
-    .trim();
+  document
+  .getElementById("adminDescription")
+  .value
+  .trim();
 
 
   const unit =
-    get("adminUnit")
-    .value
-    .trim();
+  document
+  .getElementById("adminUnit")
+  .value
+  .trim();
 
 
   const harga =
-    Number(
-      get("adminHarga").value
-    ) || 0;
+  Number(
+    document
+    .getElementById("adminHarga")
+    .value
+  ) || 0;
 
 
   const ambil =
-    Number(
-      get("adminTotalAmbil").value
-    ) || 0;
+  Number(
+    document
+    .getElementById("adminTotalAmbil")
+    .value
+  ) || 0;
 
 
   const pakai =
-    Number(
-      get("adminPakai").value
-    ) || 0;
+  Number(
+    document
+    .getElementById("adminPakai")
+    .value
+  ) || 0;
 
 
   const sisa =
-    Math.max(
-      0,
-      ambil - pakai
-    );
+  Math.max(
+    0,
+    ambil - pakai
+  );
 
 
   const nominal =
-    sisa * harga;
+  sisa * harga;
 
+
+  /* VALIDASI */
 
   if (!team) {
 
@@ -1507,27 +1556,38 @@ async function saveMaterial() {
 
   const record = {
 
-    "Team": team,
+    "Team":
+    team,
 
-    "Tanggal": tanggal,
+    "Tanggal":
+    tanggal,
 
-    "Part": part,
+    "Part":
+    part,
 
-    "Description": description,
+    "Description":
+    description,
 
-    "Unit": unit,
+    "Unit":
+    unit,
 
-    "Harga": harga,
+    "Harga":
+    harga,
 
-    "Stok Awal": ambil,
+    "Stok Awal":
+    ambil,
 
-    "Total Ambil": ambil,
+    "Total Ambil":
+    ambil,
 
-    "Pakai": pakai,
+    "Pakai":
+    pakai,
 
-    "Sisa Gudang": sisa,
+    "Sisa Gudang":
+    sisa,
 
-    "Harg Sisa": nominal
+    "Harg Sisa":
+    nominal
 
   };
 
@@ -1535,33 +1595,34 @@ async function saveMaterial() {
   try {
 
     const response =
-      await fetch(
+    await fetch(
 
-        API + "/material",
+      API +
+      "/material",
 
-        {
+      {
 
-          method: "POST",
+        method: "POST",
 
-          headers: {
+        headers: {
 
-            ...HEADERS,
+          ...HEADERS,
 
-            "Authorization":
-              "Bearer " +
-              token,
+          "Authorization":
+          "Bearer " +
+          token,
 
-            "Prefer":
-              "return=representation"
+          "Prefer":
+          "return=representation"
 
-          },
+        },
 
-          body:
-            JSON.stringify(record)
+        body:
+        JSON.stringify(record)
 
-        }
+      }
 
-      );
+    );
 
 
     if (!response.ok) {
@@ -1579,8 +1640,16 @@ async function saveMaterial() {
     );
 
 
-    resetAdminForm(false);
+    /*
+    RESET FORM SAJA
+    */
 
+    resetAdminForm();
+
+
+    /*
+    LOAD ULANG DATABASE
+    */
 
     await loadAdminData();
 
@@ -1603,10 +1672,10 @@ async function saveMaterial() {
 
 
 /* =====================================================
-RESET FORM ADMIN
+RESET FORM
 ===================================================== */
 
-function resetAdminForm(showMessage = true) {
+function resetAdminForm() {
 
   const ids = [
 
@@ -1624,27 +1693,42 @@ function resetAdminForm(showMessage = true) {
 
   ids.forEach(function(id) {
 
-    const field =
-      get(id);
+    const element =
+    document
+    .getElementById(id);
 
-    if (field) {
-      field.value = "";
+    if (element) {
+
+      element.value = "";
+
     }
 
   });
 
 
-  if (showMessage) {
+  const status =
+  document
+  .getElementById(
+    "adminStatus"
+  );
 
-    showAdminStatus(
-      "✅ Form berhasil direset.",
-      true
-    );
+
+  if (status) {
+
+    status.textContent =
+    "";
+
+    status.className =
+    "";
 
   }
 
 
-  get("adminTeam").focus();
+  document
+  .getElementById(
+    "adminTeam"
+  )
+  .focus();
 
 }
 
@@ -1656,55 +1740,65 @@ TEAM SEARCH
 async function searchTeam() {
 
   const team =
-    get("teamInput")
-    .value
-    .trim()
-    .toUpperCase();
+  document
+  .getElementById("teamInput")
+  .value
+  .trim()
+  .toUpperCase();
 
 
   const status =
-    get("teamStatus");
+  document
+  .getElementById("teamStatus");
 
 
   if (!team) {
 
     status.className =
-      "error";
+    "error";
 
     status.textContent =
-      "Masukkan kode Team.";
+    "Masukkan kode Team.";
 
     return;
 
   }
 
 
-  status.className = "";
+  status.className =
+  "";
 
   status.textContent =
-    "Memuat data " +
-    team +
-    "...";
+  "Memuat data " +
+  team +
+  "...";
 
 
   try {
 
     const response =
-      await fetch(
+    await fetch(
 
-        API +
-        "/material?Team=eq." +
-        encodeURIComponent(team) +
-        "&select=*",
+      API +
+      "/material?Team=eq." +
+      encodeURIComponent(team) +
+      "&select=*",
 
-        {
-          headers: {
-            "apikey":
-              SUPABASE_KEY
-          }
+      {
+
+        headers: {
+
+          "apikey":
+          SUPABASE_KEY,
+
+          "Content-Type":
+          "application/json"
+
         }
 
-      );
+      }
+
+    );
 
 
     if (!response.ok) {
@@ -1717,18 +1811,18 @@ async function searchTeam() {
 
 
     const rows =
-      await response.json();
+    await response.json();
 
 
     if (!rows.length) {
 
       status.className =
-        "error";
+      "error";
 
       status.textContent =
-        "Data Team " +
-        team +
-        " tidak ditemukan.";
+      "Data Team " +
+      team +
+      " tidak ditemukan.";
 
       return;
 
@@ -1736,7 +1830,7 @@ async function searchTeam() {
 
 
     currentTeam =
-      team;
+    team;
 
 
     renderTeam(rows);
@@ -1745,20 +1839,21 @@ async function searchTeam() {
     hideAll();
 
 
-    get("teamPage")
-      .classList
-      .remove("hidden");
+    document
+    .getElementById("teamPage")
+    .classList
+    .remove("hidden");
 
   }
 
   catch (error) {
 
     status.className =
-      "error";
+    "error";
 
     status.textContent =
-      "Gagal mengambil data: " +
-      error.message;
+    "Gagal mengambil data: " +
+    error.message;
 
   }
 
@@ -1771,126 +1866,190 @@ TEAM DISPLAY
 
 function renderTeam(rows) {
 
-  get("teamHeader")
-    .textContent =
-      "📦 TEAM " +
-      currentTeam;
+  document
+  .getElementById("teamHeader")
+  .textContent =
+  "📦 TEAM " +
+  currentTeam;
 
 
   let totalAmbil = 0;
+
   let totalPakai = 0;
+
   let totalSisa = 0;
 
 
   rows.forEach(function(row) {
 
     const ambil =
-      num(row["Total Ambil"]);
+    num(row["Total Ambil"]);
 
     const pakai =
-      num(row["Pakai"]);
+    num(row["Pakai"]);
 
     const sisa =
-      Math.max(
-        0,
-        ambil - pakai
-      );
+    Math.max(
+      0,
+      ambil - pakai
+    );
 
 
-    totalAmbil += ambil;
-    totalPakai += pakai;
-    totalSisa += sisa;
+    totalAmbil +=
+    ambil;
+
+    totalPakai +=
+    pakai;
+
+    totalSisa +=
+    sisa;
 
   });
 
 
-  get("teamTotalAmbil")
-    .textContent =
-      formatNumber(totalAmbil);
+  document
+  .getElementById(
+    "teamTotalAmbil"
+  )
+  .textContent =
+  formatNumber(
+    totalAmbil
+  );
 
 
-  get("teamTotalPakai")
-    .textContent =
-      formatNumber(totalPakai);
+  document
+  .getElementById(
+    "teamTotalPakai"
+  )
+  .textContent =
+  formatNumber(
+    totalPakai
+  );
 
 
-  get("teamTotalSisa")
-    .textContent =
-      formatNumber(totalSisa);
+  document
+  .getElementById(
+    "teamTotalSisa"
+  )
+  .textContent =
+  formatNumber(
+    totalSisa
+  );
 
 
   const table =
-    get("teamTable");
+  document
+  .getElementById(
+    "teamTable"
+  );
 
 
   table.innerHTML =
 
-    rows.map(function(row) {
+  rows.map(function(row) {
 
-      const ambil =
-        num(row["Total Ambil"]);
+    const ambil =
+    num(row["Total Ambil"]);
 
-      const pakai =
-        num(row["Pakai"]);
+    const pakai =
+    num(row["Pakai"]);
 
-      const sisa =
-        Math.max(
-          0,
-          ambil - pakai
-        );
+    const sisa =
+    Math.max(
+      0,
+      ambil - pakai
+    );
 
-      const harga =
-        num(row["Harga"]);
+    const harga =
+    num(row["Harga"]);
 
-      const nominal =
-        sisa * harga;
+    const nominal =
+    sisa * harga;
 
 
-      return `
+    return `
 
-        <tr>
+      <tr>
 
-          <td>
-            <b>
-              ${esc(row["Team"])}
-            </b>
-          </td>
+        <td>
 
-          <td>
-            ${formatDate(row["Tanggal"])}
-          </td>
+          <b>
+            ${esc(
+              row["Team"]
+            )}
+          </b>
 
-          <td>
-            <b>
-              ${esc(row["Part"])}
-            </b>
-          </td>
+        </td>
 
-          <td class="number">
-            ${formatNumber(ambil)}
-          </td>
 
-          <td class="number">
-            ${formatNumber(pakai)}
-          </td>
+        <td>
 
-          <td class="number">
-            <b>
-              ${formatNumber(sisa)}
-            </b>
-          </td>
+          ${formatDate(
+            row["Tanggal"]
+          )}
 
-          <td class="number">
-            <b>
-              ${rupiah(nominal)}
-            </b>
-          </td>
+        </td>
 
-        </tr>
 
-      `;
+        <td>
 
-    }).join("");
+          <b>
+            ${esc(
+              row["Part"]
+            )}
+          </b>
+
+        </td>
+
+
+        <td class="number">
+
+          ${formatNumber(
+            ambil
+          )}
+
+        </td>
+
+
+        <td class="number">
+
+          ${formatNumber(
+            pakai
+          )}
+
+        </td>
+
+
+        <td class="number">
+
+          <b>
+
+            ${formatNumber(
+              sisa
+            )}
+
+          </b>
+
+        </td>
+
+
+        <td class="number">
+
+          <b>
+
+            ${rupiah(
+              nominal
+            )}
+
+          </b>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
 
 }
 
@@ -1904,24 +2063,47 @@ function backTeamSearch() {
   hideAll();
 
 
-  get("teamSearchPage")
-    .classList
-    .remove("hidden");
+  document
+  .getElementById(
+    "teamSearchPage"
+  )
+  .classList
+  .remove("hidden");
 
 
-  get("teamInput")
-    .value = "";
+  document
+  .getElementById(
+    "teamInput"
+  )
+  .value =
+  "";
 
 
-  get("teamStatus")
-    .textContent = "";
+  document
+  .getElementById(
+    "teamStatus"
+  )
+  .textContent =
+  "";
 
 
-  get("teamStatus")
-    .className = "";
+  document
+  .getElementById(
+    "teamStatus"
+  )
+  .className =
+  "";
 
 
-  get("teamInput").focus();
+  setTimeout(function() {
+
+    document
+    .getElementById(
+      "teamInput"
+    )
+    .focus();
+
+  }, 100);
 
 }
 
@@ -1943,20 +2125,134 @@ function logoutAdmin() {
   hideAll();
 
 
-  get("startPage")
-    .classList
-    .remove("hidden");
-
-
-  get("adminEmail").value = "";
-  get("adminPassword").value = "";
+  document
+  .getElementById(
+    "startPage"
+  )
+  .classList
+  .remove("hidden");
 
 }
 
 
 /* =====================================================
-STATUS ADMIN
+HELPER
 ===================================================== */
+
+function num(value) {
+
+  return Number(value) || 0;
+
+}
+
+
+function formatNumber(value) {
+
+  return new Intl.NumberFormat(
+    "id-ID"
+  ).format(
+    num(value)
+  );
+
+}
+
+
+function rupiah(value) {
+
+  return new Intl.NumberFormat(
+
+    "id-ID",
+
+    {
+
+      style:
+      "currency",
+
+      currency:
+      "IDR",
+
+      maximumFractionDigits:
+      0
+
+    }
+
+  ).format(
+    num(value)
+  );
+
+}
+
+
+function formatDate(value) {
+
+  if (!value) {
+
+    return "-";
+
+  }
+
+
+  const parts =
+  String(value)
+  .split("-");
+
+
+  if (parts.length !== 3) {
+
+    return value;
+
+  }
+
+
+  return (
+
+    parts[2] +
+    "-" +
+    parts[1] +
+    "-" +
+    parts[0]
+
+  );
+
+}
+
+
+function esc(value) {
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+
+    /[&<>"']/g,
+
+    function(char) {
+
+      return {
+
+        "&":
+        "&amp;",
+
+        "<":
+        "&lt;",
+
+        ">":
+        "&gt;",
+
+        '"':
+        "&quot;",
+
+        "'":
+        "&#039;"
+
+      }[char];
+
+    }
+
+  );
+
+}
+
 
 function showAdminStatus(
   text,
@@ -1964,153 +2260,24 @@ function showAdminStatus(
 ) {
 
   const el =
-    get("adminStatus");
+  document
+  .getElementById(
+    "adminStatus"
+  );
 
 
   el.textContent =
-    text;
+  text;
 
 
   el.className =
-    success
-      ? "success"
-      : "error";
+  success
+  ? "success"
+  : "error";
 
 }
-
-
-/* =====================================================
-EVENT LISTENER
-===================================================== */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-
-    /*
-    HALAMAN AWAL
-    */
-
-    get("adminLoginButton")
-      .addEventListener(
-        "click",
-        showAdminLogin
-      );
-
-
-    get("teamAccessButton")
-      .addEventListener(
-        "click",
-        showTeamSearch
-      );
-
-
-    /*
-    LOGIN ADMIN
-    */
-
-    get("adminLoginSubmit")
-      .addEventListener(
-        "click",
-        loginAdmin
-      );
-
-
-    get("adminLoginBack")
-      .addEventListener(
-        "click",
-        backStart
-      );
-
-
-    /*
-    TEAM
-    */
-
-    get("teamSearchButton")
-      .addEventListener(
-        "click",
-        searchTeam
-      );
-
-
-    get("teamSearchBack")
-      .addEventListener(
-        "click",
-        backStart
-      );
-
-
-    get("otherTeamButton")
-      .addEventListener(
-        "click",
-        backTeamSearch
-      );
-
-
-    get("teamInput")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (
-            event.key === "Enter"
-          ) {
-
-            event.preventDefault();
-
-            searchTeam();
-
-          }
-
-        }
-      );
-
-
-    /*
-    ADMIN
-    */
-
-    get("saveButton")
-      .addEventListener(
-        "click",
-        saveMaterial
-      );
-
-
-    get("resetAdminButton")
-      .addEventListener(
-        "click",
-        function(event) {
-
-          event.preventDefault();
-
-          resetAdminForm(true);
-
-        }
-      );
-
-
-    get("adminSearch")
-      .addEventListener(
-        "input",
-        renderAdmin
-      );
-
-
-    get("logoutButton")
-      .addEventListener(
-        "click",
-        logoutAdmin
-      );
-
-
-  }
-);
 
 </script>
 
 </body>
 </html>
-```
