@@ -3,251 +3,239 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin / Team - Material Monitoring</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Material Monitoring</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f9;
-    color:#222;
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f3f5f7;
+ color:#222
 }
-
 header{
-    background:#1565c0;
-    color:white;
-    padding:18px 24px;
+ background:#1565c0;
+ color:#fff;
+ padding:18px 20px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
 }
-
-header h1{
-    margin:0;
-    font-size:22px;
-}
-
-.container{
-    max-width:1200px;
-    margin:20px auto;
-    padding:0 15px;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:15px;
-}
-
-.tab{
-    border:0;
-    padding:11px 20px;
-    border-radius:8px;
-    background:#ddd;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.tab.active{
-    background:#1565c0;
-    color:white;
-}
-
+header h1{margin:0;font-size:21px}
+.container{max-width:1200px;margin:20px auto;padding:0 15px}
 .card{
-    background:white;
-    border-radius:12px;
-    padding:18px;
-    margin-bottom:16px;
-    box-shadow:0 2px 8px #0001;
+ background:#fff;
+ padding:20px;
+ margin-bottom:18px;
+ border-radius:12px;
+ box-shadow:0 2px 8px #0002
 }
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:12px;
+.login{
+ max-width:420px;
+ margin:80px auto
 }
-
-label{
-    display:block;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:5px;
-}
-
 input{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:7px;
+ width:100%;
+ padding:11px;
+ border:1px solid #ccc;
+ border-radius:7px;
+ margin:6px 0 12px
 }
-
 button{
-    border:0;
-    border-radius:7px;
-    padding:10px 14px;
-    cursor:pointer;
-    font-weight:bold;
+ padding:10px 15px;
+ border:0;
+ border-radius:7px;
+ cursor:pointer;
+ font-weight:bold
 }
-
-.primary{
-    background:#1565c0;
-    color:white;
+.primary{background:#1565c0;color:#fff}
+.danger{background:#d32f2f;color:#fff}
+.secondary{background:#e8eef7;color:#1565c0}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+ gap:10px
 }
-
-.secondary{
-    background:#e8eef7;
-    color:#1565c0;
-}
-
-.danger{
-    background:#d32f2f;
-    color:white;
-}
-
 .actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:12px;
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:10px
 }
-
-.search{
-    font-size:16px;
-}
-
-.table-wrap{
-    overflow:auto;
-}
-
+.table-wrap{overflow:auto}
 table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:950px;
+ width:100%;
+ border-collapse:collapse;
+ min-width:950px
 }
-
 th,td{
-    padding:10px;
-    border-bottom:1px solid #eee;
-    font-size:13px;
+ padding:10px;
+ border-bottom:1px solid #ddd;
+ font-size:13px
 }
-
-th{
-    background:#eef4fb;
-    text-align:left;
-}
-
-.num{
-    text-align:right;
-}
-
+th{background:#edf3f9;text-align:left}
+.num{text-align:right}
 .badge{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:20px;
-    background:#e3f2fd;
-    color:#1565c0;
-    font-weight:bold;
+ background:#e3f2fd;
+ color:#1565c0;
+ padding:5px 9px;
+ border-radius:15px;
+ font-weight:bold
 }
-
+.hidden{display:none}
+.error{color:#d32f2f;font-weight:bold}
+.success{color:#16803c;font-weight:bold}
 .summary{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:10px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+ gap:10px
 }
-
-.summary .box{
-    background:#f7f9fc;
-    padding:14px;
-    border-radius:9px;
+.box{
+ background:#f5f7fa;
+ padding:13px;
+ border-radius:8px
 }
-
-.summary b{
-    display:block;
-    font-size:20px;
-    margin-top:5px;
-}
-
-.hidden{
-    display:none;
-}
-
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#777;
-}
-
-#status{
-    margin-top:10px;
-    font-weight:bold;
+.box b{
+ display:block;
+ font-size:19px;
+ margin-top:5px
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+
+<div id="loginPage">
+
+<div class="card login">
+
+<h2>🔐 Login Material Monitoring</h2>
+
+<p>Silakan masuk menggunakan akun Anda.</p>
+
+<label>Email</label>
+<input id="email" type="email" placeholder="Email">
+
+<label>Password</label>
+<input id="password" type="password" placeholder="Password">
+
+<button class="primary" style="width:100%" onclick="login()">
+Masuk
+</button>
+
+<p id="loginStatus"></p>
+
+</div>
+
+</div>
+
+
+<!-- APLIKASI -->
+
+<div id="app" class="hidden">
+
 <header>
-<h1>📦 Admin / Team - Material Monitoring</h1>
+
+<h1>📦 Material Monitoring</h1>
+
+<div>
+<span id="userInfo"></span>
+<button class="danger" onclick="logout()">Logout</button>
+</div>
+
 </header>
+
 
 <div class="container">
 
-<div class="tabs">
-<button class="tab active" onclick="showTab('team',this)">
-👥 TEAM
-</button>
+<!-- ADMIN -->
 
-<button class="tab" onclick="showTab('admin',this)">
-⚙️ ADMIN
-</button>
-</div>
-
-
-<!-- ================= TEAM ================= -->
-
-<section id="teamTab">
+<section id="adminSection" class="hidden">
 
 <div class="card">
 
-<h2>🔎 Cari Team</h2>
+<h2>⚙️ ADMIN</h2>
 
-<input
-id="teamSearch"
-class="search"
-placeholder="Contoh H007, H008, H009, H010..."
-oninput="renderTeam()"
->
+<div class="grid">
+
+<div>
+<label>Team</label>
+<input id="team">
+</div>
+
+<div>
+<label>Part</label>
+<input id="part">
+</div>
+
+<div>
+<label>Description</label>
+<input id="description">
+</div>
+
+<div>
+<label>Unit</label>
+<input id="unit">
+</div>
+
+<div>
+<label>Harga</label>
+<input id="harga" type="number">
+</div>
+
+<div>
+<label>Stok Awal</label>
+<input id="stokAwal" type="number">
+</div>
+
+<div>
+<label>Total Ambil</label>
+<input id="totalAmbil" type="number">
+</div>
+
+</div>
 
 <div class="actions">
 
-<button class="secondary" onclick="setTeam('H007')">H007</button>
-<button class="secondary" onclick="setTeam('H008')">H008</button>
-<button class="secondary" onclick="setTeam('H009')">H009</button>
-<button class="secondary" onclick="setTeam('H010')">H010</button>
-<button class="secondary" onclick="setTeam('H012')">H012</button>
-<button class="secondary" onclick="setTeam('H026')">H026</button>
+<button class="primary" onclick="saveData()">
+💾 Simpan
+</button>
 
-<button class="secondary" onclick="loadData()">
-🔄 Refresh
+<button class="secondary" onclick="resetForm()">
+Reset
 </button>
 
 </div>
 
+<p id="adminStatus"></p>
+
 </div>
 
+</section>
+
+
+<!-- TEAM -->
+
+<section>
 
 <div class="card">
+
+<h2>🔎 Data Team</h2>
+
+<input
+id="search"
+placeholder="Cari Team, contoh H007"
+oninput="render()"
+>
 
 <div class="summary">
 
 <div class="box">
 Team
-<b id="sumTeam">SEMUA</b>
-</div>
-
-<div class="box">
-Jenis Material
-<b id="sumJenis">0</b>
+<b id="sumTeam">-</b>
 </div>
 
 <div class="box">
@@ -272,8 +260,6 @@ Sisa Gudang
 
 <div class="card">
 
-<h2>Data Pemakaian Material</h2>
-
 <div class="table-wrap">
 
 <table>
@@ -285,16 +271,17 @@ Sisa Gudang
 <th>Part</th>
 <th>Description</th>
 <th>Unit</th>
-<th class="num">Harga</th>
-<th class="num">Stok Awal</th>
-<th class="num">Total Ambil</th>
-<th class="num">Sisa Gudang</th>
-<th class="num">Harg Sisa</th>
+<th>Harga</th>
+<th>Stok Awal</th>
+<th>Total Ambil</th>
+<th>Sisa Gudang</th>
+<th>Harg Sisa</th>
+<th id="actionHead" class="hidden">Aksi</th>
 </tr>
 
 </thead>
 
-<tbody id="teamBody"></tbody>
+<tbody id="tableBody"></tbody>
 
 </table>
 
@@ -304,122 +291,16 @@ Sisa Gudang
 
 </section>
 
-
-<!-- ================= ADMIN ================= -->
-
-<section id="adminTab" class="hidden">
-
-<div class="card">
-
-<h2>➕ Tambah / Edit Material</h2>
-
-<input type="hidden" id="editId">
-
-<div class="grid">
-
-<div>
-<label>Team</label>
-<input id="team" placeholder="H007">
 </div>
-
-<div>
-<label>Part</label>
-<input id="part" placeholder="RMT">
-</div>
-
-<div>
-<label>Description</label>
-<input id="description" placeholder="Remote">
-</div>
-
-<div>
-<label>Unit</label>
-<input id="unit" placeholder="PCS">
-</div>
-
-<div>
-<label>Harga</label>
-<input id="harga" type="number" min="0">
-</div>
-
-<div>
-<label>Stok Awal</label>
-<input id="stokAwal" type="number" min="0">
-</div>
-
-<div>
-<label>Total Ambil</label>
-<input id="totalAmbil" type="number" min="0">
-</div>
-
-</div>
-
-
-<div class="actions">
-
-<button class="primary" onclick="saveData()">
-💾 Simpan ke Supabase
-</button>
-
-<button class="secondary" onclick="resetForm()">
-↩ Reset
-</button>
-
-</div>
-
-<div id="status"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📋 Data Admin</h2>
-
-<input
-id="adminSearch"
-class="search"
-placeholder="Cari Team / Part / Description..."
-oninput="renderAdmin()"
->
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Team</th>
-<th>Part</th>
-<th>Description</th>
-<th>Unit</th>
-<th class="num">Harga</th>
-<th class="num">Stok Awal</th>
-<th class="num">Total Ambil</th>
-<th class="num">Sisa Gudang</th>
-<th class="num">Harg Sisa</th>
-<th>Aksi</th>
-</tr>
-
-</thead>
-
-<tbody id="adminBody"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
 
 </div>
 
 
 <script>
 
-/* ================= SUPABASE ================= */
+/* ================================
+   SUPABASE
+================================ */
 
 const SUPABASE_URL =
 "https://umfpogjgiqhtiuvazqdm.supabase.co";
@@ -428,192 +309,119 @@ const SUPABASE_KEY =
 "sb_publishable_ijo6swvjf5X83TrDe4Xfpg_7rJz7dRs";
 
 const API =
-SUPABASE_URL + "/rest/v1/material";
+SUPABASE_URL + "/rest/v1";
 
 const headers = {
-
-"apikey": SUPABASE_KEY,
-
-"Authorization":
-"Bearer " + SUPABASE_KEY,
-
-"Content-Type":
-"application/json",
-
-"Prefer":
-"return=representation"
-
+ "apikey":SUPABASE_KEY,
+ "Authorization":"Bearer "+SUPABASE_KEY,
+ "Content-Type":"application/json"
 };
 
-let data = [];
+let currentUser=null;
+let profile=null;
+let materials=[];
 
 
-/* ================= HELPER ================= */
+/* ================================
+   LOGIN
+================================ */
 
-function getValue(row,column){
+async function login(){
 
-return row[column] ?? "";
+const email =
+document.getElementById("email").value.trim();
 
-}
+const password =
+document.getElementById("password").value;
 
+const status =
+document.getElementById("loginStatus");
 
-function number(value){
+if(!email || !password){
 
-return Number(value) || 0;
-
-}
-
-
-function formatNumber(value){
-
-return new Intl.NumberFormat("id-ID")
-.format(number(value));
-
-}
-
-
-function rupiah(value){
-
-return new Intl.NumberFormat(
-"id-ID",
-{
-style:"currency",
-currency:"IDR",
-maximumFractionDigits:0
-}
-).format(number(value));
+status.className="error";
+status.textContent="Email dan password wajib diisi.";
+return;
 
 }
 
-
-function escapeHtml(value){
-
-return String(value ?? "")
-.replace(/[&<>"']/g,function(m){
-
-return {
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[m];
-
-});
-
-}
-
-
-/* ================= CALCULATION ================= */
-
-function calculate(row){
-
-const harga =
-number(getValue(row,"Harga"));
-
-const stok =
-number(getValue(row,"Stok Awal"));
-
-const ambil =
-number(getValue(row,"Total Ambil"));
-
-const sisa =
-stok - ambil;
-
-const hargaSisa =
-sisa * harga;
-
-return {
-
-harga,
-stok,
-ambil,
-sisa,
-hargaSisa
-
-};
-
-}
-
-
-/* ================= STATUS ================= */
-
-function status(message,success=true){
-
-const el =
-document.getElementById("status");
-
-el.textContent = message;
-
-el.style.color =
-success ? "#16803c" : "#c62828";
-
-}
-
-
-/* ================= TAB ================= */
-
-function showTab(tab,button){
-
-document
-.getElementById("teamTab")
-.classList
-.toggle("hidden",tab !== "team");
-
-document
-.getElementById("adminTab")
-.classList
-.toggle("hidden",tab !== "admin");
-
-document
-.querySelectorAll(".tab")
-.forEach(function(x){
-
-x.classList.remove("active");
-
-});
-
-button.classList.add("active");
-
-if(tab === "team"){
-
-renderTeam();
-
-}else{
-
-renderAdmin();
-
-}
-
-}
-
-
-/* ================= TEAM SEARCH ================= */
-
-function setTeam(team){
-
-document
-.getElementById("teamSearch")
-.value = team;
-
-renderTeam();
-
-}
-
-
-/* ================= LOAD DATA ================= */
-
-async function loadData(){
+status.className="";
+status.textContent="Sedang login...";
 
 try{
 
 const response =
 await fetch(
-API + "?select=*",
+SUPABASE_URL+"/auth/v1/token?grant_type=password",
 {
-headers:headers
+ method:"POST",
+ headers:{
+  "apikey":SUPABASE_KEY,
+  "Content-Type":"application/json"
+ },
+ body:JSON.stringify({
+  email:email,
+  password:password
+ })
+}
+);
+
+const result =
+await response.json();
+
+if(!response.ok){
+
+throw new Error(
+result.msg ||
+result.error_description ||
+result.message ||
+"Login gagal"
+);
+
+}
+
+localStorage.setItem(
+"access_token",
+result.access_token
+);
+
+localStorage.setItem(
+"refresh_token",
+result.refresh_token
+);
+
+currentUser=result.user;
+
+await loadProfile();
+
+}catch(error){
+
+status.className="error";
+status.textContent=
+"Gagal login: "+error.message;
+
+}
+
+}
+
+
+/* ================================
+   PROFILE
+================================ */
+
+async function loadProfile(){
+
+const token =
+localStorage.getItem("access_token");
+
+const response =
+await fetch(
+API+"/profiles?id=eq."+currentUser.id+"&select=*",
+{
+ headers:{
+  ...headers,
+  "Authorization":"Bearer "+token
+ }
 }
 );
 
@@ -625,82 +433,169 @@ await response.text()
 
 }
 
-data =
+const rows =
 await response.json();
 
-renderTeam();
+if(!rows.length){
 
-renderAdmin();
-
-status(
-"Data berhasil dimuat dari Supabase."
-);
-
-}catch(error){
-
-console.error(error);
-
-status(
-"Gagal memuat data: " +
-error.message,
-false
+throw new Error(
+"Profile user belum dibuat di tabel profiles."
 );
 
 }
 
+profile=rows[0];
+
+document.getElementById("loginPage")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+document.getElementById("userInfo")
+.textContent=
+profile.role === "admin"
+ ? "ADMIN"
+ : "TEAM "+(profile.team || "-");
+
+
+if(profile.role === "admin"){
+
+document.getElementById("adminSection")
+.classList.remove("hidden");
+
+document.getElementById("actionHead")
+.classList.remove("hidden");
+
+}else{
+
+document.getElementById("adminSection")
+.classList.add("hidden");
+
+document.getElementById("actionHead")
+.classList.add("hidden");
+
+}
+
+await loadData();
+
 }
 
 
-/* ================= TEAM DISPLAY ================= */
+/* ================================
+   LOAD MATERIAL
+================================ */
 
-function renderTeam(){
+async function loadData(){
+
+const token =
+localStorage.getItem("access_token");
+
+const response =
+await fetch(
+API+"/material?select=*",
+{
+ headers:{
+  ...headers,
+  "Authorization":"Bearer "+token
+ }
+}
+);
+
+if(!response.ok){
+
+throw new Error(
+await response.text()
+);
+
+}
+
+materials =
+await response.json();
+
+render();
+
+}
+
+
+/* ================================
+   RENDER
+================================ */
+
+function render(){
 
 const search =
-document
-.getElementById("teamSearch")
+document.getElementById("search")
 .value
 .trim()
 .toUpperCase();
 
-let rows = data;
+let rows=materials;
 
-if(search){
+
+/* ADMIN BOLEH MELIHAT SEMUA */
+
+if(profile && profile.role !== "admin"){
 
 rows =
-data.filter(function(row){
+rows.filter(function(row){
 
-return String(
-getValue(row,"Team")
-)
-.toUpperCase()
-.includes(search);
+return String(row["Team"] || "")
+.toUpperCase() ===
+String(profile.team || "")
+.toUpperCase();
 
 });
 
 }
 
 
+/* PENCARIAN */
+
+if(search){
+
+rows =
+rows.filter(function(row){
+
+return (
+
+String(row["Team"] || "")
+.toUpperCase()
+.includes(search)
+
+||
+
+String(row["Part"] || "")
+.toUpperCase()
+.includes(search)
+
+||
+
+String(row["Description"] || "")
+.toUpperCase()
+.includes(search)
+
+);
+
+});
+
+}
+
+
+/* SUMMARY */
+
 document.getElementById("sumTeam")
 .textContent =
-search || "SEMUA";
-
-
-document.getElementById("sumJenis")
-.textContent =
-formatNumber(rows.length);
+profile && profile.role !== "admin"
+ ? profile.team
+ : (search || "SEMUA");
 
 
 document.getElementById("sumAwal")
 .textContent =
 formatNumber(
 rows.reduce(
-function(total,row){
-
-return total +
-calculate(row).stok;
-
-},
-0
+(t,r)=>t+num(r["Stok Awal"]),0
 )
 );
 
@@ -709,13 +604,7 @@ document.getElementById("sumAmbil")
 .textContent =
 formatNumber(
 rows.reduce(
-function(total,row){
-
-return total +
-calculate(row).ambil;
-
-},
-0
+(t,r)=>t+num(r["Total Ambil"]),0
 )
 );
 
@@ -724,25 +613,19 @@ document.getElementById("sumSisa")
 .textContent =
 formatNumber(
 rows.reduce(
-function(total,row){
-
-return total +
-calculate(row).sisa;
-
-},
-0
+(t,r)=>t+num(r["Sisa Gudang"]),0
 )
 );
 
 
 const body =
-document.getElementById("teamBody");
+document.getElementById("tableBody");
 
 
 if(!rows.length){
 
-body.innerHTML =
-'<tr><td colspan="9" class="empty">Data tidak ditemukan.</td></tr>';
+body.innerHTML=
+'<tr><td colspan="10" style="text-align:center;padding:25px">Data tidak ditemukan.</td></tr>';
 
 return;
 
@@ -752,8 +635,18 @@ return;
 body.innerHTML =
 rows.map(function(row){
 
-const c =
-calculate(row);
+const action =
+profile.role === "admin"
+?
+`<td>
+<button class="secondary"
+onclick="editData('${row.id}')">
+Edit
+</button>
+</td>`
+:
+"";
+
 
 return `
 
@@ -761,41 +654,37 @@ return `
 
 <td>
 <span class="badge">
-${escapeHtml(getValue(row,"Team"))}
+${esc(row["Team"])}
 </span>
 </td>
 
-<td>
-${escapeHtml(getValue(row,"Part"))}
-</td>
+<td>${esc(row["Part"])}</td>
 
-<td>
-${escapeHtml(getValue(row,"Description"))}
-</td>
+<td>${esc(row["Description"])}</td>
 
-<td>
-${escapeHtml(getValue(row,"Unit"))}
+<td>${esc(row["Unit"])}</td>
+
+<td class="num">
+${rupiah(row["Harga"])}
 </td>
 
 <td class="num">
-${rupiah(c.harga)}
+${formatNumber(row["Stok Awal"])}
 </td>
 
 <td class="num">
-${formatNumber(c.stok)}
+${formatNumber(row["Total Ambil"])}
 </td>
 
 <td class="num">
-${formatNumber(c.ambil)}
+<b>${formatNumber(row["Sisa Gudang"])}</b>
 </td>
 
 <td class="num">
-<b>${formatNumber(c.sisa)}</b>
+${rupiah(row["Harg Sisa"])}
 </td>
 
-<td class="num">
-${rupiah(c.hargaSisa)}
-</td>
+${action}
 
 </tr>
 
@@ -806,189 +695,55 @@ ${rupiah(c.hargaSisa)}
 }
 
 
-/* ================= ADMIN DISPLAY ================= */
+/* ================================
+   SAVE
+================================ */
 
-function renderAdmin(){
+async function saveData(){
 
-const search =
-document
-.getElementById("adminSearch")
-.value
-.trim()
-.toUpperCase();
-
-
-const rows =
-data
-.map(function(row,index){
-
-return {
-
-row,
-index
-
-};
-
-})
-.filter(function(item){
-
-if(!search){
-
-return true;
-
-}
-
-const text =
-[
-getValue(item.row,"Team"),
-getValue(item.row,"Part"),
-getValue(item.row,"Description")
-]
-.join(" ")
-.toUpperCase();
-
-return text.includes(search);
-
-});
-
-
-const body =
-document.getElementById("adminBody");
-
-
-if(!rows.length){
-
-body.innerHTML =
-'<tr><td colspan="10" class="empty">Belum ada data.</td></tr>';
+if(profile.role !== "admin"){
 
 return;
 
 }
 
+const record={
 
-body.innerHTML =
-rows.map(function(item){
+"Team":
+document.getElementById("team").value.trim().toUpperCase(),
 
-const row =
-item.row;
+"Part":
+document.getElementById("part").value.trim(),
 
-const c =
-calculate(row);
+"Description":
+document.getElementById("description").value.trim(),
 
-return `
+"Unit":
+document.getElementById("unit").value.trim(),
 
-<tr>
+"Harga":
+num(document.getElementById("harga").value),
 
-<td>
-${escapeHtml(getValue(row,"Team"))}
-</td>
+"Stok Awal":
+num(document.getElementById("stokAwal").value),
 
-<td>
-${escapeHtml(getValue(row,"Part"))}
-</td>
+"Total Ambil":
+num(document.getElementById("totalAmbil").value)
 
-<td>
-${escapeHtml(getValue(row,"Description"))}
-</td>
+};
 
-<td>
-${escapeHtml(getValue(row,"Unit"))}
-</td>
+record["Sisa Gudang"] =
+record["Stok Awal"] -
+record["Total Ambil"];
 
-<td class="num">
-${rupiah(c.harga)}
-</td>
-
-<td class="num">
-${formatNumber(c.stok)}
-</td>
-
-<td class="num">
-${formatNumber(c.ambil)}
-</td>
-
-<td class="num">
-${formatNumber(c.sisa)}
-</td>
-
-<td class="num">
-${rupiah(c.hargaSisa)}
-</td>
-
-<td>
-
-<button
-class="secondary"
-onclick="editData(${item.index})">
-
-Edit
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-}).join("");
-
-}
+record["Harg Sisa"] =
+record["Sisa Gudang"] *
+record["Harga"];
 
 
-/* ================= SAVE ================= */
+if(!record["Team"]){
 
-async function saveData(){
-
-const team =
-document.getElementById("team")
-.value
-.trim()
-.toUpperCase();
-
-
-const part =
-document.getElementById("part")
-.value
-.trim();
-
-
-const description =
-document.getElementById("description")
-.value
-.trim();
-
-
-const unit =
-document.getElementById("unit")
-.value
-.trim();
-
-
-const harga =
-number(
-document.getElementById("harga")
-.value
-);
-
-
-const stok =
-number(
-document.getElementById("stokAwal")
-.value
-);
-
-
-const ambil =
-number(
-document.getElementById("totalAmbil")
-.value
-);
-
-
-if(!team){
-
-status(
+showAdminStatus(
 "Team wajib diisi.",
 false
 );
@@ -998,109 +753,24 @@ return;
 }
 
 
-if(!part){
-
-status(
-"Part wajib diisi.",
-false
-);
-
-return;
-
-}
-
-
-const sisa =
-stok - ambil;
-
-
-const hargaSisa =
-sisa * harga;
-
-
-/*
-Nama kolom HARUS sama
-dengan Supabase:
-Team
-Part
-Description
-Unit
-Harg Sisa
-Harga
-Stok Awal
-Total Ambil
-Sisa Gudang
-*/
-
-const record = {
-
-"Team": team,
-
-"Part": part,
-
-"Description": description,
-
-"Unit": unit,
-
-"Harg Sisa": hargaSisa,
-
-"Harga": harga,
-
-"Stok Awal": stok,
-
-"Total Ambil": ambil,
-
-"Sisa Gudang": sisa
-
-};
-
+const token =
+localStorage.getItem("access_token");
 
 try{
 
-const editId =
-document.getElementById("editId")
-.value;
-
-
-let response;
-
-
-if(editId){
-
-response =
+const response =
 await fetch(
-API +
-"?id=eq." +
-encodeURIComponent(editId),
+API+"/material",
 {
-
-method:"PATCH",
-
-headers:headers,
-
-body:JSON.stringify(record)
-
+ method:"POST",
+ headers:{
+  ...headers,
+  "Authorization":"Bearer "+token,
+  "Prefer":"return=representation"
+ },
+ body:JSON.stringify(record)
 }
 );
-
-}else{
-
-response =
-await fetch(
-API,
-{
-
-method:"POST",
-
-headers:headers,
-
-body:JSON.stringify(record)
-
-}
-);
-
-}
-
 
 if(!response.ok){
 
@@ -1110,24 +780,19 @@ await response.text()
 
 }
 
-
-status(
-"Data berhasil disimpan ke Supabase."
+showAdminStatus(
+"Data berhasil disimpan.",
+true
 );
-
 
 resetForm();
 
 await loadData();
 
-
 }catch(error){
 
-console.error(error);
-
-status(
-"Gagal menyimpan: " +
-error.message,
+showAdminStatus(
+"Gagal menyimpan: "+error.message,
 false
 );
 
@@ -1136,73 +801,44 @@ false
 }
 
 
-/* ================= EDIT ================= */
+/* ================================
+   EDIT
+================================ */
 
-function editData(index){
+async function editData(id){
 
 const row =
-data[index];
-
-const id =
-row.id ??
-row.ID ??
-row.Id;
-
-
-if(id === undefined){
-
-status(
-"Kolom ID tidak ditemukan.",
-false
+materials.find(
+x=>String(x.id)===String(id)
 );
 
-return;
-
-}
+if(!row)return;
 
 
-document.getElementById("editId")
-.value = id;
+document.getElementById("team").value =
+row["Team"] || "";
 
+document.getElementById("part").value =
+row["Part"] || "";
 
-document.getElementById("team")
-.value =
-getValue(row,"Team");
+document.getElementById("description").value =
+row["Description"] || "";
 
+document.getElementById("unit").value =
+row["Unit"] || "";
 
-document.getElementById("part")
-.value =
-getValue(row,"Part");
+document.getElementById("harga").value =
+row["Harga"] || 0;
 
+document.getElementById("stokAwal").value =
+row["Stok Awal"] || 0;
 
-document.getElementById("description")
-.value =
-getValue(row,"Description");
+document.getElementById("totalAmbil").value =
+row["Total Ambil"] || 0;
 
-
-document.getElementById("unit")
-.value =
-getValue(row,"Unit");
-
-
-document.getElementById("harga")
-.value =
-getValue(row,"Harga");
-
-
-document.getElementById("stokAwal")
-.value =
-getValue(row,"Stok Awal");
-
-
-document.getElementById("totalAmbil")
-.value =
-getValue(row,"Total Ambil");
-
-
-status(
-"Mode edit data."
-);
+document.getElementById("adminStatus")
+.textContent=
+"Data dimuat untuk diedit. Untuk versi berikutnya kita bisa tambahkan tombol Update.";
 
 window.scrollTo({
 top:0,
@@ -1212,43 +848,137 @@ behavior:"smooth"
 }
 
 
-/* ================= RESET ================= */
+/* ================================
+   LOGOUT
+================================ */
 
-function resetForm(){
+function logout(){
 
-document.getElementById("editId")
-.value = "";
+localStorage.removeItem("access_token");
+localStorage.removeItem("refresh_token");
 
-document.getElementById("team")
-.value = "";
-
-document.getElementById("part")
-.value = "";
-
-document.getElementById("description")
-.value = "";
-
-document.getElementById("unit")
-.value = "";
-
-document.getElementById("harga")
-.value = 0;
-
-document.getElementById("stokAwal")
-.value = 0;
-
-document.getElementById("totalAmbil")
-.value = 0;
-
-document.getElementById("status")
-.textContent = "";
+location.reload();
 
 }
 
 
-/* ================= START ================= */
+/* ================================
+   HELPERS
+================================ */
 
-loadData();
+function num(v){
+
+return Number(v)||0;
+
+}
+
+function formatNumber(v){
+
+return new Intl.NumberFormat("id-ID")
+.format(num(v));
+
+}
+
+function rupiah(v){
+
+return new Intl.NumberFormat(
+"id-ID",
+{
+style:"currency",
+currency:"IDR",
+maximumFractionDigits:0
+}
+).format(num(v));
+
+}
+
+function esc(v){
+
+return String(v ?? "")
+.replace(/[&<>"']/g,function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
+
+});
+
+}
+
+function resetForm(){
+
+document.getElementById("team").value="";
+document.getElementById("part").value="";
+document.getElementById("description").value="";
+document.getElementById("unit").value="";
+document.getElementById("harga").value="";
+document.getElementById("stokAwal").value="";
+document.getElementById("totalAmbil").value="";
+
+}
+
+function showAdminStatus(text,ok){
+
+const el =
+document.getElementById("adminStatus");
+
+el.textContent=text;
+
+el.className=
+ok ? "success" : "error";
+
+}
+
+
+/* ================================
+   CEK SESSION
+================================ */
+
+async function checkSession(){
+
+const token =
+localStorage.getItem("access_token");
+
+if(!token)return;
+
+try{
+
+const response =
+await fetch(
+SUPABASE_URL+"/auth/v1/user",
+{
+ headers:{
+  "apikey":SUPABASE_KEY,
+  "Authorization":"Bearer "+token
+ }
+}
+);
+
+if(!response.ok){
+
+logout();
+return;
+
+}
+
+currentUser =
+await response.json();
+
+await loadProfile();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+checkSession();
 
 </script>
 
