@@ -50,13 +50,15 @@ header h1 {
   margin: 40px auto;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 12px;
   margin: 6px 0 14px;
   border: 1px solid #ccc;
   border-radius: 7px;
   font-size: 16px;
+  background: white;
 }
 
 button {
@@ -178,6 +180,37 @@ th {
   white-space: nowrap;
 }
 
+.material-add-box {
+  background: #f5f7fa;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.material-list {
+  margin-top: 15px;
+}
+
+.material-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  margin-bottom: 7px;
+}
+
+.material-name {
+  font-weight: bold;
+}
+
+.small-button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
 @media (max-width: 600px) {
 
   .container {
@@ -199,6 +232,10 @@ th {
   th,
   td {
     padding: 8px;
+  }
+
+  .material-list-item {
+    gap: 10px;
   }
 }
 </style>
@@ -461,15 +498,63 @@ LOGOUT
 
 
 <!-- =====================================================
-FORM ADMIN
-Description dan Unit/PCS DIHILANGKAN
+DAFTAR NAMA MATERIAL
+KHUSUS ADMIN
 ===================================================== -->
 
 <div class="card">
 
-<h2>➕ Tambah Material</h2>
+<h2>📦 Daftar Nama Material</h2>
+
+<div class="material-add-box">
+
+<label>
+Tambah Nama Material Baru
+</label>
+
+<input
+id="newMaterialName"
+placeholder="Contoh RMT">
+
+<button
+type="button"
+class="primary"
+onclick="addMaterialName()">
+
+➕ TAMBAH NAMA MATERIAL
+
+</button>
+
+<p id="materialNameStatus"></p>
+
+</div>
+
+
+<div class="material-list">
+
+<h3>Nama Material Tersimpan</h3>
+
+<div id="materialNamesList">
+
+Memuat nama material...
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+FORM TAMBAH MATERIAL
+===================================================== -->
+
+<div class="card">
+
+<h2>➕ Tambah Data Material</h2>
 
 <div class="grid">
+
 
 <div>
 
@@ -497,9 +582,13 @@ type="date">
 
 <label>Nama Material</label>
 
-<input
-id="adminPart"
-placeholder="Contoh RMT">
+<select id="adminPart">
+
+<option value="">
+-- Pilih Nama Material --
+</option>
+
+</select>
 
 </div>
 
@@ -572,7 +661,6 @@ onclick="resetAdminForm()">
 
 <!-- =====================================================
 DATA ADMIN
-Description dan Unit/PCS DIHILANGKAN
 ===================================================== -->
 
 <div class="card">
@@ -635,6 +723,7 @@ const SUPABASE_KEY =
 const API =
 SUPABASE_URL + "/rest/v1";
 
+
 const HEADERS = {
 
 "apikey": SUPABASE_KEY,
@@ -644,7 +733,10 @@ const HEADERS = {
 
 };
 
+
 let materials = [];
+
+let materialNames = [];
 
 let currentTeam = "";
 
@@ -729,7 +821,8 @@ document.getElementById("loginStatus");
 
 if (!email || !password) {
 
-status.className = "error";
+status.className =
+"error";
 
 status.textContent =
 "Email dan password wajib diisi.";
@@ -759,7 +852,8 @@ method: "POST",
 
 headers: {
 
-"apikey": SUPABASE_KEY,
+"apikey":
+SUPABASE_KEY,
 
 "Content-Type":
 "application/json"
@@ -797,7 +891,7 @@ result.message ||
 }
 
 
-/* CEK ADMIN */
+/* CEK PROFILE ADMIN */
 
 const profileResponse =
 await fetch(
@@ -851,13 +945,17 @@ hideAll();
 document.getElementById("adminPage")
 .classList.remove("hidden");
 
+
 await loadAdminData();
+
+await loadMaterialNames();
 
 }
 
 catch (error) {
 
-status.className = "error";
+status.className =
+"error";
 
 status.textContent =
 "Gagal login: " +
@@ -869,7 +967,7 @@ error.message;
 
 
 /* =====================================================
-LOAD ADMIN
+LOAD DATA MATERIAL
 ===================================================== */
 
 async function loadAdminData() {
@@ -896,7 +994,8 @@ headers: {
 ...HEADERS,
 
 "Authorization":
-"Bearer " + token
+"Bearer " +
+token
 
 }
 
@@ -919,6 +1018,317 @@ await response.json();
 
 
 renderAdmin();
+
+}
+
+
+/* =====================================================
+LOAD NAMA MATERIAL
+===================================================== */
+
+async function loadMaterialNames() {
+
+const token =
+localStorage.getItem(
+"access_token"
+);
+
+
+if (!token) return;
+
+
+const response =
+await fetch(
+
+API +
+"/material_names?select=*&order=nama_material.asc",
+
+{
+
+headers: {
+
+...HEADERS,
+
+"Authorization":
+"Bearer " +
+token
+
+}
+
+}
+
+);
+
+
+if (!response.ok) {
+
+throw new Error(
+await response.text()
+);
+
+}
+
+
+materialNames =
+await response.json();
+
+
+renderMaterialNames();
+
+renderMaterialSelect();
+
+}
+
+
+/* =====================================================
+TAMPILKAN DAFTAR MATERIAL ADMIN
+===================================================== */
+
+function renderMaterialNames() {
+
+const container =
+document.getElementById(
+"materialNamesList"
+);
+
+
+if (!materialNames.length) {
+
+container.innerHTML = `
+
+<p>
+
+Belum ada nama material.
+Silakan tambahkan nama material.
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+container.innerHTML =
+
+materialNames.map(function(item) {
+
+return `
+
+<div class="material-list-item">
+
+<span class="material-name">
+
+${esc(
+item["nama_material"]
+)}
+
+</span>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =====================================================
+DROPDOWN NAMA MATERIAL
+===================================================== */
+
+function renderMaterialSelect() {
+
+const select =
+document.getElementById(
+"adminPart"
+);
+
+
+if (!select) return;
+
+
+select.innerHTML = `
+
+<option value="">
+
+-- Pilih Nama Material --
+
+</option>
+
+`;
+
+
+materialNames.forEach(function(item) {
+
+const option =
+document.createElement(
+"option"
+);
+
+option.value =
+item["nama_material"];
+
+option.textContent =
+item["nama_material"];
+
+select.appendChild(
+option
+);
+
+});
+
+}
+
+
+/* =====================================================
+TAMBAH NAMA MATERIAL
+===================================================== */
+
+async function addMaterialName() {
+
+const token =
+localStorage.getItem(
+"access_token"
+);
+
+
+if (!token) {
+
+alert(
+"Silakan login sebagai Admin."
+);
+
+return;
+
+}
+
+
+const input =
+document.getElementById(
+"newMaterialName"
+);
+
+
+const status =
+document.getElementById(
+"materialNameStatus"
+);
+
+
+const nama =
+input.value
+.trim()
+.toUpperCase();
+
+
+if (!nama) {
+
+status.className =
+"error";
+
+status.textContent =
+"Nama material wajib diisi.";
+
+return;
+
+}
+
+
+status.className = "";
+
+status.textContent =
+"Menyimpan...";
+
+
+try {
+
+const response =
+await fetch(
+
+API +
+"/material_names",
+
+{
+
+method: "POST",
+
+headers: {
+
+...HEADERS,
+
+"Authorization":
+"Bearer " +
+token,
+
+"Prefer":
+"return=representation"
+
+},
+
+body:
+JSON.stringify({
+
+nama_material:
+nama
+
+})
+
+}
+
+);
+
+
+const text =
+await response.text();
+
+
+if (!response.ok) {
+
+if (
+response.status === 409
+) {
+
+throw new Error(
+"Nama material sudah ada."
+);
+
+}
+
+throw new Error(
+text ||
+"Gagal menambahkan nama material."
+);
+
+}
+
+
+input.value = "";
+
+
+status.className =
+"success";
+
+status.textContent =
+"✅ Nama material berhasil ditambahkan.";
+
+
+await loadMaterialNames();
+
+}
+
+catch (error) {
+
+status.className =
+"error";
+
+status.textContent =
+"❌ " +
+error.message;
+
+}
 
 }
 
@@ -979,7 +1389,8 @@ body.innerHTML = `
 
 <tr>
 
-<td colspan="9"
+<td
+colspan="9"
 class="center">
 
 Data tidak ditemukan.
@@ -1029,7 +1440,9 @@ return `
 
 <span class="badge">
 
-${esc(row["Team"])}
+${esc(
+row["Team"]
+)}
 
 </span>
 
@@ -1134,7 +1547,7 @@ localStorage.getItem(
 if (!token) {
 
 alert(
-"Sesi Admin sudah berakhir. Silakan login kembali."
+"Sesi Admin sudah berakhir."
 );
 
 return;
@@ -1162,21 +1575,10 @@ const row =
 materials.find(function(item) {
 
 return String(item["id"])
-=== String(id);
+===
+String(id);
 
 });
-
-
-const team =
-row ? row["Team"] : "";
-
-const material =
-row ? row["Part"] : "";
-
-const tanggal =
-row
-? formatDate(row["Tanggal"])
-: "";
 
 
 const yakin =
@@ -1185,18 +1587,20 @@ confirm(
 "⚠️ KONFIRMASI HAPUS DATA\n\n" +
 
 "Team: " +
-team +
-"\n" +
-
-"Tanggal: " +
-tanggal +
+(row ? row["Team"] : "") +
 "\n" +
 
 "Material: " +
-material +
+(row ? row["Part"] : "") +
+"\n" +
+
+"Tanggal: " +
+(row
+? formatDate(row["Tanggal"])
+: "") +
 "\n\n" +
 
-"Data akan dihapus PERMANEN dari database.\n\n" +
+"Data akan dihapus permanen.\n\n" +
 
 "Lanjutkan?"
 
@@ -1225,7 +1629,8 @@ headers: {
 SUPABASE_KEY,
 
 "Authorization":
-"Bearer " + token,
+"Bearer " +
+token,
 
 "Content-Type":
 "application/json",
@@ -1258,7 +1663,8 @@ materials =
 materials.filter(function(item) {
 
 return String(item["id"])
-!== String(id);
+!==
+String(id);
 
 });
 
@@ -1290,7 +1696,7 @@ false
 
 
 /* =====================================================
-SIMPAN
+SIMPAN DATA MATERIAL
 ===================================================== */
 
 async function saveMaterial() {
@@ -1368,8 +1774,6 @@ const nominal =
 sisa * harga;
 
 
-/* VALIDASI */
-
 if (!team) {
 
 showAdminStatus(
@@ -1397,7 +1801,7 @@ return;
 if (!part) {
 
 showAdminStatus(
-"Nama material wajib diisi.",
+"Silakan pilih nama material.",
 false
 );
 
@@ -1417,12 +1821,6 @@ return;
 
 }
 
-
-/*
-Description dan Unit tidak dikirim
-dari form baru.
-Kolom lama di database tetap aman.
-*/
 
 const record = {
 
@@ -1461,7 +1859,8 @@ try {
 const response =
 await fetch(
 
-API + "/material",
+API +
+"/material",
 
 {
 
@@ -1472,7 +1871,8 @@ headers: {
 ...HEADERS,
 
 "Authorization":
-"Bearer " + token,
+"Bearer " +
+token,
 
 "Prefer":
 "return=representation"
@@ -1535,7 +1935,6 @@ const ids = [
 
 "adminTeam",
 "adminTanggal",
-"adminPart",
 "adminHarga",
 "adminTotalAmbil",
 "adminPakai"
@@ -1557,6 +1956,18 @@ element.value = "";
 });
 
 
+const select =
+document.getElementById(
+"adminPart"
+);
+
+if (select) {
+
+select.value = "";
+
+}
+
+
 const status =
 document.getElementById(
 "adminStatus"
@@ -1570,11 +1981,6 @@ status.textContent = "";
 status.className = "";
 
 }
-
-
-document.getElementById(
-"adminTeam"
-).focus();
 
 }
 
@@ -1742,14 +2148,11 @@ ambil - pakai
 );
 
 
-totalAmbil +=
-ambil;
+totalAmbil += ambil;
 
-totalPakai +=
-pakai;
+totalPakai += pakai;
 
-totalSisa +=
-sisa;
+totalSisa += sisa;
 
 });
 
@@ -1757,25 +2160,19 @@ sisa;
 document.getElementById(
 "teamTotalAmbil"
 ).textContent =
-formatNumber(
-totalAmbil
-);
+formatNumber(totalAmbil);
 
 
 document.getElementById(
 "teamTotalPakai"
 ).textContent =
-formatNumber(
-totalPakai
-);
+formatNumber(totalPakai);
 
 
 document.getElementById(
 "teamTotalSisa"
 ).textContent =
-formatNumber(
-totalSisa
-);
+formatNumber(totalSisa);
 
 
 const table =
@@ -1848,18 +2245,14 @@ row["Part"]
 
 <td class="number">
 
-${formatNumber(
-ambil
-)}
+${formatNumber(ambil)}
 
 </td>
 
 
 <td class="number">
 
-${formatNumber(
-pakai
-)}
+${formatNumber(pakai)}
 
 </td>
 
@@ -1868,9 +2261,7 @@ pakai
 
 <b>
 
-${formatNumber(
-sisa
-)}
+${formatNumber(sisa)}
 
 </b>
 
@@ -1881,9 +2272,7 @@ sisa
 
 <b>
 
-${rupiah(
-nominal
-)}
+${rupiah(nominal)}
 
 </b>
 
@@ -1905,7 +2294,6 @@ CARI TEAM LAIN
 function backTeamSearch() {
 
 hideAll();
-
 
 document.getElementById(
 "teamSearchPage"
@@ -1951,6 +2339,8 @@ localStorage.removeItem(
 );
 
 materials = [];
+
+materialNames = [];
 
 hideAll();
 
@@ -2013,16 +2403,11 @@ num(value)
 
 function formatDate(value) {
 
-if (!value) {
-
-return "-";
-
-}
+if (!value) return "-";
 
 
 const parts =
-String(value)
-.split("-");
+String(value).split("-");
 
 
 if (parts.length !== 3) {
